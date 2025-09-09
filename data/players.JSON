@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "surname": "Dupont",
+        "name": "Jean",
+        "date_of_birth": "1990-05-12",
+        "elo": 1450
+    },
+    {
+        "id": 2,
+        "nom": "Martin",
+        "prenom": "Sophie",
+        "date_naissance": "1988-11-23",
+        "elo": 1720
+    },
+    {
+        "id": 3,
+        "nom": "Bernard",
+        "prenom": "Luc",
+        "date_naissance": "1995-03-08",
+        "elo": 1580
+    },
+    {
+        "id": 4,
+        "nom": "Lefevre",
+        "prenom": "Claire",
+        "date_naissance": "1992-07-15",
+        "elo": 1810
+    },
+    {
+        "id": 5,
+        "nom": "Moreau",
+        "prenom": "Pierre",
+        "date_naissance": "1985-12-30",
+        "elo": 1340
+    },
+    {
+        "id": 6,
+        "nom": "Girard",
+        "prenom": "Julie",
+        "date_naissance": "1998-09-21",
+        "elo": 1670
+    },
+    {
+        "id": 7,
+        "nom": "Roux",
+        "prenom": "Marcel",
+        "date_naissance": "1983-02-17",
+        "elo": 1200
+    },
+    {
+        "id": 8,
+        "nom": "David",
+        "prenom": "Anne",
+        "date_naissance": "1991-10-09",
+        "elo": 1750
+    },
+    {
+        "id": 9,
+        "nom": "Fontaine",
+        "prenom": "Paul",
+        "date_naissance": "1986-04-25",
+        "elo": 1300
+    },
+    {
+        "id": 10,
+        "nom": "Bernard",
+        "prenom": "Camille",
+        "date_naissance": "1993-08-30",
+        "elo": 1800
+    }
+]
