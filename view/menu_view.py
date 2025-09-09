@@ -7,7 +7,7 @@ class MenuView:
     def __init__(self):
         self.console = Console()
 
-    def display_menu(self):
+    def display_menu_view(self):
         table = Table(title="Menu Principal", show_header=False, box=None)
         table.add_row("[bold cyan]1.[/bold cyan] Tournois")
         table.add_row("[bold cyan]2.[/bold cyan] Joueurs")
@@ -15,3 +15,4 @@ class MenuView:
         table.add_row("[bold cyan]4.[/bold cyan] Quitter")
         panel = Panel(table, title="[bold yellow]AJEDREZ[/bold yellow]", border_style="blue")
         centered_panel = Align.center(panel)
+        self.console.print(centered_panel)
