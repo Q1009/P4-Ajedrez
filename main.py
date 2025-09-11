@@ -1,5 +1,5 @@
-from menu_view import MenuView
-from player_view import PlayerView
+from view.menu_view import MenuView
+from view.player_view import PlayerView
 
 def main():
     # Affichage du menu principal avec la création de l'instance menu_view

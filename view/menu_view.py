@@ -16,3 +16,7 @@ class MenuView:
         panel = Panel(table, title="[bold yellow]AJEDREZ[/bold yellow]", border_style="blue")
         centered_panel = Align.center(panel)
         self.console.print(centered_panel)
+
+    """def user_menu_view_choice(self):
+        return self.console.input("\n[bold green]Sélectionnez une section (1-4) : [/bold green]")
+        """

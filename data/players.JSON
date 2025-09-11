@@ -1,72 +1,72 @@
 [
     {
-        "id": 1,
         "surname": "Dupont",
         "name": "Jean",
         "date_of_birth": "1990-05-12",
+        "federation_chess_id": "AB12345",
         "elo": 1450
     },
     {
-        "id": 2,
-        "nom": "Martin",
-        "prenom": "Sophie",
-        "date_naissance": "1988-11-23",
+        "surname": "Martin",
+        "name": "Sophie",
+        "date_of_birth": "1988-11-23",
+        "federation_chess_id": "AB12346",
         "elo": 1720
     },
     {
-        "id": 3,
-        "nom": "Bernard",
-        "prenom": "Luc",
-        "date_naissance": "1995-03-08",
+        "surname": "Bernard",
+        "name": "Luc",
+        "date_of_birth": "1995-03-08",
+        "federation_chess_id": "AB12347",
         "elo": 1580
     },
     {
-        "id": 4,
-        "nom": "Lefevre",
-        "prenom": "Claire",
-        "date_naissance": "1992-07-15",
+        "surname": "Lefevre",
+        "name": "Claire",
+        "date_of_birth": "1992-07-15",
+        "federation_chess_id": "AB12348",
         "elo": 1810
     },
     {
-        "id": 5,
-        "nom": "Moreau",
-        "prenom": "Pierre",
-        "date_naissance": "1985-12-30",
+        "surname": "Moreau",
+        "name": "Pierre",
+        "date_of_birth": "1985-12-30",
+        "federation_chess_id": "AB12349",
         "elo": 1340
     },
     {
-        "id": 6,
-        "nom": "Girard",
-        "prenom": "Julie",
-        "date_naissance": "1998-09-21",
+        "surname": "Girard",
+        "name": "Julie",
+        "date_of_birth": "1998-09-21",
+        "federation_chess_id": "AB12350",
         "elo": 1670
     },
     {
-        "id": 7,
-        "nom": "Roux",
-        "prenom": "Marcel",
-        "date_naissance": "1983-02-17",
+        "surname": "Roux",
+        "name": "Marcel",
+        "date_of_birth": "1983-02-17",
+        "federation_chess_id": "AB12351",
         "elo": 1200
     },
     {
-        "id": 8,
-        "nom": "David",
-        "prenom": "Anne",
-        "date_naissance": "1991-10-09",
+        "surname": "David",
+        "name": "Anne",
+        "date_of_birth": "1991-10-09",
+        "federation_chess_id": "AB12352",
         "elo": 1750
     },
     {
-        "id": 9,
-        "nom": "Fontaine",
-        "prenom": "Paul",
-        "date_naissance": "1986-04-25",
+        "surname": "Fontaine",
+        "name": "Paul",
+        "date_of_birth": "1986-04-25",
+        "federation_chess_id": "AB12353",
         "elo": 1300
     },
     {
-        "id": 10,
-        "nom": "Bernard",
-        "prenom": "Camille",
-        "date_naissance": "1993-08-30",
+        "surname": "Bernard",
+        "name": "Camille",
+        "date_of_birth": "1993-08-30",
+        "federation_chess_id": "AB12354",
         "elo": 1800
     }
 ]
