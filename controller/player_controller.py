@@ -14,10 +14,21 @@ class ChessPlayerController:
     def display_players_from_json(self, filepath="data/players.json"):
         try:
             with open(filepath, "r", encoding="utf-8") as f:
-                data = json.load(f)
+                data_loaded = json.load(f)
+                for player_data in data_loaded:
+                    player = ChessPlayer(
+                        surname=player_data["surname"],
+                        name=player_data["name"],
+                        date_of_birth=player_data["date_of_birth"],
+                        id=player_data["federation_chess_id"],
+                        elo=player_data["elo"]
+                    )
+                    self.chess_players.chess_players.append(player)
+                data = self.chess_players.chess_players
                 self.ui.display_players(data)
 
         except (FileNotFoundError, json.JSONDecodeError):
+            print("Aucun joueur trouvé dans le fichier JSON.")
             data = []
             return
 
