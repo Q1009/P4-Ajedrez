@@ -68,5 +68,12 @@
         "date_of_birth": "1993-08-30",
         "federation_chess_id": "AB12354",
         "elo": 1800
+    },
+    {
+        "surname": "Tellier",
+        "name": "Quentin",
+        "date_of_birth": "1992-09-10",
+        "federation_chess_id": "QT12345",
+        "elo": 2500
     }
 ]

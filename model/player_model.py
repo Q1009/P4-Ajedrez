@@ -10,4 +10,4 @@ class ChessPlayer:
 class ChessClubMember:
     
     def __init__(self):
-        self.chess_players = []
+        self.chess_club_members = []
