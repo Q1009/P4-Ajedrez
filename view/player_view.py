@@ -23,7 +23,7 @@ class PlayerView:
             self.console.print("[bold yellow]Aucun joueur disponible.[/bold yellow]")
             return
 
-        table = Table(title="Liste des Joueurs", show_header=True, header_style="bold blue")
+        table = Table(title=None, show_header=True, header_style="bold blue")
         table.add_column("Index", style="dim", width=6)
         table.add_column("Nom", style="cyan")
         table.add_column("Prénom", style="cyan")
@@ -31,11 +31,13 @@ class PlayerView:
         table.add_column("ID Fédération", style="green")
         table.add_column("Elo", style="dark_orange")
 
+
         for index, player in enumerate(players):
             table.add_row(str(index), player.surname, player.name, player.date_of_birth, player.federation_chess_id, str(player.elo))
         
-        centered_table = Align.center(table)
-        self.console.print(centered_table)
+        panel = Panel(table, title="[bold yellow]Liste des Joueurs[/bold yellow]", subtitle="Appuyez sur 'b' pour revenir au menu précédent", border_style="magenta")
+        centered_panel = Align.center(panel)
+        self.console.print(centered_panel)
 
     def display_modify_player_view(self, index):
         table = Table(title="Modifier un joueur", show_header=False, box=None)

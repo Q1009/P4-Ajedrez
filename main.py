@@ -20,8 +20,11 @@ def main():
                 chess_player_controller = ChessPlayerController()
                 player_view_user_choice = player_view.console.input("\n[bold green]Sélectionnez une action (1-5) : [/bold green]")
                 if player_view_user_choice == "1":
-                    #while True:
-                    chess_player_controller.display_players_from_json()
+                    while True:
+                        chess_player_controller.display_players_from_json()
+                        player_list_view_user_choice = player_view.console.input("\n[bold green]Sélectionnez une action : [/bold green]")
+                        if player_list_view_user_choice == "b":
+                            break
                 elif player_view_user_choice == "2":
                     player_view.console.print("[bold magenta]Ajouter un joueur.[/bold magenta]")
                     # Ici, ajouter la logique pour ajouter un joueur

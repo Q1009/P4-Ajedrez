@@ -75,5 +75,12 @@
         "date_of_birth": "1992-09-10",
         "federation_chess_id": "QT12345",
         "elo": 2500
+    },
+    {
+        "surname": "Restrepo",
+        "name": "Arianna",
+        "date_of_birth": "1999-03-31",
+        "federation_chess_id": "AR12345",
+        "elo": 2499
     }
 ]
