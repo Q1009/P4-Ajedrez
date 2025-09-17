@@ -50,3 +50,39 @@ class PlayerView:
         panel = Panel(table, title="[bold yellow]Modification Joueur[/bold yellow]", border_style="magenta")
         centered_panel = Align.center(panel)
         self.console.print(centered_panel)
+
+    def get_new_player_details(self):
+        surname = self.console.input("Nom de famille : ")
+        name = self.console.input("Prénom : ")
+        date_of_birth = self.console.input("Date de naissance (YYYY-MM-DD) : ")
+        federation_chess_id = self.console.input("Identifiant fédération : ")
+        elo_input = self.console.input("ELO (1000-2500) : ")
+        elo = int(elo_input)
+        return surname, name, date_of_birth, federation_chess_id, elo
+
+    def get_user_input(self, prompt):
+        return self.console.input(prompt)
+    
+    def display_player_added_message(self, name, surname):
+        self.console.print(Align.center(f"[bold green]Le joueur {name} {surname} a été ajouté avec succès ![/bold green]"))
+
+    def display_player_removed_message(self, name, surname):
+        self.console.print(f"[bold red]Le joueur à l'index {name} {surname} a été supprimé avec succès ![/bold red]")
+        
+    def display_player_index_error_message(self):
+        self.console.print(Align.center("[bold red]Index invalide. Aucun joueur supprimé.[/bold red]"))
+
+    def display_player_modified_message(self, name, surname):
+        self.console.print(f"[bold blue]Le joueur {name} {surname} a été modifié avec succès ![/bold blue]")
+
+    def display_exit_message(self):
+        self.console.print(Align.center("[bold red]Au revoir ![/bold red]"))
+
+    def display_invalid_choice_message(self):
+        self.console.print(Align.center("[bold red]Choix invalide, veuillez réessayer.[/bold red]"))
+
+    def display_section_message(self, section_name):
+        self.console.print(Align.center(f"[bold magenta]{section_name}[/bold magenta]"))
+
+    def display_value_error_message(self):
+        self.console.print(Align.center("[bold red]Entrée invalide, veuillez entrer un nombre entier pour l'index.[/bold red]"))

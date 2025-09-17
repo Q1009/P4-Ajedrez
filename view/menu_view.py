@@ -17,6 +17,11 @@ class MenuView:
         centered_panel = Align.center(panel)
         self.console.print(centered_panel)
 
-    """def user_menu_view_choice(self):
-        return self.console.input("\n[bold green]Sélectionnez une section (1-4) : [/bold green]")
-        """
+    def display_exit_message(self):
+        self.console.print(Align.center("[bold red]Au revoir ![/bold red]"))
+
+    def display_invalid_choice_message(self):
+        self.console.print(Align.center("[bold red]Choix invalide, veuillez réessayer.[/bold red]"))
+
+    def display_section_message(self, section_name):
+        self.console.print(Align.center(f"[bold magenta]Vous êtes dans la section {section_name}.[/bold magenta]"))

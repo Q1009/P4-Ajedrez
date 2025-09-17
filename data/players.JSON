@@ -32,7 +32,7 @@
         "name": "Pierre",
         "date_of_birth": "1985-12-30",
         "federation_chess_id": "AB12349",
-        "elo": 1340
+        "elo": "1743"
     },
     {
         "surname": "Girard",
@@ -77,10 +77,31 @@
         "elo": 2500
     },
     {
-        "surname": "Restrepo",
-        "name": "Arianna",
-        "date_of_birth": "1999-03-31",
-        "federation_chess_id": "AR12345",
-        "elo": 2499
+        "surname": "Vincent",
+        "name": "Arthur",
+        "date_of_birth": "1987-02-17",
+        "federation_chess_id": "FE34523",
+        "elo": "1900"
+    },
+    {
+        "surname": "Richard",
+        "name": "Marc",
+        "date_of_birth": "1977-03-12",
+        "federation_chess_id": "EF57832",
+        "elo": 1899
+    },
+    {
+        "surname": "Jean",
+        "name": "Dupont",
+        "date_of_birth": "1988-04-21",
+        "federation_chess_id": "HY64977",
+        "elo": 1543
+    },
+    {
+        "surname": "Franc",
+        "name": "Paul",
+        "date_of_birth": "1987-05-29",
+        "federation_chess_id": "FG97643",
+        "elo": 1774
     }
 ]
