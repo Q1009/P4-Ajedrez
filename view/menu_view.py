@@ -2,6 +2,8 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.align import Align
+from view.tournament_view import TournamentView
+from controller.tournament_controller import TournamentController
 from view.player_view import PlayerView
 from controller.player_controller import ChessPlayerController
 
@@ -26,14 +28,16 @@ class MenuView:
             self.display_menu_view()
             choice = self.console.input("\n[bold green]Sélectionnez une section (1-4) : [/bold green]")
             if choice == "1":
-                self.display_section_message("Tournois")
                 # Ajouter la logique pour gérer les tournois ici
+                self.display_section_message("Tournois")
+                tournament_controller = TournamentController()
+                tournament_view = TournamentView(tournament_controller)
+                tournament_view.execute()
             elif choice == "2":
                 # Ajouter la logique pour gérer les joueurs ici
                 player_controller = ChessPlayerController()
                 player_view = PlayerView(player_controller)
                 player_view.execute()
-                #fin du player view loop
             elif choice == "3":
                 self.display_section_message("Rapports")
                 # Ajouter la logique pour gérer les rapports ici

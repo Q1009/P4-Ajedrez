@@ -1,4 +1,5 @@
 from datetime import datetime
+from utils.unique_id_generator import generate_unique_id
 
 
 class Tournament:
@@ -14,17 +15,19 @@ class Tournament:
         current_round=1,
         number_of_rounds=4,
         status="À venir",
+        tournament_id=None,
     ):
         self.name = name
         self.location = location
-        self.start_date = start_date if start_date else datetime.now().strftime("%Y-%m-%d")
+        self.start_date = start_date if start_date else ""
         self.end_date = end_date if end_date else ""
         self.number_of_rounds = number_of_rounds
         self.current_round = current_round
         self.rounds = rounds if rounds is not None else []
         self.players = players if players is not None else []
         self.description = description
-        self.status = status  # e.g., "À venir", "En cours", "Terminé"
+        self.status = status # e.g., "À venir", "En cours", "Terminé"
+        self.tournament_id = tournament_id if tournament_id else generate_unique_id()
 
     def to_dict(self):
         return {
@@ -34,24 +37,28 @@ class Tournament:
             "end_date": self.end_date,
             "number_of_rounds": self.number_of_rounds,
             "current_round": self.current_round,
-            "rounds": [r.to_dict() for r in self.rounds],
+            #"rounds": [r.to_dict() for r in self.rounds],
             "players": self.players, # List of player IDs and not player objects
             "description": self.description,
+            "status": self.status,
+            "tournament_id": self.tournament_id,
         }
 
     @classmethod
     def from_dict(cls, data):
-        rounds = [TournamentRound.from_dict(r) for r in data.get("rounds", [])]
+        #rounds = [TournamentRound.from_dict(r) for r in data.get("rounds", [])]
         return cls(
-            name=data.get("name"),
-            location=data.get("location"),
-            start_date=data.get("start_date"),
-            end_date=data.get("end_date"),
-            players=data.get("players", []),
-            description=data.get("description", ""),
-            rounds=rounds,
-            current_round=data.get("current_round", 1),
-            number_of_rounds=data.get("number_of_rounds", 4),
+            name=data["name"],
+            location=data["location"],
+            start_date=data["start_date"],
+            end_date=data["end_date"],
+            players=data["players", []],
+            #rounds=rounds,
+            current_round=data["current_round", 1],
+            number_of_rounds=data["number_of_rounds", 4],
+            description=data["description"],
+            status=data["status"],
+            tournament_id=data["tournament_id"],
         )
 
 

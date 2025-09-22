@@ -1,20 +1,23 @@
-from view.tournament_view import TournamentView
 from model.tournament_model import Tournament
 
 import json
 
 class TournamentController:
-    def __init__(self, tournament_view):
-        self.tournament_view = tournament_view
+    def __init__(self):
         self.tournaments = []
 
     def load_tournaments_from_json(self, filepath="data/tournaments.json"):
         try:
             with open(filepath, "r", encoding="utf-8") as f:
-                tournaments_data = json.load(f)
-                self.tournaments = [Tournament(**t) for t in tournaments_data]
+                tournaments_loaded = json.load(f)
+                for tournament_data in tournaments_loaded:
+                    tournament = Tournament.from_dict(tournament_data)
+                    self.tournaments.append(tournament)
+
         except (FileNotFoundError, json.JSONDecodeError):
-            self.tournaments = []
+            print("Aucun tournoi trouvé dans le fichier JSON.")
+            tournaments = []
+            return tournaments
 
     def save_tournaments_to_json(self, filepath="data/tournaments.json"):
         with open(filepath, "w", encoding="utf-8") as f:
@@ -25,6 +28,7 @@ class TournamentController:
         self.tournament_view.display_tournaments(self.tournaments)
 
     def add_tournament(self, name, location, start_date, end_date, players, description):
+        self.tournaments.clear()
         self.load_tournaments_from_json()
         new_tournament = Tournament(name, location, start_date, end_date, players, description)
         self.tournaments.append(new_tournament)
@@ -67,56 +71,3 @@ class TournamentController:
             else:
                 tournament.status = "En cours"
             self.save_tournaments_to_json()
-
-    def execute(self):
-        # À compléter selon la logique de navigation de votre application
-        running = True
-        while running:
-            self.tournament_view.display_tournament_menu_view()
-            choice = self.tournament_view.console.input("\n[bold green]Sélectionnez une option (1-6) : [/bold green]")
-            if choice == "1":
-                self.display_tournaments()
-            elif choice == "2":
-                self.display_section_message("Créer un tournoi")
-                # Logique pour ajouter un tournoi
-                name = self.tournament_view.console.input("Nom du tournoi: ")
-                location = self.tournament_view.console.input("Lieu du tournoi: ")
-                start_date = self.tournament_view.console.input("Date de début (YYYY-MM-DD): ")
-                end_date = self.tournament_view.console.input("Date de fin (YYYY-MM-DD): ")
-                players = []  # Logique pour ajouter des joueurs
-                description = self.tournament_view.console.input("Description du tournoi: ")
-                self.add_tournament(name, location, start_date, end_date, players, description)
-            elif choice == "3":
-                self.display_section_message("Modifier un tournoi")
-                # Logique pour modifier un tournoi
-                index = int(self.tournament_view.console.input("Index du tournoi à modifier: "))
-                name = self.tournament_view.console.input("Nouveau nom du tournoi (laisser vide pour ne pas changer): ")
-                location = self.tournament_view.console.input("Nouveau lieu du tournoi (laisser vide pour ne pas changer): ")
-                start_date = self.tournament_view.console.input("Nouvelle date de début (YYYY-MM-DD) (laisser vide pour ne pas changer): ")
-                end_date = self.tournament_view.console.input("Nouvelle date de fin (YYYY-MM-DD) (laisser vide pour ne pas changer): ")
-                description = self.tournament_view.console.input("Nouvelle description du tournoi (laisser vide pour ne pas changer): ")
-                updates = {k: v for k, v in {
-                    "name": name,
-                    "location": location,
-                    "start_date": start_date,
-                    "end_date": end_date,
-                    "description": description
-                }.items() if v}
-                self.modify_tournament(index, **updates)
-            elif choice == "4":
-                self.display_section_message("Mettre à jour un tournoi")
-                # Logique pour mettre à jour un tournoi (par exemple, avancer le round)
-                index = int(self.tournament_view.console.input("Index du tournoi à mettre à jour: "))
-                # Exemple simple d'incrémentation du round actuel
-                if 0 <= index < len(self.tournaments):
-                    current_round = self.tournaments[index].current_round
-                    self.modify_tournament(index, current_round=current_round + 1)
-            elif choice == "5":
-                self.display_section_message("Supprimer un tournoi")
-                # Logique pour supprimer un tournoi
-                index = int(self.tournament_view.console.input("Index du tournoi à supprimer: "))
-                self.remove_tournament(index)
-            elif choice == "6":
-                running = False
-            else:
-                self.tournament_view.display_invalid_choice_message()
