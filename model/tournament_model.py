@@ -35,7 +35,7 @@ class Tournament:
             "number_of_rounds": self.number_of_rounds,
             "current_round": self.current_round,
             "rounds": [r.to_dict() for r in self.rounds],
-            "players": self.players,
+            "players": self.players, # List of player IDs and not player objects
             "description": self.description,
         }
 
@@ -67,6 +67,7 @@ class TournamentRound:
 
     def to_dict(self):
         return {
+            #générer un id unique (voir lib)
             "name": self.name,
             "start_date": self.start_date,
             "start_time": self.start_time,

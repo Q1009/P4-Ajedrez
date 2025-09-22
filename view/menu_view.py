@@ -2,6 +2,8 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.align import Align
+from view.player_view import PlayerView
+from controller.player_controller import ChessPlayerController
 
 class MenuView:
     def __init__(self):
@@ -16,6 +18,30 @@ class MenuView:
         panel = Panel(table, title="[bold yellow]AJEDREZ[/bold yellow]", border_style="blue")
         centered_panel = Align.center(panel)
         self.console.print(centered_panel)
+
+    def execute(self):
+        
+        running = True
+        while running:
+            self.display_menu_view()
+            choice = self.console.input("\n[bold green]Sélectionnez une section (1-4) : [/bold green]")
+            if choice == "1":
+                self.display_section_message("Tournois")
+                # Ajouter la logique pour gérer les tournois ici
+            elif choice == "2":
+                # Ajouter la logique pour gérer les joueurs ici
+                player_controller = ChessPlayerController()
+                player_view = PlayerView(player_controller)
+                player_view.execute()
+                #fin du player view loop
+            elif choice == "3":
+                self.display_section_message("Rapports")
+                # Ajouter la logique pour gérer les rapports ici
+            elif choice == "4":
+                self.display_exit_message()
+                running = False
+            else:
+                self.display_invalid_choice_message()
 
     def display_exit_message(self):
         self.console.print(Align.center("[bold red]Au revoir ![/bold red]"))
