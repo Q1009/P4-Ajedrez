@@ -67,7 +67,7 @@ class PlayerView:
         self.console.print(Align.center(f"[bold green]Le joueur {name} {surname} a été ajouté avec succès ![/bold green]"))
 
     def display_player_removed_message(self, name, surname):
-        self.console.print(f"[bold red]Le joueur à l'index {name} {surname} a été supprimé avec succès ![/bold red]")
+        self.console.print(f"[bold red]Le joueur {name} {surname} a été supprimé avec succès ![/bold red]")
         
     def display_player_index_error_message(self):
         self.console.print(Align.center("[bold red]Index invalide. Aucun joueur supprimé.[/bold red]"))

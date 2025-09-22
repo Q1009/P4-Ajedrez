@@ -35,13 +35,6 @@
         "elo": "1743"
     },
     {
-        "surname": "Girard",
-        "name": "Julie",
-        "date_of_birth": "1998-09-21",
-        "federation_chess_id": "AB12350",
-        "elo": 1670
-    },
-    {
         "surname": "Roux",
         "name": "Marcel",
         "date_of_birth": "1983-02-17",
@@ -91,8 +84,8 @@
         "elo": 1899
     },
     {
-        "surname": "Jean",
-        "name": "Dupont",
+        "surname": "Malfoy",
+        "name": "Drago",
         "date_of_birth": "1988-04-21",
         "federation_chess_id": "HY64977",
         "elo": 1543
@@ -103,5 +96,26 @@
         "date_of_birth": "1987-05-29",
         "federation_chess_id": "FG97643",
         "elo": 1774
+    },
+    {
+        "surname": "de Genouillac",
+        "name": "Aude",
+        "date_of_birth": "1960-07-26",
+        "federation_chess_id": "AT65423",
+        "elo": 1000
+    },
+    {
+        "surname": "Tellberg",
+        "name": "Olaf",
+        "date_of_birth": "1956-09-03",
+        "federation_chess_id": "DF43697",
+        "elo": 1500
+    },
+    {
+        "surname": "Tellier",
+        "name": "Clémence",
+        "date_of_birth": "1996-10-18",
+        "federation_chess_id": "HB76894",
+        "elo": 1810
     }
 ]
