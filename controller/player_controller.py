@@ -36,7 +36,7 @@ class ChessPlayerController:
             player.name = name
         if date_of_birth:
             player.date_of_birth = date_of_birth
-        if id:
+        if federation_chess_id:
             player.federation_chess_id = federation_chess_id
         if elo:
             player.elo = elo
@@ -46,12 +46,16 @@ class ChessPlayerController:
         self.chess_players.clear()
         self.load_players_from_json()
         return self.chess_players[index]
+    
+    def get_players_count(self):
+        self.chess_players.clear()
+        self.load_players_from_json()
+        return len(self.chess_players)
 
     def save_players_to_json(self, filepath="data/players.json"):
         data = []
-        for member in self.chess_players:
-            player = member.to_dict()
-            data.append(player)
+        for player in self.chess_players:
+            data.append(player.to_dict())
         with open(filepath, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
 
@@ -64,6 +68,9 @@ class ChessPlayerController:
                         self.chess_players.append(player)
 
             except (FileNotFoundError, json.JSONDecodeError):
+                pass
+            """
                 print("Aucun joueur trouvé dans le fichier JSON.")
                 data = []
                 return data
+                """

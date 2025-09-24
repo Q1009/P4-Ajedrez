@@ -21,9 +21,6 @@ class PlayerView:
         self.console.print(centered_panel)
 
     def display_display_players_view(self, players):
-        if not players:
-            self.console.print("[bold yellow]Aucun joueur disponible.[/bold yellow]")
-            return
 
         table = Table(title=None, show_header=True, header_style="bold blue")
         table.add_column("Index", style="dim", width=6)
@@ -46,10 +43,14 @@ class PlayerView:
         table.add_row("[bold cyan]1.[/bold cyan] Modifier le nom")
         table.add_row("[bold cyan]2.[/bold cyan] Modifier le prénom")
         table.add_row("[bold cyan]3.[/bold cyan] Modifier la date de naissance")
-        table.add_row("[bold cyan]4.[/bold cyan] Modifier l'ID Fédération")
-        table.add_row("[bold cyan]5.[/bold cyan] Modifier l'Elo")
+        table.add_row("[bold cyan]4.[/bold cyan] Modifier l'ID fédération")
+        table.add_row("[bold cyan]5.[/bold cyan] Modifier l'elo")
         table.add_row("[bold cyan]6.[/bold cyan] Retour")
-        panel = Panel(table, title="[bold yellow]Modification Joueur[/bold yellow]", border_style="magenta")
+        panel = Panel(
+            table,
+            title="[bold yellow]Modification Joueur[/bold yellow]",
+            border_style="magenta",
+            )
         centered_panel = Align.center(panel)
         self.console.print(centered_panel)
 
@@ -84,7 +85,7 @@ class PlayerView:
                 while True:
                     self.display_display_players_view(self.player_controller.display_players_from_json())
                     player_list_choice = self.console.input("\n[bold green]Sélectionnez une action : [/bold green]")
-                    if player_list_choice == "b":
+                    if player_list_choice.lower() == "b":
                         break
             elif player_choice == "2":
                 self.display_section_message("Ajouter un joueur")
@@ -93,8 +94,12 @@ class PlayerView:
                 self.display_player_added_message(name, surname)
             elif player_choice == "3":
                 self.display_section_message("Supprimer un joueur")
+                players_count = self.player_controller.get_players_count()
+                if players_count == 0:
+                    self.display_empty_player_remove_list_message()
+                    break
                 try:
-                    index = int(self.console.input("Index du joueur à supprimer : "))
+                    index = int(self.console.input(f"Index du joueur à supprimer (0-{players_count - 1}): "))
                     try:
                         name, surname = self.player_controller.remove_player(index)
                         self.display_player_removed_message(name, surname)
@@ -104,31 +109,40 @@ class PlayerView:
                     self.display_value_error_message()
             elif player_choice == "4":
                 self.display_section_message("Modifier un joueur")
+                players_count = self.player_controller.get_players_count()
+                if players_count == 0:
+                    self.display_empty_player_modify_list_message()
+                    break
                 try:
-                    index = int(self.console.input("Index du joueur à modifier : "))
+                    index = int(self.console.input(f"Index du joueur à modifier (0-{players_count - 1}): "))
                     while True:
                         player = self.player_controller.get_player(index)  # Vérifie si l'index est valide
                         self.display_modify_player_view(index, player.surname, player.name)
                         modify_choice = self.console.input("\n[bold green]Sélectionnez une action (1-6) : [/bold green]")
                         if modify_choice == "1":
+                            self.console.print(f"Ancien nom : {player.surname}", style="dim")
                             surname = self.console.input("Nouveau nom : ")
                             self.player_controller.modify_player(index, surname=surname)
                             self.display_player_modified_message(index)
                         elif modify_choice == "2":
+                            self.console.print(f"Ancien prénom : {player.name}", style="dim")
                             name = self.console.input("Nouveau prénom : ")
                             self.player_controller.modify_player(index, name=name)
                             self.display_player_modified_message(index)
                         elif modify_choice == "3":
+                            self.console.print(f"Ancienne date de naissance : {player.date_of_birth}", style="dim")
                             date_of_birth = self.console.input("Nouvelle date de naissance (YYYY-MM-DD) : ")
                             self.player_controller.modify_player(index, date_of_birth=date_of_birth)
                             self.display_player_modified_message(index)
                         elif modify_choice == "4":
-                            federation_chess_id = self.console.input("Nouveau identifiant fédération : ")
+                            self.console.print(f"Ancien ID fédération : {player.federation_chess_id}", style="dim")
+                            federation_chess_id = self.console.input("Nouveau ID fédération : ")
                             self.player_controller.modify_player(index, federation_chess_id=federation_chess_id)
                             self.display_player_modified_message(index)
                         elif modify_choice == "5":
                             elo_nok = True
                             while elo_nok:
+                                self.console.print(f"Ancien Elo : {player.elo}", style="dim")
                                 elo_input = self.console.input("Nouvel Elo (1000-2500) : ")
                                 try:
                                     elo = int(elo_input)
@@ -179,3 +193,9 @@ class PlayerView:
 
     def display_elo_value_error_message(self):
         self.console.print(Align.center("[bold red]ELO invalide. Veuillez entrer un nombre entier entre 1000 et 2500.[/bold red]"))
+
+    def display_empty_player_remove_list_message(self):
+        self.console.print(Align.center("[bold magenta]Aucun joueur disponible pour suppression.[/bold magenta]"))
+
+    def display_empty_player_modify_list_message(self):
+        self.console.print(Align.center("[bold magenta]Aucun joueur disponible pour modification.[/bold magenta]"))

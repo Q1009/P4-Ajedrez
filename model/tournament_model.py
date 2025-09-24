@@ -12,7 +12,7 @@ class Tournament:
         players=None,
         description="",
         rounds=None,
-        current_round=1,
+        current_round=None,
         number_of_rounds=4,
         status="À venir",
         tournament_id=None,
@@ -22,7 +22,7 @@ class Tournament:
         self.start_date = start_date if start_date else ""
         self.end_date = end_date if end_date else ""
         self.number_of_rounds = number_of_rounds
-        self.current_round = current_round
+        self.current_round = current_round if current_round is not None else ""
         self.rounds = rounds if rounds is not None else []
         self.players = players if players is not None else []
         self.description = description
@@ -37,7 +37,7 @@ class Tournament:
             "end_date": self.end_date,
             "number_of_rounds": self.number_of_rounds,
             "current_round": self.current_round,
-            #"rounds": [r.to_dict() for r in self.rounds],
+            "rounds": self.rounds, #[r.to_dict() for r in self.rounds],
             "players": self.players, # List of player IDs and not player objects
             "description": self.description,
             "status": self.status,
@@ -52,17 +52,17 @@ class Tournament:
             location=data["location"],
             start_date=data["start_date"],
             end_date=data["end_date"],
-            players=data["players", []],
-            #rounds=rounds,
-            current_round=data["current_round", 1],
-            number_of_rounds=data["number_of_rounds", 4],
+            players=data["players"],
+            rounds=data["rounds"],
+            current_round=data["current_round"],
+            number_of_rounds=data["number_of_rounds"],
             description=data["description"],
             status=data["status"],
             tournament_id=data["tournament_id"],
         )
 
 
-class TournamentRound:
+"""class TournamentRound:
     def __init__(self, round_number, matches=None, name=None, start_date=None, start_time=None, end_date=None, end_time=None):
         self.name = name if name else "Round " + str(round_number)
         now = datetime.now()
@@ -93,4 +93,4 @@ class TournamentRound:
             end_date=data["end_date"],
             end_time=data["end_time"],
             matches=data["matches", []],
-        )
+        )"""

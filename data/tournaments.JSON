@@ -1,0 +1,54 @@
+[
+    {
+        "name": "Open de Picardie",
+        "location": "Gouvieux",
+        "start_date": "2025-11-12",
+        "end_date": "2025-11-15",
+        "number_of_rounds": 4,
+        "current_round": "",
+        "rounds": [],
+        "players": [],
+        "description": "Tournoi test pour debug",
+        "status": "À venir",
+        "tournament_id": "2859"
+    },
+    {
+        "name": "Open des Hauts de France",
+        "location": "Chantilly",
+        "start_date": "2025-11-21",
+        "end_date": "2025-11-25",
+        "number_of_rounds": 4,
+        "current_round": "",
+        "rounds": [],
+        "players": [],
+        "description": "Tournoi tes pour débug et mise en place du CRUD",
+        "status": "À venir",
+        "tournament_id": "1e19"
+    },
+    {
+        "name": "Open d'Ile de France",
+        "location": "Paris",
+        "start_date": "2025-12-01",
+        "end_date": "2025-12-05",
+        "number_of_rounds": 4,
+        "current_round": "",
+        "rounds": [],
+        "players": [],
+        "description": "Tournoi test pour debug",
+        "status": "À venir",
+        "tournament_id": "2adc"
+    },
+    {
+        "name": "Open du Testing",
+        "location": "Testlandia",
+        "start_date": "2025-10-24",
+        "end_date": "2025-10-27",
+        "number_of_rounds": 4,
+        "current_round": "",
+        "rounds": [],
+        "players": [],
+        "description": "Ceci est la nouvelle description du tournoi",
+        "status": "À venir",
+        "tournament_id": "34c2"
+    }
+]

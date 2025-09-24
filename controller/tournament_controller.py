@@ -15,38 +15,65 @@ class TournamentController:
                     self.tournaments.append(tournament)
 
         except (FileNotFoundError, json.JSONDecodeError):
-            print("Aucun tournoi trouvé dans le fichier JSON.")
-            tournaments = []
-            return tournaments
+            pass
 
     def save_tournaments_to_json(self, filepath="data/tournaments.json"):
+        data = []
+        for tournament in self.tournaments:
+            data.append(tournament.to_dict())
         with open(filepath, "w", encoding="utf-8") as f:
-            json.dump([t.__dict__ for t in self.tournaments], f, ensure_ascii=False, indent=4)
+            json.dump(data, f, ensure_ascii=False, indent=4)
 
     def display_tournaments(self):
-        self.load_tournaments_from_json()
-        self.tournament_view.display_tournaments(self.tournaments)
-
-    def add_tournament(self, name, location, start_date, end_date, players, description):
         self.tournaments.clear()
         self.load_tournaments_from_json()
-        new_tournament = Tournament(name, location, start_date, end_date, players, description)
+        return self.tournaments
+
+    def add_tournament(self, name, location, start_date, end_date, description):
+        self.tournaments.clear()
+        self.load_tournaments_from_json()
+        new_tournament = Tournament(
+            name=name,
+            location=location,
+            start_date=start_date,
+            end_date=end_date,
+            description=description,
+            )
         self.tournaments.append(new_tournament)
         self.save_tournaments_to_json()
 
     def remove_tournament(self, index):
+        self.tournaments.clear()
         self.load_tournaments_from_json()
-        if 0 <= index < len(self.tournaments):
-            del self.tournaments[index]
-            self.save_tournaments_to_json()
+        remove_tournament = self.tournaments.pop(index)
+        self.save_tournaments_to_json()
+        return remove_tournament.name, remove_tournament.tournament_id
 
-    def modify_tournament(self, index, **kwargs):
+    def modify_tournament(self, index, name=None, location=None, start_date=None, end_date=None, description=None):
+        self.tournaments.clear()
         self.load_tournaments_from_json()
-        if 0 <= index < len(self.tournaments):
-            for key, value in kwargs.items():
-                if hasattr(self.tournaments[index], key):
-                    setattr(self.tournaments[index], key, value)
-            self.save_tournaments_to_json()
+        tournament = self.tournaments[index]
+        if name:
+            tournament.name = name
+        if location:
+            tournament.location = location
+        if start_date:
+            tournament.start_date = start_date
+        if end_date:
+            tournament.end_date = end_date
+        if description:
+            tournament.description = description
+        self.save_tournaments_to_json()
+
+    def get_tournament(self, index):
+        self.tournaments.clear()
+        self.load_tournaments_from_json()
+        return self.tournaments[index]
+    
+    def get_tournaments_count(self):
+        self.tournaments.clear()
+        self.load_tournaments_from_json()
+        return len(self.tournaments)
 
     def status_update(self, index, status=None):
         from datetime import datetime
