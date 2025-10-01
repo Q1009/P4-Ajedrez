@@ -115,7 +115,7 @@ class TournamentView:
         running = True
         while running:
             self.display_tournament_menu_view()
-            choice = self.console.input("\n[bold green]Sélectionnez une option (1-6) : [/bold green]")
+            choice = self.console.input("\n[bold green]Sélectionnez une option (1-8) : [/bold green]")
             if choice == "1":
                 while True:
                     self.display_display_tournaments_view(self.tournament_controller.display_tournaments())

@@ -43,21 +43,72 @@
         "location": "Testlandia",
         "start_date": "2025-10-25",
         "end_date": "2025-10-27",
-        "number_of_rounds": 4,
+        "number_of_rounds": 7,
         "current_round": 1,
-        "rounds": [],
+        "rounds": [
+            {
+                "name": "Round 1",
+                "round_id": "54ba",
+                "start_date": "2025-10-01",
+                "start_time": "16:24:18",
+                "end_date": null,
+                "end_time": null,
+                "matches": [
+                    [
+                        [
+                            "AB12352",
+                            ""
+                        ],
+                        [
+                            "FG97643",
+                            ""
+                        ]
+                    ],
+                    [
+                        [
+                            "AB12349",
+                            ""
+                        ],
+                        [
+                            "AB12353",
+                            ""
+                        ]
+                    ],
+                    [
+                        [
+                            "FE34523",
+                            ""
+                        ],
+                        [
+                            "AB12348",
+                            ""
+                        ]
+                    ],
+                    [
+                        [
+                            "EF57832",
+                            ""
+                        ],
+                        [
+                            "DM32456",
+                            ""
+                        ]
+                    ]
+                ]
+            }
+        ],
         "players": [
-            "EF57832",
-            "DM32456",
-            "AB12349",
+            "AB12352",
             "FG97643",
+            "AB12349",
+            "AB12353",
             "FE34523",
             "AB12348",
-            "AB12353",
-            "AB12352"
+            "EF57832",
+            "DM32456"
         ],
         "description": "Ceci est la nouvelle description du tournoi",
-        "status": "À venir",
+        "status": "En cours",
         "tournament_id": "34c2"
     }
 ]

@@ -37,7 +37,7 @@ class Tournament:
             "end_date": self.end_date,
             "number_of_rounds": self.number_of_rounds,
             "current_round": self.current_round,
-            "rounds": self.rounds, #[r.to_dict() for r in self.rounds],
+            "rounds": [r.r_to_dict() for r in self.rounds],
             "players": self.players, # List of player IDs and not player objects
             "description": self.description,
             "status": self.status,
@@ -46,7 +46,7 @@ class Tournament:
 
     @classmethod
     def from_dict(cls, data):
-        #rounds = [TournamentRound.from_dict(r) for r in data.get("rounds", [])]
+        rounds = [TournamentRound.r_from_dict(r) for r in data["rounds"]]
         return cls(
             name=data["name"],
             location=data["location"],
@@ -63,20 +63,20 @@ class Tournament:
 
 
 class TournamentRound:
-    def __init__(self, round_number, matches=None, name=None, end_date=None, end_time=None):
-        self.name = "Round " + str(round_number)
-        self.round_id = generate_unique_id()
+    def __init__(self, round_number=None, round_id=None, start_date=None, start_time=None, matches=None, name=None, end_date=None, end_time=None):
+        self.name = "Round " + str(round_number) if round_number else ""
+        self.round_id = round_id if round_id else generate_unique_id()
         now = datetime.now()
-        self.start_date = now.strftime("%Y-%m-%d")
-        self.start_time = now.strftime("%H:%M:%S")
+        self.start_date = start_date if start_date else now.strftime("%Y-%m-%d")
+        self.start_time = start_time if start_time else now.strftime("%H:%M:%S")
         self.end_date = end_date
         self.end_time = end_time
         self.matches = matches if matches is not None else []
 
-    """def to_dict(self):
+    def r_to_dict(self):
         return {
-            #générer un id unique (voir lib)
             "name": self.name,
+            "round_id": self.round_id,
             "start_date": self.start_date,
             "start_time": self.start_time,
             "end_date": self.end_date,
@@ -85,13 +85,14 @@ class TournamentRound:
         }
 
     @classmethod
-    def from_dict(cls, data):
+    def r_from_dict(cls, data):
         return cls(
-            round_number=0,  # round_number is not used if name is provided
             name=data["name"],
-            start_date=["start_date"],
+            round_number = data["name"][:1],
+            round_id=data["round_id"],
+            start_date=data["start_date"],
             start_time=data["start_time"],
             end_date=data["end_date"],
             end_time=data["end_time"],
-            matches=data["matches", []],
-        )"""
+            matches=data["matches"],
+        )
