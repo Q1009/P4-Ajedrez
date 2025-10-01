@@ -37,7 +37,7 @@ class Tournament:
             "end_date": self.end_date,
             "number_of_rounds": self.number_of_rounds,
             "current_round": self.current_round,
-            "rounds": [r.r_to_dict() for r in self.rounds],
+            "rounds": self.rounds if not self.rounds else [r.r_to_dict() for r in self.rounds],
             "players": self.players, # List of player IDs and not player objects
             "description": self.description,
             "status": self.status,
@@ -46,14 +46,13 @@ class Tournament:
 
     @classmethod
     def from_dict(cls, data):
-        rounds = [TournamentRound.r_from_dict(r) for r in data["rounds"]]
         return cls(
             name=data["name"],
             location=data["location"],
             start_date=data["start_date"],
             end_date=data["end_date"],
             players=data["players"],
-            rounds=data["rounds"],
+            rounds=[TournamentRound.r_from_dict(r) for r in data["rounds"]],
             current_round=data["current_round"],
             number_of_rounds=data["number_of_rounds"],
             description=data["description"],
@@ -88,7 +87,7 @@ class TournamentRound:
     def r_from_dict(cls, data):
         return cls(
             name=data["name"],
-            round_number = data["name"][:1],
+            round_number = data["name"][-1:],
             round_id=data["round_id"],
             start_date=data["start_date"],
             start_time=data["start_time"],

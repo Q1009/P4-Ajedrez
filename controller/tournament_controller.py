@@ -105,7 +105,9 @@ class TournamentController:
         self.save_tournaments_to_json()
 
     def generate_first_round_matches(self, players):
-        shuffled_players = players
+        shuffled_players = []
+        for player in players:
+            shuffled_players.append(player)
         random.shuffle(shuffled_players)
         matches = []
         for i in range(0, len(players), 2):
