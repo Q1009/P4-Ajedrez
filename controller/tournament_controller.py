@@ -1,5 +1,5 @@
-from model.tournament_model import Tournament
-
+from model.tournament_model import Tournament, TournamentRound
+import random
 import json
 
 class TournamentController:
@@ -90,6 +90,28 @@ class TournamentController:
         self.tournaments.clear()
         self.load_tournaments_from_json()
         return len(self.tournaments)
+    
+    def start_tournament(self, index):
+        self.tournaments.clear()
+        self.load_tournaments_from_json()
+        tournament = self.tournaments[index]
+        tournament.current_round = 1
+        tournament.number_of_rounds = len(tournament.players) - 1
+        tournament.status = "En cours"
+        # Instancier le premier round
+        matches = self.generate_first_round_matches(tournament.players)
+        first_round = TournamentRound(round_number=1, matches=matches)
+        tournament.rounds.append(first_round.round_id)
+        self.save_tournaments_to_json()
+
+    def generate_first_round_matches(self, players):
+        random.shuffle(players)
+        matches = []
+        for i in range(len(players)//2):
+            match = ([players[i], ""], [players[(i+1)], ""]) # ([joueur_i, score_joueur_i], [joueur_i+1, score_joueur_i+1])
+            matches.append(match)
+
+        return matches
 
     def status_update(self, index, status=None):
         from datetime import datetime

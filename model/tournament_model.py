@@ -62,17 +62,18 @@ class Tournament:
         )
 
 
-"""class TournamentRound:
-    def __init__(self, round_number, matches=None, name=None, start_date=None, start_time=None, end_date=None, end_time=None):
-        self.name = name if name else "Round " + str(round_number)
+class TournamentRound:
+    def __init__(self, round_number, matches=None, name=None, end_date=None, end_time=None):
+        self.name = "Round " + str(round_number)
+        self.round_id = generate_unique_id()
         now = datetime.now()
-        self.start_date = start_date if start_date else now.strftime("%Y-%m-%d")
-        self.start_time = start_time if start_time else now.strftime("%H:%M:%S")
+        self.start_date = now.strftime("%Y-%m-%d")
+        self.start_time = now.strftime("%H:%M:%S")
         self.end_date = end_date
         self.end_time = end_time
         self.matches = matches if matches is not None else []
 
-    def to_dict(self):
+    """def to_dict(self):
         return {
             #générer un id unique (voir lib)
             "name": self.name,

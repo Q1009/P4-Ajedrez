@@ -59,7 +59,7 @@ class TournamentView:
                 tournament.start_date,
                 tournament.end_date,
                 str(len(tournament.players)),
-                str(len(tournament.rounds)),
+                str(tournament.number_of_rounds),
                 str(tournament.current_round),
                 tournament.description,
             )
@@ -184,6 +184,9 @@ class TournamentView:
                     # Logique pour inscrire des joueurs dans le tournoi à l'index spécifié
                     # Par exemple, demander les IDs des joueurs à inscrire
                     tournament = self.tournament_controller.get_tournament(index)
+                    if tournament.status != "À venir":
+                        self.display_tournament_subscription_closed_message()
+                        break
                     self.console.print(f"Inscrire des joueurs pour le tournoi : {tournament.name}", style="bold green")
                     players_id = self.console.input("Entrez les IDs des joueurs à inscrire (séparés par des virgules) : ")
                     # Vous pouvez ajouter une validation pour vérifier si les IDs existent
@@ -204,6 +207,20 @@ class TournamentView:
                 except IndexError:
                     self.display_tournament_index_error_message()
             elif choice == "5":
+                self.display_section_message("Démarrer un tournoi")
+                tournaments_count = self.tournament_controller.get_tournaments_count()
+                if tournaments_count == 0:
+                    self.display_empty_tournament_start_list_message()
+                    break
+                try:
+                    index = int(self.console.input(f"Index du tournoi à démarrer (0-{tournaments_count - 1}): "))
+                    self.tournament_controller.start_tournament(index)
+                except ValueError:
+                    self.display_index_value_error_message()
+                except IndexError:
+                    self.display_tournament_index_error_message()
+
+            elif choice == "6":
                 """
                 self.display_section_message("Mettre à jour un tournoi") // Démarrer le tournoi
                 # Logique pour mettre à jour un tournoi (par exemple, avancer le round, inscrire des joueurs, etc.)
@@ -253,7 +270,7 @@ class TournamentView:
                     self.display_index_value_error_message()
                 except IndexError:
                     self.display_tournament_index_error_message()
-            elif choice == "6":
+            elif choice == "8":
                 running = False
             else:
                 self.display_invalid_choice_message()
@@ -294,6 +311,9 @@ class TournamentView:
     def display_empty_tournament_update_list_message(self):
         self.console.print(Align.center("[bold yellow]Aucun tournoi disponible pour mise à jour.[/bold yellow]"))
 
+    def display_empty_tournament_start_list_message(self):
+        self.console.print(Align.center("[bold yellow]Aucun tournoi disponible pour démarrage.[/bold yellow]"))
+
     def display_tournament_valid_subscription_message(self, valid_ids):
         self.console.print(Align.center("[bold green]Le(s) joueur(s) aux IDs suivants ont été inscrits avec succès :[/bold green]"))
         self.console.print(Align.center(f"[green]{',\n'.join(valid_ids)}[/green]"))
@@ -305,3 +325,6 @@ class TournamentView:
     def display_tournament_invalid_subscription_message(self, invalid_ids):
         self.console.print(Align.center("[bold red]Le(s) ID(s) suivant(s) sont invalides et aucune action n'a été effectuée avec :[/bold red]"))
         self.console.print(Align.center(f"[red]{',\n'.join(invalid_ids)}[/red]"))
+
+    def display_tournament_subscription_closed_message(self):
+        self.console.print(Align.center("[bold red]Les inscriptions sont clôturées pour ce tournoi.[/bold red]"))
