@@ -50,6 +50,7 @@ class TournamentController:
         return remove_tournament.name, remove_tournament.tournament_id
 
     def modify_tournament(self, index, name=None, location=None, start_date=None, end_date=None, description=None):
+        #Rajouter possibilité de modifier les joueurs inscrits
         self.tournaments.clear()
         self.load_tournaments_from_json()
         tournament = self.tournaments[index]
@@ -64,6 +65,21 @@ class TournamentController:
         if description:
             tournament.description = description
         self.save_tournaments_to_json()
+
+    def subscribe_players(self, index, player_ids):
+        self.tournaments.clear()
+        self.load_tournaments_from_json()
+        tournament = self.tournaments[index]
+        subscribed_ids = []
+        already_subscribed_ids = []
+        for pid in player_ids:
+            if pid not in tournament.players:
+                tournament.players.append(pid)
+                subscribed_ids.append(pid)
+            else:
+                already_subscribed_ids.append(pid)
+        self.save_tournaments_to_json()
+        return subscribed_ids, already_subscribed_ids
 
     def get_tournament(self, index):
         self.tournaments.clear()

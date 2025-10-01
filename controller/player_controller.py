@@ -51,6 +51,20 @@ class ChessPlayerController:
         self.chess_players.clear()
         self.load_players_from_json()
         return len(self.chess_players)
+    
+    def get_players_id(self):
+        self.chess_players.clear()
+        self.load_players_from_json()
+        return [player.federation_chess_id for player in self.chess_players]
+    
+    def transform_players_id_list(self, players_id):
+        self.chess_players.clear()
+        self.load_players_from_json()
+        players_id_list = [pid.strip() for pid in players_id.split(",") if pid.strip()]
+        existing_players_id = self.get_players_id()
+        invalid_ids = [pid for pid in players_id_list if pid not in existing_players_id]
+        valid_ids = [pid for pid in players_id_list if pid in existing_players_id]
+        return valid_ids, invalid_ids
 
     def save_players_to_json(self, filepath="data/players.json"):
         data = []
@@ -69,8 +83,3 @@ class ChessPlayerController:
 
             except (FileNotFoundError, json.JSONDecodeError):
                 pass
-            """
-                print("Aucun joueur trouvé dans le fichier JSON.")
-                data = []
-                return data
-                """

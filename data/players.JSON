@@ -96,26 +96,5 @@
         "date_of_birth": "1987-05-29",
         "federation_chess_id": "FG97643",
         "elo": 1774
-    },
-    {
-        "surname": "de Genouillac",
-        "name": "Aude",
-        "date_of_birth": "1960-07-26",
-        "federation_chess_id": "AT65423",
-        "elo": 1000
-    },
-    {
-        "surname": "Tellberg",
-        "name": "Olaf",
-        "date_of_birth": "1956-09-03",
-        "federation_chess_id": "OT34986",
-        "elo": 1500
-    },
-    {
-        "surname": "Tellier",
-        "name": "Clémence",
-        "date_of_birth": "1996-10-18",
-        "federation_chess_id": "CT34754",
-        "elo": 1810
     }
 ]
