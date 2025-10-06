@@ -103,6 +103,63 @@ class TournamentView:
         centered_panel = Align.center(panel)
         self.console.print(centered_panel)
 
+    def display_tournament_round(self, rounds):
+        rounds_table = Table(
+            title=None,
+            show_header=True,
+            header_style="bold blue",
+            show_lines=True,
+            box=box.SQUARE_DOUBLE_HEAD,
+        )
+        rounds_table.add_column("Index", style="dim", justify="center")
+        rounds_table.add_column("Round ID", style="steel_blue3", justify="center")
+        rounds_table.add_column("Statut", style="green_yellow", justify="center")
+        rounds_table.add_column("Round", style="cyan", justify="center")
+        rounds_table.add_column("Matches", justify="center")
+
+        for index, round in enumerate(rounds):
+            rounds_table.add_row(
+                str(index),
+                round.round_id,
+                round.status,
+                round.name,
+                self.display_tournament_round_matches(round.matches),
+            )
+        
+        panel = Panel(
+            rounds_table, title="[bold yellow]Liste des Rounds[/bold yellow]",
+            subtitle="Pour inscrire les résultats, entrez le numéro du match concerné dans le round en cours.Appuyez sur 'b' pour revenir au menu précédent",
+            border_style="gold1",
+        )
+        centered_panel = Align.center(panel)
+        self.console.print(centered_panel)
+
+    def display_tournament_round_matches(self, matches):
+        matches_table = Table(
+            title=None,
+            show_header=True,
+            header_style="orange_red1",
+            show_lines=True,
+            box=box.MINIMAL_HEAVY_HEAD,
+        )
+        matches_table.add_column("N°", style="dim", justify="center")
+        matches_table.add_column("Joueur Blanc", style="steel_blue3", justify="right")
+        matches_table.add_column("Score", style="steel_blue3", justify="right")
+        matches_table.add_column("", style="cyan", justify="center")
+        matches_table.add_column("Score", style="medium_orchid", justify="left")
+        matches_table.add_column("Joueur Noir", style="medium_orchid", justify="left")
+
+        for index, match in enumerate(matches):
+            matches_table.add_row(
+                str(index),
+                match[0][0],
+                str(match[0][1]),
+                "VS",
+                str(match[1][1]),
+                match[1][0],
+            )
+        return matches_table
+
     def get_new_tournament_details(self):
         name = self.console.input("Nom du tournoi : ")
         location = self.console.input("Lieu : ")
@@ -110,7 +167,11 @@ class TournamentView:
         end_date = self.console.input("Date de fin (YYYY-MM-DD) : ")
         description = self.console.input("Description du tournoi : ")
         return name, location, start_date, end_date, description
-
+    
+    def get_match_result(self):
+        result = self.console.input(f"Entrer le score du joueur blanc (1, 0 ou 0.5): ")
+        return float(result)
+    
     def execute(self):
         running = True
         while running:
@@ -191,7 +252,6 @@ class TournamentView:
                     players_id = self.console.input("Entrez les IDs des joueurs à inscrire (séparés par des virgules) : ")
                     # Vous pouvez ajouter une validation pour vérifier si les IDs existent
                     # dans la liste des joueurs avant de les inscrire
-                    # from controller.player_controller import ChessPlayerController
                     player_controller = ChessPlayerController()
                     valid_players_id_list, invalid_players_id_list = player_controller.transform_players_id_list(players_id)
                     if valid_players_id_list:
@@ -214,7 +274,41 @@ class TournamentView:
                     break
                 try:
                     index = int(self.console.input(f"Index du tournoi à démarrer (0-{tournaments_count - 1}): "))
-                    self.tournament_controller.start_tournament(index)
+                    tournament = self.tournament_controller.get_tournament(index)
+                    if tournament.status == "À venir":
+                        self.tournament_controller.start_tournament(index)
+                        round_index = 0
+                        self.display_tournament_started_message(index)
+                        started_tournament = self.tournament_controller.get_tournament(index)
+                        started_tournament_round_status = started_tournament.rounds[round_index].status
+                        while started_tournament_round_status != "Terminé":
+                            self.display_tournament_round(started_tournament.rounds)
+                            matches_count = self.tournament_controller.get_tournament_round_matches_count(index, round_index)
+                            valid_matches_number = []
+                            for n in range(matches_count):
+                                valid_matches_number.append(str(n))
+                            tournament_list_choice = self.console.input(f"\nSélectionnez le numéro d'un match (0-{matches_count - 1}): ")
+                            if tournament_list_choice in valid_matches_number:
+                                self.console.print(f"Résultats du match N°{tournament_list_choice} :", style="bold")
+                                self.tournament_controller.put_tournament_round_match_results(
+                                    index=index,
+                                    round_index=round_index,
+                                    match_number=tournament_list_choice,
+                                    result1=self.get_match_result()
+                                )
+                                self.tournament_controller.tournament_round_status_update(index, round_index)
+                                started_tournament = self.tournament_controller.get_tournament(index)
+                                started_tournament_round_status = started_tournament.rounds[round_index].status
+                            elif tournament_list_choice.lower() == 'b':
+                                break
+                            else:
+                                self.display_tournament_round_match_number_error_message()
+                    elif tournament.status == "En cours":
+                        self.display_tournament_already_started_message()
+                    elif tournament.status == "Terminé":
+                        self.display_tournament_already_ended_message()
+                    else:
+                        self.display_tournament_status_error_message()
                 except ValueError:
                     self.display_index_value_error_message()
                 except IndexError:
@@ -299,6 +393,9 @@ class TournamentView:
     def display_tournament_modified_message(self, index):
         self.console.print(Align.center(f"[bold blue]Le tournoi à l'index {index} a été modifié avec succès ![/bold blue]"))
 
+    def display_tournament_started_message(self, index):
+        self.console.print(Align.center(f"[bold green]Le tournoi à l'index {index} a été initialisé avec succès ![/bold green]"))
+
     def display_empty_tournament_modify_list_message(self):
         self.console.print(Align.center("[bold yellow]Aucun tournoi disponible pour modification.[/bold yellow]"))
 
@@ -328,3 +425,15 @@ class TournamentView:
 
     def display_tournament_subscription_closed_message(self):
         self.console.print(Align.center("[bold red]Les inscriptions sont clôturées pour ce tournoi.[/bold red]"))
+
+    def display_tournament_already_started_message(self):
+        self.console.print(Align.center("[bold yellow]Ce tournoi a déjà commencé.[/bold yellow]"))
+
+    def display_tournament_already_ended_message(self):
+        self.console.print(Align.center("[bold yellow]Ce tournoi est terminé.[/bold yellow]"))
+
+    def display_tournament_status_error_message(self):
+        self.console.print(Align.center("[bold red]Impossible de récupérer le statut de ce tournoi. Aucune action effectuée.[/bold red]"))
+
+    def display_tournament_round_match_number_error_message(self):
+        self.console.print(Align.center("[bold red]Numéro invalide. Aucune action effectuée.[/bold red]"))

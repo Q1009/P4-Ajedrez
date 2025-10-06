@@ -1,6 +1,7 @@
 from model.tournament_model import Tournament, TournamentRound
-import random
 import json
+from utils.tournament_utils import generate_first_round_matches
+from utils.tournament_utils import inscribe_match_results
 
 class TournamentController:
     def __init__(self):
@@ -91,6 +92,12 @@ class TournamentController:
         self.load_tournaments_from_json()
         return len(self.tournaments)
     
+    def get_tournament_round_matches_count(self, index, round_index):
+        self.tournaments.clear()
+        self.load_tournaments_from_json()
+        return len(self.tournaments[index].rounds[round_index].matches)
+
+    
     def start_tournament(self, index):
         self.tournaments.clear()
         self.load_tournaments_from_json()
@@ -99,22 +106,34 @@ class TournamentController:
         tournament.number_of_rounds = len(tournament.players) - 1
         tournament.status = "En cours"
         # Instancier le premier round
-        matches = self.generate_first_round_matches(tournament.players)
-        first_round = TournamentRound(round_number=1, matches=matches)
+        matches = generate_first_round_matches(tournament.players)
+        first_round = TournamentRound(round_number=1, matches=matches, status="En cours")
         tournament.rounds.append(first_round)
         self.save_tournaments_to_json()
+    
+    def tournament_round_status_update(self, index, round_index):
+        self.tournaments.clear()
+        self.load_tournaments_from_json()
+        tournament = self.tournaments[index]
+        round = tournament.rounds[round_index]
+        matches_count = len(round.matches)
+        matches_over = 0
+        for match in round.matches:
+            if str(match[0][1]) != "":
+                matches_over += 1
 
-    def generate_first_round_matches(self, players):
-        shuffled_players = []
-        for player in players:
-            shuffled_players.append(player)
-        random.shuffle(shuffled_players)
-        matches = []
-        for i in range(0, len(players), 2):
-            match = ([shuffled_players[i], ""], [shuffled_players[(i+1)], ""]) # ([joueur_i, score_joueur_i], [joueur_i+1, score_joueur_i+1])
-            matches.append(match)
+        if matches_over == matches_count:
+            round.status = "Terminé"
+        self.save_tournaments_to_json()
 
-        return matches
+    def put_tournament_round_match_results(self, index, round_index, match_number, result1):
+        self.tournaments.clear()
+        self.load_tournaments_from_json()
+        tournament = self.tournaments[index]
+        round = tournament.rounds[round_index]
+        match = round.matches[int(match_number)]
+        round.matches[int(match_number)] = inscribe_match_results(match, result1)
+        self.save_tournaments_to_json()
 
     def status_update(self, index, status=None):
         from datetime import datetime

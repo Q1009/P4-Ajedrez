@@ -62,7 +62,7 @@ class Tournament:
 
 
 class TournamentRound:
-    def __init__(self, round_number=None, round_id=None, start_date=None, start_time=None, matches=None, name=None, end_date=None, end_time=None):
+    def __init__(self, round_number=None, round_id=None, start_date=None, start_time=None, matches=None, name=None, end_date=None, end_time=None, status=None):
         self.name = "Round " + str(round_number) if round_number else ""
         self.round_id = round_id if round_id else generate_unique_id()
         now = datetime.now()
@@ -71,8 +71,9 @@ class TournamentRound:
         self.end_date = end_date
         self.end_time = end_time
         self.matches = matches if matches is not None else []
+        self.status = status if status else ""
 
-    def r_to_dict(self):
+    def r_to_dict(self):# virer le r
         return {
             "name": self.name,
             "round_id": self.round_id,
@@ -81,10 +82,11 @@ class TournamentRound:
             "end_date": self.end_date,
             "end_time": self.end_time,
             "matches": self.matches,
+            "status": self.status,
         }
 
     @classmethod
-    def r_from_dict(cls, data):
+    def r_from_dict(cls, data):# virer le r
         return cls(
             name=data["name"],
             round_number = data["name"][-1:],
@@ -94,4 +96,5 @@ class TournamentRound:
             end_date=data["end_date"],
             end_time=data["end_time"],
             matches=data["matches"],
+            status=data["status"],
         )
