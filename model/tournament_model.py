@@ -24,7 +24,7 @@ class Tournament:
         self.number_of_rounds = number_of_rounds
         self.current_round = current_round if current_round is not None else ""
         self.rounds = rounds if rounds is not None else []
-        self.players = players if players is not None else []
+        self.players = players if players is not None else {}
         self.description = description
         self.status = status # e.g., "À venir", "En cours", "Terminé"
         self.tournament_id = tournament_id if tournament_id else generate_unique_id()
@@ -38,7 +38,7 @@ class Tournament:
             "number_of_rounds": self.number_of_rounds,
             "current_round": self.current_round,
             "rounds": self.rounds if not self.rounds else [r.r_to_dict() for r in self.rounds],
-            "players": self.players, # List of player IDs and not player objects
+            "players": self.players, # Dict of player IDs and their points, not player objects
             "description": self.description,
             "status": self.status,
             "tournament_id": self.tournament_id,

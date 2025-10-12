@@ -2,6 +2,8 @@ from model.tournament_model import Tournament, TournamentRound
 import json
 from utils.tournament_utils import generate_first_round_matches
 from utils.tournament_utils import inscribe_match_results
+from utils.tournament_utils import generate_round_matches
+from datetime import datetime
 
 class TournamentController:
     def __init__(self):
@@ -74,8 +76,8 @@ class TournamentController:
         subscribed_ids = []
         already_subscribed_ids = []
         for pid in player_ids:
-            if pid not in tournament.players:
-                tournament.players.append(pid)
+            if pid not in tournament.players.keys():
+                tournament.players[pid] = 0.0
                 subscribed_ids.append(pid)
             else:
                 already_subscribed_ids.append(pid)
@@ -123,7 +125,18 @@ class TournamentController:
                 matches_over += 1
 
         if matches_over == matches_count:
-            round.status = "Terminé"
+            return True
+        self.save_tournaments_to_json()
+
+    def close_tournament_round(self, index, round_index):
+        now = datetime.now()
+        self.tournaments.clear()
+        self.load_tournaments_from_json()
+        tournament = self.tournaments[index]
+        round = tournament.rounds[round_index]
+        round.end_date = now.strftime("%Y-%m-%d")
+        round.end_time = now.strftime("%H:%M:%S")
+        round.status = "Terminé"
         self.save_tournaments_to_json()
 
     def put_tournament_round_match_results(self, index, round_index, match_number, result1):
@@ -133,6 +146,33 @@ class TournamentController:
         round = tournament.rounds[round_index]
         match = round.matches[int(match_number)]
         round.matches[int(match_number)] = inscribe_match_results(match, result1)
+        self.save_tournaments_to_json()
+
+    def update_tournament_round_players_points(self, index, round_index):
+        self.tournaments.clear()
+        self.load_tournaments_from_json()
+        tournament = self.tournaments[index]
+        round = tournament.rounds[round_index]
+        for match in round.matches:
+            tournament.players[match[0][0]] += match[0][1]
+            tournament.players[match[1][0]] += match[1][1]
+        self.save_tournaments_to_json()
+
+    def initiate_next_tournament_round(self, index):
+        self.tournaments.clear()
+        self.load_tournaments_from_json()
+        tournament = self.tournaments[index]
+        tournament.current_round += 1
+        matches = generate_round_matches(tournament.players)
+        next_round = TournamentRound(round_number=tournament.current_round, matches=matches, status="En cours")
+        tournament.rounds.append(next_round)
+        self.save_tournaments_to_json()
+
+    def close_tournament(self, index):
+        self.tournaments.clear()
+        self.load_tournaments_from_json()
+        tournament = self.tournaments[index]
+        tournament.status = "Terminé"
         self.save_tournaments_to_json()
 
     def status_update(self, index, status=None):

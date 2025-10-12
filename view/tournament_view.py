@@ -128,7 +128,7 @@ class TournamentView:
         
         panel = Panel(
             rounds_table, title="[bold yellow]Liste des Rounds[/bold yellow]",
-            subtitle="Pour inscrire les résultats, entrez le numéro du match concerné dans le round en cours.Appuyez sur 'b' pour revenir au menu précédent",
+            subtitle="Appuyez sur 'b' pour revenir au menu précédent",
             border_style="gold1",
         )
         centered_panel = Align.center(panel)
@@ -170,7 +170,11 @@ class TournamentView:
     
     def get_match_result(self):
         result = self.console.input(f"Entrer le score du joueur blanc (1, 0 ou 0.5): ")
-        return float(result)
+        return result
+    
+    def demand_round_status_update_validation(self):
+        validation = self.console.input(f"Tous les résultats ont été renseignés. Validez-vous ces scores ? (O/N): ")
+        return validation
     
     def execute(self):
         running = True
@@ -287,7 +291,7 @@ class TournamentView:
                             valid_matches_number = []
                             for n in range(matches_count):
                                 valid_matches_number.append(str(n))
-                            tournament_list_choice = self.console.input(f"\nSélectionnez le numéro d'un match (0-{matches_count - 1}): ")
+                            tournament_list_choice = self.console.input(f"\nSélectionnez le numéro d'un match du round en cours pour inscrire les scores (0-{matches_count - 1}): ")
                             if tournament_list_choice in valid_matches_number:
                                 self.console.print(f"Résultats du match N°{tournament_list_choice} :", style="bold")
                                 self.tournament_controller.put_tournament_round_match_results(
@@ -296,7 +300,19 @@ class TournamentView:
                                     match_number=tournament_list_choice,
                                     result1=self.get_match_result()
                                 )
-                                self.tournament_controller.tournament_round_status_update(index, round_index)
+                                matches_over = self.tournament_controller.tournament_round_status_update(index, round_index)
+                                if matches_over:
+                                    validation = self.demand_round_status_update_validation()
+                                    if validation.lower() == "o":
+                                        self.tournament_controller.close_tournament_round(index, round_index)
+                                        self.tournament_controller.update_tournament_round_players_points(index, round_index)
+                                        if started_tournament.current_round == started_tournament.number_of_rounds:
+                                            self.display_end_of_tournament_message()
+                                            self.tournament_controller.close_tournament(index)
+                                        else:
+                                            self.tournament_controller.initiate_next_tournament_round(index)
+                                            round_index += 1
+
                                 started_tournament = self.tournament_controller.get_tournament(index)
                                 started_tournament_round_status = started_tournament.rounds[round_index].status
                             elif tournament_list_choice.lower() == 'b':
@@ -315,41 +331,63 @@ class TournamentView:
                     self.display_tournament_index_error_message()
 
             elif choice == "6":
-                """
-                self.display_section_message("Mettre à jour un tournoi") // Démarrer le tournoi
-                # Logique pour mettre à jour un tournoi (par exemple, avancer le round, inscrire des joueurs, etc.)
+                self.display_section_message("Mettre à jour un tournoi")
                 tournaments_count = self.tournament_controller.get_tournaments_count()
                 if tournaments_count == 0:
-                    self.display_empty_tournament_modify_list_message()
+                    self.display_empty_tournament_start_list_message()
                     break
                 try:
                     index = int(self.console.input(f"Index du tournoi à mettre à jour (0-{tournaments_count - 1}): "))
-                    while True:
-                        tournament = self.tournament_controller.get_tournament(index)
-                        self.display_update_tournament_view(index, tournament.name)
-                        update_choice = self.console.input("\n[bold green]Sélectionnez une action (1-5) : [/bold green]")
-                        if update_choice == "1":
-                            # Logique pour inscrire des joueurs
-                            pass
-                        elif update_choice == "2":
-                            # Logique pour clôturer les inscriptions
-                            pass
-                        elif update_choice == "3":
-                            # Logique pour inscrire les résultats
-                            pass
-                            pass
-                        elif update_choice == "4":
-                            # Logique pour clôturer le round
-                            pass
-                        elif update_choice == "5":
-                            break
-                        else:
-                            self.display_invalid_choice_message()
+                    tournament = self.tournament_controller.get_tournament(index)
+                    if tournament.status == "En cours":
+                        round_index = len(tournament.rounds) - 1
+                        ongoing_tournament = self.tournament_controller.get_tournament(index)
+                        ongoing_tournament_round_status = ongoing_tournament.rounds[round_index].status
+                        while ongoing_tournament_round_status != "Terminé":
+                            self.display_tournament_round(ongoing_tournament.rounds)
+                            matches_count = self.tournament_controller.get_tournament_round_matches_count(index, round_index)
+                            valid_matches_number = []
+                            for n in range(matches_count):
+                                valid_matches_number.append(str(n))
+                            tournament_list_choice = self.console.input(f"\nSélectionnez le numéro d'un match du round en cours pour inscrire les scores (0-{matches_count - 1}): ")
+                            if tournament_list_choice in valid_matches_number:
+                                self.console.print(f"Résultats du match N°{tournament_list_choice} :", style="bold")
+                                self.tournament_controller.put_tournament_round_match_results(
+                                    index=index,
+                                    round_index=round_index,
+                                    match_number=tournament_list_choice,
+                                    result1=self.get_match_result()
+                                )
+                                matches_over = self.tournament_controller.tournament_round_status_update(index, round_index)
+                                if matches_over:
+                                    validation = self.demand_round_status_update_validation()
+                                    if validation.lower() == "o":
+                                        self.tournament_controller.close_tournament_round(index, round_index)
+                                        self.tournament_controller.update_tournament_round_players_points(index, round_index)
+                                        if ongoing_tournament.current_round == ongoing_tournament.number_of_rounds:
+                                            self.display_end_of_tournament_message()
+                                            self.tournament_controller.close_tournament(index)
+                                        else:
+                                            self.tournament_controller.initiate_next_tournament_round(index)
+                                            round_index += 1
+
+                                ongoing_tournament = self.tournament_controller.get_tournament(index)
+                                ongoing_tournament_round_status = ongoing_tournament.rounds[round_index].status
+                            elif tournament_list_choice.lower() == 'b':
+                                break
+                            else:
+                                self.display_tournament_round_match_number_error_message()
+                    elif tournament.status == "À venir":
+                        self.display_tournament_not_started_message()
+                    elif tournament.status == "Terminé":
+                        self.display_tournament_already_ended_message()
+                    else:
+                        self.display_tournament_status_error_message()
                 except ValueError:
                     self.display_index_value_error_message()
                 except IndexError:
                     self.display_tournament_index_error_message()
-                    """
+                    
             elif choice == "5":
                 self.display_section_message("Supprimer un tournoi")
                 tournaments_count = self.tournament_controller.get_tournaments_count()
@@ -431,6 +469,12 @@ class TournamentView:
 
     def display_tournament_already_ended_message(self):
         self.console.print(Align.center("[bold yellow]Ce tournoi est terminé.[/bold yellow]"))
+
+    def display_tournament_not_started_message(self):
+        self.console.print(Align.center("[bold yellow]Ce tournoi n'a pas commencé encore.[/bold yellow]"))
+
+    def display_end_of_tournament_message(self):
+        self.console.print(Align.center("[bold deep_pink3]Ce tournoi est maintenant terminé.[/bold deep_pink3]"))
 
     def display_tournament_status_error_message(self):
         self.console.print(Align.center("[bold red]Impossible de récupérer le statut de ce tournoi. Aucune action effectuée.[/bold red]"))

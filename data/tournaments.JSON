@@ -4,17 +4,80 @@
         "location": "Gouvieux",
         "start_date": "2025-11-12",
         "end_date": "2025-11-15",
-        "number_of_rounds": 4,
-        "current_round": "",
-        "rounds": [],
-        "players": [
-            "AB12345",
-            "AB12346",
-            "AB12348",
-            "AB12349"
+        "number_of_rounds": 3,
+        "current_round": 2,
+        "rounds": [
+            {
+                "name": "Round 1",
+                "round_id": "e61d",
+                "start_date": "2025-10-12",
+                "start_time": "19:49:11",
+                "end_date": "2025-10-12",
+                "end_time": "19:51:44",
+                "matches": [
+                    [
+                        [
+                            "DM32456",
+                            1.0
+                        ],
+                        [
+                            "FG97643",
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            "EF57832",
+                            1.0
+                        ],
+                        [
+                            "FE34523",
+                            0.0
+                        ]
+                    ]
+                ],
+                "status": "Terminé"
+            },
+            {
+                "name": "Round 2",
+                "round_id": "3598",
+                "start_date": "2025-10-12",
+                "start_time": "19:51:44",
+                "end_date": null,
+                "end_time": null,
+                "matches": [
+                    [
+                        [
+                            "EF57832",
+                            1.0
+                        ],
+                        [
+                            "FG97643",
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            "FE34523",
+                            1.0
+                        ],
+                        [
+                            "DM32456",
+                            0.0
+                        ]
+                    ]
+                ],
+                "status": "En cours"
+            }
         ],
+        "players": {
+            "FG97643": 3.0,
+            "DM32456": 2.0,
+            "EF57832": 6.0,
+            "FE34523": 3.0
+        },
         "description": "Tournoi test pour debug",
-        "status": "À venir",
+        "status": "En cours",
         "tournament_id": "2859"
     },
     {
@@ -22,10 +85,10 @@
         "location": "Chantilly",
         "start_date": "2025-11-21",
         "end_date": "2025-11-25",
-        "number_of_rounds": 4,
-        "current_round": "",
+        "number_of_rounds": -1,
+        "current_round": 1,
         "rounds": [],
-        "players": [],
+        "players": {},
         "description": "Tournoi tes pour débug et mise en place du CRUD",
         "status": "À venir",
         "tournament_id": "1e19"
@@ -38,14 +101,9 @@
         "number_of_rounds": 3,
         "current_round": 1,
         "rounds": [],
-        "players": [
-            "AB12345",
-            "AB12346",
-            "AB12347",
-            "AB12348"
-        ],
+        "players": {},
         "description": "Tournoi test pour debug",
-        "status": "En cours",
+        "status": "À venir",
         "tournament_id": "2adc"
     },
     {
@@ -55,71 +113,10 @@
         "end_date": "2025-10-27",
         "number_of_rounds": 7,
         "current_round": 1,
-        "rounds": [
-            {
-                "name": "Round 1",
-                "round_id": "5a93",
-                "start_date": "2025-10-06",
-                "start_time": "17:47:24",
-                "end_date": null,
-                "end_time": null,
-                "matches": [
-                    [
-                        [
-                            "AB12352",
-                            0.5
-                        ],
-                        [
-                            "AB12349",
-                            0.5
-                        ]
-                    ],
-                    [
-                        [
-                            "EF57832",
-                            1.0
-                        ],
-                        [
-                            "FE34523",
-                            0
-                        ]
-                    ],
-                    [
-                        [
-                            "DM32456",
-                            1.0
-                        ],
-                        [
-                            "AB12353",
-                            0
-                        ]
-                    ],
-                    [
-                        [
-                            "AB12348",
-                            0.0
-                        ],
-                        [
-                            "FG97643",
-                            1
-                        ]
-                    ]
-                ],
-                "status": "Terminé"
-            }
-        ],
-        "players": [
-            "FG97643",
-            "DM32456",
-            "EF57832",
-            "FE34523",
-            "AB12352",
-            "AB12353",
-            "AB12349",
-            "AB12348"
-        ],
+        "rounds": [],
+        "players": {},
         "description": "Ceci est la toute nouvelle description du tournoi",
-        "status": "En cours",
+        "status": "À venir",
         "tournament_id": "34c2"
     }
 ]
