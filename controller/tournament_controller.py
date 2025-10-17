@@ -108,7 +108,7 @@ class TournamentController:
         tournament.number_of_rounds = len(tournament.players) - 1
         tournament.status = "En cours"
         # Instancier le premier round
-        matches = generate_first_round_matches(tournament.players)
+        matches, tournament.matches_history = generate_first_round_matches(tournament.players)
         first_round = TournamentRound(round_number=1, matches=matches, status="En cours")
         tournament.rounds.append(first_round)
         self.save_tournaments_to_json()
@@ -163,7 +163,7 @@ class TournamentController:
         self.load_tournaments_from_json()
         tournament = self.tournaments[index]
         tournament.current_round += 1
-        matches = generate_round_matches(tournament.players)
+        matches, tournament.matches_history = generate_round_matches(tournament.players, tournament.matches_history)
         next_round = TournamentRound(round_number=tournament.current_round, matches=matches, status="En cours")
         tournament.rounds.append(next_round)
         self.save_tournaments_to_json()

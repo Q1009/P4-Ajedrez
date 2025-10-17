@@ -14,6 +14,7 @@ class Tournament:
         rounds=None,
         current_round=None,
         number_of_rounds=4,
+        matches_history=None,
         status="À venir",
         tournament_id=None,
     ):
@@ -23,11 +24,15 @@ class Tournament:
         self.end_date = end_date if end_date else ""
         self.number_of_rounds = number_of_rounds
         self.current_round = current_round if current_round is not None else ""
+        self.matches_history = matches_history if matches_history else []
         self.rounds = rounds if rounds is not None else []
         self.players = players if players is not None else {}
         self.description = description
         self.status = status # e.g., "À venir", "En cours", "Terminé"
         self.tournament_id = tournament_id if tournament_id else generate_unique_id()
+
+    # def update_players(self):
+
 
     def to_dict(self):
         return {
@@ -37,6 +42,7 @@ class Tournament:
             "end_date": self.end_date,
             "number_of_rounds": self.number_of_rounds,
             "current_round": self.current_round,
+            "matches_history": self.matches_history,
             "rounds": self.rounds if not self.rounds else [r.r_to_dict() for r in self.rounds],
             "players": self.players, # Dict of player IDs and their points, not player objects
             "description": self.description,
@@ -54,6 +60,7 @@ class Tournament:
             players=data["players"],
             rounds=[TournamentRound.r_from_dict(r) for r in data["rounds"]],
             current_round=data["current_round"],
+            matches_history=data["matches_history"],
             number_of_rounds=data["number_of_rounds"],
             description=data["description"],
             status=data["status"],
