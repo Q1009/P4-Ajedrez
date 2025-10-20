@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des joueurs</title>
+    <style>
+    /* Palette inspirée de l'image : jaune, orange, rose, magenta, violet */
+
+:root{
+    --bg-1: #0f0c29;
+    --bg-2: #302b63;
+    --bg-3: #24243e;
+
+    /* palette principale */
+    --neon-yellow: #ffd400;
+    --neon-orange: #ff8c00;
+    --neon-pink: #ff2d6f;
+    --neon-magenta: #ff3cff;
+    --neon-purple: #7a2cff;
+
+    --glass: rgba(255,255,255,0.04);
+    --glass-2: rgba(255,255,255,0.02);
+    --text: #e6f0ff;
+}
+
+*{box-sizing:border-box}
+html,body{
+    height:100%;
+    margin:0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color:var(--text);
+    background:
+        radial-gradient(ellipse at 10% 10%, rgba(255,212,0,0.06) 0%, transparent 12%),
+        radial-gradient(ellipse at 90% 85%, rgba(122,44,255,0.06) 0%, transparent 12%),
+        linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 40%, var(--bg-3) 100%);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding:2rem;
+}
+
+/* Conteneur central */
+main, .container {
+    max-width:1000px;
+    margin:0 auto;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));
+    border-radius:12px;
+    padding:1.5rem;
+    box-shadow:
+        0 12px 40px rgba(0,0,0,0.65),
+        0 0 80px rgba(122,44,255,0.06) inset;
+    backdrop-filter: blur(6px);
+}
+
+/* En-tête */
+header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+    margin-bottom:1rem;
+}
+header h1{
+    margin:0;
+    font-size:1.6rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--neon-pink);
+    text-shadow:
+        0 0 8px rgba(255,45,111,0.7),
+        0 1px 0 rgba(0,0,0,0.6);
+}
+nav a{
+    color:var(--neon-magenta);
+    text-decoration:none;
+    margin-left:0.75rem;
+    padding:0.35rem 0.6rem;
+    border-radius:6px;
+    transition: all 160ms ease;
+    font-weight:600;
+    font-size:0.95rem;
+    border: 1px solid rgba(255,255,255,0.03);
+    background: linear-gradient(90deg, rgba(255,45,111,0.04), rgba(122,44,255,0.03));
+}
+nav a:hover{
+    color:#021019;
+    background: linear-gradient(90deg, var(--neon-magenta), var(--neon-pink));
+    box-shadow:
+        0 8px 30px rgba(255,60,160,0.08),
+        0 0 18px rgba(122,44,255,0.08);
+}
+
+/* Titres de section */
+h2{
+    color:var(--neon-purple);
+    margin-top:0;
+    margin-bottom:0.8rem;
+    text-shadow: 0 0 12px rgba(122,44,255,0.25);
+}
+
+/* Tableau centré et stylisé */
+table{
+    width:100%;
+    max-width:100%;
+    margin:1rem auto; /* centre le tableau */
+    border-collapse:collapse;
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.03));
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:
+        0 12px 40px rgba(0,0,0,0.65),
+        0 0 40px rgba(255,45,111,0.04) inset;
+}
+
+/* En-tête du tableau */
+thead th{
+    padding:0.85rem 1rem;
+    text-align:left;
+    font-size:0.95rem;
+    letter-spacing:0.6px;
+    background: linear-gradient(90deg,
+        rgba(255,212,0,0.06),
+        rgba(255,140,0,0.06),
+        rgba(255,45,111,0.06));
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color:var(--text);
+}
+
+/* Lignes et cellules */
+tbody td{
+    padding:0.75rem 1rem;
+    border-bottom: 1px dashed rgba(255,255,255,0.03);
+    font-size:0.95rem;
+    vertical-align:middle;
+}
+
+/* Liens dans les tableaux — même comportement hover que nav */
+table a,
+.table-card a,
+.badge,
+.badge-small {
+    color: var(--neon-magenta);
+    text-decoration: none;
+    padding: 0.25rem 0.45rem;
+    border-radius: 6px;
+    transition: all 160ms ease;
+    border: 1px solid rgba(255,255,255,0.02);
+    background: linear-gradient(90deg, rgba(255, 45, 111, 0.02), rgba(122, 44, 255, 0.01));
+}
+
+table a:hover,
+.table-card a:hover,
+.badge:hover,
+.badge-small:hover {
+    color: #021019;
+    background: linear-gradient(90deg, var(--neon-purple), var(--neon-magenta));
+    box-shadow:
+        0 8px 30px rgba(255,60,160,0.08),
+        0 0 18px rgba(122,44,255,0.08);
+}
+
+/* Rangées alternées */
+tbody tr:nth-child(odd){
+    background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(0,0,0,0.01));
+}
+tbody tr:nth-child(even){
+    background: rgba(0,0,0,0.02);
+}
+
+/* Ajuste la largeur de toutes les colonnes pour qu'elles s'ajustent au contenu */
+/* allow columns to size to content but keep the table inside its container
+   by enabling horizontal scrolling when necessary */
+.info-table{
+    width:100%;
+    table-layout: auto; /* browser decides column widths from content */
+    min-width: 480px;   /* prevent collapsing too small; tune as needed */
+}
+.info-table th,
+.info-table td {
+    white-space: nowrap; /* prefer single-line cells so columns fit content */
+    padding:0.75rem 1rem;
+}
+
+/* put the table in a scrollable wrapper so it never escapes the main container */
+.table-card {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+}
+
+/* optionnel : centre le contenu des badges dans les colonnes */
+.info-table td .badge-small,
+.info-table td .badge {
+    display: inline-block;
+    text-align: center;
+}
+
+/* Survol des lignes avec néon */
+tbody tr:hover{
+    transform: translateY(-2px);
+    transition: transform 160ms ease, box-shadow 160ms;
+    box-shadow: 0 8px 40px rgba(122,44,255,0.06);
+}
+
+/* Accent badges et éléments importants */
+.badge{
+    display:inline-block;
+    padding:0.25rem 0.45rem;
+    border-radius:999px;
+    background: linear-gradient(90deg, var(--neon-yellow), var(--neon-pink));
+    color:#021019;
+    font-weight:700;
+    font-size:0.8rem;
+    box-shadow: 0 8px 24px rgba(255,45,111,0.06);
+}
+
+/* Lignes de surbrillance pour Elo élevé */
+.elevated {
+    background: linear-gradient(90deg, rgba(122,44,255,0.06), rgba(255,60,160,0.04));
+}
+
+/* Messages vides */
+p{
+    color: rgba(230,240,255,0.9);
+}
+.no-data{
+    text-align:center;
+    padding:1rem;
+    color: rgba(230,240,255,0.8);
+}
+
+/* Footer */
+footer{
+    margin-top:1rem;
+    text-align:center;
+    color: rgba(230,240,255,0.55);
+    font-size:0.85rem;
+}
+
+/* Responsive */
+@media (max-width:720px){
+    .info-table th,
+    .info-table td { white-space: normal; } /* allow wrapping on narrow devices */
+    header{ flex-direction:column; align-items:flex-start; gap:0.4rem; }
+    nav a{ margin-left:0; margin-right:0.5rem; }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ajedrez</h1>
+        <nav>
+            <a href="./index.html">Accueil</a>
+            <a href="./players.html">Joueurs</a>
+            <a href="./tournaments.html">Tournois</a>
+        </nav>
+    </header>
+    <main>
+        
+    <h2>Joueurs inscrits dans le système</h2>
+    
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Fédération</th>
+                    <th>Elo</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Date de Naissance</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td>WY44099</td>
+                    <td>1360</td>
+                    <td>BARBIER</td>
+                    <td>Olivier</td>
+                    <td>1979-04-03</td>
+                </tr>
+                
+                <tr>
+                    <td>AB88433</td>
+                    <td>1795</td>
+                    <td>BASTIEN</td>
+                    <td>Romain</td>
+                    <td>1984-08-19</td>
+                </tr>
+                
+                <tr>
+                    <td>CE12045</td>
+                    <td>1580</td>
+                    <td>BERNARD</td>
+                    <td>Luc</td>
+                    <td>1995-03-08</td>
+                </tr>
+                
+                <tr>
+                    <td>IK88122</td>
+                    <td>1800</td>
+                    <td>BERNARD</td>
+                    <td>Camille</td>
+                    <td>1993-08-30</td>
+                </tr>
+                
+                <tr>
+                    <td>YA66211</td>
+                    <td>1690</td>
+                    <td>BLANC</td>
+                    <td>Etienne</td>
+                    <td>1993-06-30</td>
+                </tr>
+                
+                <tr>
+                    <td>CD10655</td>
+                    <td>1335</td>
+                    <td>COLIN</td>
+                    <td>Maxime</td>
+                    <td>1986-10-02</td>
+                </tr>
+                
+                <tr>
+                    <td>GI65903</td>
+                    <td>1750</td>
+                    <td>DAVID</td>
+                    <td>Anne</td>
+                    <td>1991-10-09</td>
+                </tr>
+                
+                <tr>
+                    <td>AC48291</td>
+                    <td>1450</td>
+                    <td>DUPONT</td>
+                    <td>Jean</td>
+                    <td>1990-05-12</td>
+                </tr>
+                
+                <tr>
+                    <td>BC99544</td>
+                    <td>1525</td>
+                    <td>DUPUIS</td>
+                    <td>Emilie</td>
+                    <td>1995-05-27</td>
+                </tr>
+                
+                <tr>
+                    <td>HJ24098</td>
+                    <td>1325</td>
+                    <td>FONTAINE</td>
+                    <td>Paul</td>
+                    <td>1986-04-25</td>
+                </tr>
+                
+                <tr>
+                    <td>NP66770</td>
+                    <td>1774</td>
+                    <td>FRANC</td>
+                    <td>Paul</td>
+                    <td>1987-05-29</td>
+                </tr>
+                
+                <tr>
+                    <td>OQ41903</td>
+                    <td>1605</td>
+                    <td>GARNIER</td>
+                    <td>Lucie</td>
+                    <td>1994-06-21</td>
+                </tr>
+                
+                <tr>
+                    <td>VX32901</td>
+                    <td>1575</td>
+                    <td>GAUTHIER</td>
+                    <td>Nina</td>
+                    <td>1994-11-11</td>
+                </tr>
+                
+                <tr>
+                    <td>DF90817</td>
+                    <td>1810</td>
+                    <td>LEFEVRE</td>
+                    <td>Claire</td>
+                    <td>1992-07-15</td>
+                </tr>
+                
+                <tr>
+                    <td>QS78320</td>
+                    <td>1530</td>
+                    <td>LEMOINE</td>
+                    <td>Isabelle</td>
+                    <td>1996-01-03</td>
+                </tr>
+                
+                <tr>
+                    <td>TV90765</td>
+                    <td>1620</td>
+                    <td>LEROY</td>
+                    <td>Aline</td>
+                    <td>1998-09-02</td>
+                </tr>
+                
+                <tr>
+                    <td>MO55321</td>
+                    <td>1234</td>
+                    <td>MALFOY</td>
+                    <td>Drago</td>
+                    <td>2992-12-32</td>
+                </tr>
+                
+                <tr>
+                    <td>UW11823</td>
+                    <td>1485</td>
+                    <td>MARCHAND</td>
+                    <td>Hugo</td>
+                    <td>1989-01-21</td>
+                </tr>
+                
+                <tr>
+                    <td>BD57302</td>
+                    <td>1720</td>
+                    <td>MARTIER</td>
+                    <td>Sophie</td>
+                    <td>1988-11-23</td>
+                </tr>
+                
+                <tr>
+                    <td>EG33456</td>
+                    <td>1743</td>
+                    <td>MOREAU</td>
+                    <td>Pierre</td>
+                    <td>1985-12-30</td>
+                </tr>
+                
+                <tr>
+                    <td>SU23567</td>
+                    <td>1350</td>
+                    <td>MOREL</td>
+                    <td>Emma</td>
+                    <td>2000-04-15</td>
+                </tr>
+                
+                <tr>
+                    <td>RT89412</td>
+                    <td>1650</td>
+                    <td>NGUYEN</td>
+                    <td>Minh</td>
+                    <td>1990-12-01</td>
+                </tr>
+                
+                <tr>
+                    <td>XZ55100</td>
+                    <td>1210</td>
+                    <td>NOEL</td>
+                    <td>Claire</td>
+                    <td>2002-02-14</td>
+                </tr>
+                
+                <tr>
+                    <td>PR56011</td>
+                    <td>1420</td>
+                    <td>PERRIN</td>
+                    <td>Sébastien</td>
+                    <td>1982-09-11</td>
+                </tr>
+                
+                <tr>
+                    <td>ZB77322</td>
+                    <td>1410</td>
+                    <td>PERROT</td>
+                    <td>Manon</td>
+                    <td>1997-12-05</td>
+                </tr>
+                
+                <tr>
+                    <td>LN12840</td>
+                    <td>1899</td>
+                    <td>RICHARD</td>
+                    <td>Marc</td>
+                    <td>1977-03-12</td>
+                </tr>
+                
+                <tr>
+                    <td>FH77011</td>
+                    <td>1200</td>
+                    <td>ROUX</td>
+                    <td>Marcel</td>
+                    <td>1983-02-17</td>
+                </tr>
+                
+                <tr>
+                    <td>JL31789</td>
+                    <td>2500</td>
+                    <td>TELLIER</td>
+                    <td>Quentin</td>
+                    <td>1992-09-10</td>
+                </tr>
+                
+                <tr>
+                    <td>KM90456</td>
+                    <td>1900</td>
+                    <td>VINCENT</td>
+                    <td>Arthur</td>
+                    <td>1987-02-17</td>
+                </tr>
+                
+            </tbody>
+        </table>
+    
+
+    </main>
+    <footer>
+        <p>&copy; 2025 Ajedrez</p>
+    </footer>
+</body>
+</html>

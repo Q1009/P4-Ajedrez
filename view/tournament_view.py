@@ -110,6 +110,7 @@ class TournamentView:
             header_style="bold blue",
             show_lines=True,
             box=box.SQUARE_DOUBLE_HEAD,
+            expand=True,
         )
         rounds_table.add_column("Index", style="dim", justify="center")
         rounds_table.add_column("Round ID", style="steel_blue3", justify="center")
@@ -130,9 +131,10 @@ class TournamentView:
             rounds_table, title="[bold yellow]Liste des Rounds[/bold yellow]",
             subtitle="Appuyez sur 'b' pour revenir au menu précédent",
             border_style="gold1",
+            expand=True
         )
         centered_panel = Align.center(panel)
-        self.console.print(centered_panel)
+        self.console.print(panel)
 
     def display_tournament_round_matches(self, matches):
         matches_table = Table(
@@ -388,7 +390,7 @@ class TournamentView:
                 except IndexError:
                     self.display_tournament_index_error_message()
                     
-            elif choice == "5":
+            elif choice == "7":
                 self.display_section_message("Supprimer un tournoi")
                 tournaments_count = self.tournament_controller.get_tournaments_count()
                 if tournaments_count == 0:

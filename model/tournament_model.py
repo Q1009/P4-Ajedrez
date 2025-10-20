@@ -70,7 +70,7 @@ class Tournament:
 
 class TournamentRound:
     def __init__(self, round_number=None, round_id=None, start_date=None, start_time=None, matches=None, name=None, end_date=None, end_time=None, status=None):
-        self.name = "Round " + str(round_number) if round_number else ""
+        self.name = f'Round {round_number}' if round_number else ""
         self.round_id = round_id if round_id else generate_unique_id()
         now = datetime.now()
         self.start_date = start_date if start_date else now.strftime("%Y-%m-%d")

@@ -1,0 +1,33 @@
+{% extends "base.html.j2" %}
+
+{% block title %}Liste des joueurs{% endblock %}
+
+{% block content %}
+    <h2>Joueurs inscrits dans le système</h2>
+    {% if players %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Fédération</th>
+                    <th>Elo</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Date de Naissance</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in players|sort(attribute='surname') %}
+                <tr>
+                    <td>{{ player.federation_chess_id }}</td>
+                    <td>{{ player.elo }}</td>
+                    <td>{{ player.surname|upper }}</td>
+                    <td>{{ player.name }}</td>
+                    <td>{{ player.date_of_birth }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Aucun joueur inscrit.</p>
+    {% endif %}
+{% endblock %}

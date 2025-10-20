@@ -1,0 +1,52 @@
+{% extends "base.html.j2" %}
+
+{% block title %}Liste des tournois{% endblock %}
+
+{% block content %}
+<h2>{{tournament.name}} : Joueurs</h2>
+
+{% if tournament %}
+<div class="table-card">
+    <table class="info-table" aria-describedby="tournois-table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player_id, points in tournament.players.items()|sort(attribute='surname') %}
+            <tr>
+                <td>{{ player_id | default('—') }}</td>
+                <td>{{ points | default('—') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="table-footer">
+        <div class="pager">
+            {# pagination placeholder — adapter côté contrôleur si besoin #}
+            {% if pagination %}
+                {% if pagination.prev %}
+                    <a class="page-btn" href="/tournament/previous.html">«</a>
+                {% endif %}
+                <span class="muted">Page {{ pagination.page }} / {{ pagination.pages }}</span>
+                {% if pagination.next %}
+                    <a class="page-btn" href="/tournament/next.html">»</a>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="controls">
+            <a class="btn" href="/tournament/create.html">Créer un tournoi</a>
+        </div>
+    </div>
+</div>
+
+{% else %}
+    <div class="empty-state">
+        <p>Aucun tournoi trouvé.</p>
+        <p><a class="btn" href="/tournament/create.html">Créer un tournoi</a></p>
+    </div>
+{% endif %}
+{% endblock %}

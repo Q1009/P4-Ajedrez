@@ -6,6 +6,8 @@ from view.tournament_view import TournamentView
 from controller.tournament_controller import TournamentController
 from view.player_view import PlayerView
 from controller.player_controller import ChessPlayerController
+from view.report_view import ReportView
+from controller.report_controller import ReportController
 
 class MenuView:
     def __init__(self):
@@ -29,7 +31,6 @@ class MenuView:
             choice = self.console.input("\n[bold green]Sélectionnez une section (1-4) : [/bold green]")
             if choice == "1":
                 # Ajouter la logique pour gérer les tournois ici
-                self.display_section_message("Tournois")
                 tournament_controller = TournamentController()
                 tournament_view = TournamentView(tournament_controller)
                 tournament_view.execute()
@@ -39,8 +40,10 @@ class MenuView:
                 player_view = PlayerView(player_controller)
                 player_view.execute()
             elif choice == "3":
-                self.display_section_message("Rapports")
                 # Ajouter la logique pour gérer les rapports ici
+                report_controller = ReportController()
+                report_view = ReportView(report_controller)
+                report_view.execute()
             elif choice == "4":
                 self.display_exit_message()
                 running = False

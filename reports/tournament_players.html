@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des tournois</title>
+    <style>
+    /* Palette inspirée de l'image : jaune, orange, rose, magenta, violet */
+
+:root{
+    --bg-1: #0f0c29;
+    --bg-2: #302b63;
+    --bg-3: #24243e;
+
+    /* palette principale */
+    --neon-yellow: #ffd400;
+    --neon-orange: #ff8c00;
+    --neon-pink: #ff2d6f;
+    --neon-magenta: #ff3cff;
+    --neon-purple: #7a2cff;
+
+    --glass: rgba(255,255,255,0.04);
+    --glass-2: rgba(255,255,255,0.02);
+    --text: #e6f0ff;
+}
+
+*{box-sizing:border-box}
+html,body{
+    height:100%;
+    margin:0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color:var(--text);
+    background:
+        radial-gradient(ellipse at 10% 10%, rgba(255,212,0,0.06) 0%, transparent 12%),
+        radial-gradient(ellipse at 90% 85%, rgba(122,44,255,0.06) 0%, transparent 12%),
+        linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 40%, var(--bg-3) 100%);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding:2rem;
+}
+
+/* Conteneur central */
+main, .container {
+    max-width:1000px;
+    margin:0 auto;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));
+    border-radius:12px;
+    padding:1.5rem;
+    box-shadow:
+        0 12px 40px rgba(0,0,0,0.65),
+        0 0 80px rgba(122,44,255,0.06) inset;
+    backdrop-filter: blur(6px);
+}
+
+/* En-tête */
+header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+    margin-bottom:1rem;
+}
+header h1{
+    margin:0;
+    font-size:1.6rem;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--neon-pink);
+    text-shadow:
+        0 0 8px rgba(255,45,111,0.7),
+        0 1px 0 rgba(0,0,0,0.6);
+}
+nav a{
+    color:var(--neon-magenta);
+    text-decoration:none;
+    margin-left:0.75rem;
+    padding:0.35rem 0.6rem;
+    border-radius:6px;
+    transition: all 160ms ease;
+    font-weight:600;
+    font-size:0.95rem;
+    border: 1px solid rgba(255,255,255,0.03);
+    background: linear-gradient(90deg, rgba(255,45,111,0.04), rgba(122,44,255,0.03));
+}
+nav a:hover{
+    color:#021019;
+    background: linear-gradient(90deg, var(--neon-magenta), var(--neon-pink));
+    box-shadow:
+        0 8px 30px rgba(255,60,160,0.08),
+        0 0 18px rgba(122,44,255,0.08);
+}
+
+/* Titres de section */
+h2{
+    color:var(--neon-purple);
+    margin-top:0;
+    margin-bottom:0.8rem;
+    text-shadow: 0 0 12px rgba(122,44,255,0.25);
+}
+
+/* Tableau centré et stylisé */
+table{
+    width:100%;
+    max-width:100%;
+    margin:1rem auto; /* centre le tableau */
+    border-collapse:collapse;
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.03));
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:
+        0 12px 40px rgba(0,0,0,0.65),
+        0 0 40px rgba(255,45,111,0.04) inset;
+}
+
+/* En-tête du tableau */
+thead th{
+    padding:0.85rem 1rem;
+    text-align:left;
+    font-size:0.95rem;
+    letter-spacing:0.6px;
+    background: linear-gradient(90deg,
+        rgba(255,212,0,0.06),
+        rgba(255,140,0,0.06),
+        rgba(255,45,111,0.06));
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color:var(--text);
+}
+
+/* Lignes et cellules */
+tbody td{
+    padding:0.75rem 1rem;
+    border-bottom: 1px dashed rgba(255,255,255,0.03);
+    font-size:0.95rem;
+    vertical-align:middle;
+}
+
+/* Liens dans les tableaux — même comportement hover que nav */
+table a,
+.table-card a,
+.badge,
+.badge-small {
+    color: var(--neon-magenta);
+    text-decoration: none;
+    padding: 0.25rem 0.45rem;
+    border-radius: 6px;
+    transition: all 160ms ease;
+    border: 1px solid rgba(255,255,255,0.02);
+    background: linear-gradient(90deg, rgba(255, 45, 111, 0.02), rgba(122, 44, 255, 0.01));
+}
+
+table a:hover,
+.table-card a:hover,
+.badge:hover,
+.badge-small:hover {
+    color: #021019;
+    background: linear-gradient(90deg, var(--neon-purple), var(--neon-magenta));
+    box-shadow:
+        0 8px 30px rgba(255,60,160,0.08),
+        0 0 18px rgba(122,44,255,0.08);
+}
+
+/* Rangées alternées */
+tbody tr:nth-child(odd){
+    background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(0,0,0,0.01));
+}
+tbody tr:nth-child(even){
+    background: rgba(0,0,0,0.02);
+}
+
+/* Ajuste la largeur de toutes les colonnes pour qu'elles s'ajustent au contenu */
+/* allow columns to size to content but keep the table inside its container
+   by enabling horizontal scrolling when necessary */
+.info-table{
+    width:100%;
+    table-layout: auto; /* browser decides column widths from content */
+    min-width: 480px;   /* prevent collapsing too small; tune as needed */
+}
+.info-table th,
+.info-table td {
+    white-space: nowrap; /* prefer single-line cells so columns fit content */
+    padding:0.75rem 1rem;
+}
+
+/* put the table in a scrollable wrapper so it never escapes the main container */
+.table-card {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+}
+
+/* optionnel : centre le contenu des badges dans les colonnes */
+.info-table td .badge-small,
+.info-table td .badge {
+    display: inline-block;
+    text-align: center;
+}
+
+/* Survol des lignes avec néon */
+tbody tr:hover{
+    transform: translateY(-2px);
+    transition: transform 160ms ease, box-shadow 160ms;
+    box-shadow: 0 8px 40px rgba(122,44,255,0.06);
+}
+
+/* Accent badges et éléments importants */
+.badge{
+    display:inline-block;
+    padding:0.25rem 0.45rem;
+    border-radius:999px;
+    background: linear-gradient(90deg, var(--neon-yellow), var(--neon-pink));
+    color:#021019;
+    font-weight:700;
+    font-size:0.8rem;
+    box-shadow: 0 8px 24px rgba(255,45,111,0.06);
+}
+
+/* Lignes de surbrillance pour Elo élevé */
+.elevated {
+    background: linear-gradient(90deg, rgba(122,44,255,0.06), rgba(255,60,160,0.04));
+}
+
+/* Messages vides */
+p{
+    color: rgba(230,240,255,0.9);
+}
+.no-data{
+    text-align:center;
+    padding:1rem;
+    color: rgba(230,240,255,0.8);
+}
+
+/* Footer */
+footer{
+    margin-top:1rem;
+    text-align:center;
+    color: rgba(230,240,255,0.55);
+    font-size:0.85rem;
+}
+
+/* Responsive */
+@media (max-width:720px){
+    .info-table th,
+    .info-table td { white-space: normal; } /* allow wrapping on narrow devices */
+    header{ flex-direction:column; align-items:flex-start; gap:0.4rem; }
+    nav a{ margin-left:0; margin-right:0.5rem; }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ajedrez</h1>
+        <nav>
+            <a href="./index.html">Accueil</a>
+            <a href="./players.html">Joueurs</a>
+            <a href="./tournaments.html">Tournois</a>
+        </nav>
+    </header>
+    <main>
+        
+<h2>Open de Commune : Joueurs</h2>
+
+
+<div class="table-card">
+    <table class="info-table" aria-describedby="tournois-table">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td>AC48291</td>
+                <td>4.5</td>
+            </tr>
+            
+            <tr>
+                <td>BD57302</td>
+                <td>2.0</td>
+            </tr>
+            
+            <tr>
+                <td>EG33456</td>
+                <td>7.0</td>
+            </tr>
+            
+            <tr>
+                <td>RT89412</td>
+                <td>1.5</td>
+            </tr>
+            
+            <tr>
+                <td>YA66211</td>
+                <td>4.5</td>
+            </tr>
+            
+            <tr>
+                <td>PR56011</td>
+                <td>1.5</td>
+            </tr>
+            
+            <tr>
+                <td>LN12840</td>
+                <td>3.0</td>
+            </tr>
+            
+            <tr>
+                <td>QS78320</td>
+                <td>2.0</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <div class="table-footer">
+        <div class="pager">
+            
+            
+        </div>
+        <div class="controls">
+            <a class="btn" href="/tournament/create.html">Créer un tournoi</a>
+        </div>
+    </div>
+</div>
+
+
+
+    </main>
+    <footer>
+        <p>&copy; 2025 Ajedrez</p>
+    </footer>
+</body>
+</html>

@@ -1,5 +1,5 @@
 import json
-from model.player_model import ChessPlayer, ChessClubMember
+from model.player_model import ChessPlayer
 
 class ChessPlayerController:
 

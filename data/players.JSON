@@ -3,98 +3,203 @@
         "surname": "Dupont",
         "name": "Jean",
         "date_of_birth": "1990-05-12",
-        "federation_chess_id": "AB12345",
+        "federation_chess_id": "AC48291",
         "elo": 1450
     },
     {
-        "surname": "Martin",
+        "surname": "Martier",
         "name": "Sophie",
         "date_of_birth": "1988-11-23",
-        "federation_chess_id": "AB12346",
+        "federation_chess_id": "BD57302",
         "elo": 1720
     },
     {
         "surname": "Bernard",
         "name": "Luc",
         "date_of_birth": "1995-03-08",
-        "federation_chess_id": "AB12347",
+        "federation_chess_id": "CE12045",
         "elo": 1580
     },
     {
         "surname": "Lefevre",
         "name": "Claire",
         "date_of_birth": "1992-07-15",
-        "federation_chess_id": "AB12348",
+        "federation_chess_id": "DF90817",
         "elo": 1810
     },
     {
         "surname": "Moreau",
         "name": "Pierre",
         "date_of_birth": "1985-12-30",
-        "federation_chess_id": "AB12349",
-        "elo": "1743"
+        "federation_chess_id": "EG33456",
+        "elo": 1743
     },
     {
         "surname": "Roux",
         "name": "Marcel",
         "date_of_birth": "1983-02-17",
-        "federation_chess_id": "AB12351",
+        "federation_chess_id": "FH77011",
         "elo": 1200
     },
     {
         "surname": "David",
         "name": "Anne",
         "date_of_birth": "1991-10-09",
-        "federation_chess_id": "AB12352",
+        "federation_chess_id": "GI65903",
         "elo": 1750
     },
     {
         "surname": "Fontaine",
         "name": "Paul",
         "date_of_birth": "1986-04-25",
-        "federation_chess_id": "AB12353",
-        "elo": "1325"
+        "federation_chess_id": "HJ24098",
+        "elo": 1325
     },
     {
         "surname": "Bernard",
         "name": "Camille",
         "date_of_birth": "1993-08-30",
-        "federation_chess_id": "AB12354",
+        "federation_chess_id": "IK88122",
         "elo": 1800
     },
     {
         "surname": "Tellier",
         "name": "Quentin",
         "date_of_birth": "1992-09-10",
-        "federation_chess_id": "QT12345",
+        "federation_chess_id": "JL31789",
         "elo": 2500
     },
     {
         "surname": "Vincent",
         "name": "Arthur",
         "date_of_birth": "1987-02-17",
-        "federation_chess_id": "FE34523",
-        "elo": "1900"
+        "federation_chess_id": "KM90456",
+        "elo": 1900
     },
     {
         "surname": "Richard",
         "name": "Marc",
         "date_of_birth": "1977-03-12",
-        "federation_chess_id": "EF57832",
+        "federation_chess_id": "LN12840",
         "elo": 1899
     },
     {
         "surname": "Malfoy",
         "name": "Drago",
         "date_of_birth": "2992-12-32",
-        "federation_chess_id": "DM32456",
+        "federation_chess_id": "MO55321",
         "elo": 1234
     },
     {
         "surname": "Franc",
         "name": "Paul",
         "date_of_birth": "1987-05-29",
-        "federation_chess_id": "FG97643",
+        "federation_chess_id": "NP66770",
         "elo": 1774
+    },
+    {
+        "surname": "Garnier",
+        "name": "Lucie",
+        "date_of_birth": "1994-06-21",
+        "federation_chess_id": "OQ41903",
+        "elo": 1605
+    },
+    {
+        "surname": "Perrin",
+        "name": "Sébastien",
+        "date_of_birth": "1982-09-11",
+        "federation_chess_id": "PR56011",
+        "elo": 1420
+    },
+    {
+        "surname": "Lemoine",
+        "name": "Isabelle",
+        "date_of_birth": "1996-01-03",
+        "federation_chess_id": "QS78320",
+        "elo": 1530
+    },
+    {
+        "surname": "Nguyen",
+        "name": "Minh",
+        "date_of_birth": "1990-12-01",
+        "federation_chess_id": "RT89412",
+        "elo": 1650
+    },
+    {
+        "surname": "Morel",
+        "name": "Emma",
+        "date_of_birth": "2000-04-15",
+        "federation_chess_id": "SU23567",
+        "elo": 1350
+    },
+    {
+        "surname": "Leroy",
+        "name": "Aline",
+        "date_of_birth": "1998-09-02",
+        "federation_chess_id": "TV90765",
+        "elo": 1620
+    },
+    {
+        "surname": "Marchand",
+        "name": "Hugo",
+        "date_of_birth": "1989-01-21",
+        "federation_chess_id": "UW11823",
+        "elo": 1485
+    },
+    {
+        "surname": "Gauthier",
+        "name": "Nina",
+        "date_of_birth": "1994-11-11",
+        "federation_chess_id": "VX32901",
+        "elo": 1575
+    },
+    {
+        "surname": "Barbier",
+        "name": "Olivier",
+        "date_of_birth": "1979-04-03",
+        "federation_chess_id": "WY44099",
+        "elo": 1360
+    },
+    {
+        "surname": "Noel",
+        "name": "Claire",
+        "date_of_birth": "2002-02-14",
+        "federation_chess_id": "XZ55100",
+        "elo": 1210
+    },
+    {
+        "surname": "Blanc",
+        "name": "Etienne",
+        "date_of_birth": "1993-06-30",
+        "federation_chess_id": "YA66211",
+        "elo": 1690
+    },
+    {
+        "surname": "Perrot",
+        "name": "Manon",
+        "date_of_birth": "1997-12-05",
+        "federation_chess_id": "ZB77322",
+        "elo": 1410
+    },
+    {
+        "surname": "Bastien",
+        "name": "Romain",
+        "date_of_birth": "1984-08-19",
+        "federation_chess_id": "AB88433",
+        "elo": 1795
+    },
+    {
+        "surname": "Dupuis",
+        "name": "Emilie",
+        "date_of_birth": "1995-05-27",
+        "federation_chess_id": "BC99544",
+        "elo": 1525
+    },
+    {
+        "surname": "Colin",
+        "name": "Maxime",
+        "date_of_birth": "1986-10-02",
+        "federation_chess_id": "CD10655",
+        "elo": 1335
     }
 ]

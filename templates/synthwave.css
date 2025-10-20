@@ -1,0 +1,103 @@
+/* 🌌 Palette synthwave */
+:root {
+  --neon-yellow: #ffd400;
+  --neon-orange: #ff8c00;
+  --neon-pink: #ff2d6f;
+  --neon-magenta: #ff3cff;
+  --neon-purple: #7a2cff;
+  --bg-dark: #0a0025;
+  --text-light: #f2f2f2;
+}
+
+/* 🌃 Style global */
+body {
+  background-color: var(--bg-dark);
+  color: var(--neon-yellow);
+  text-shadow: 0 0 10px var(--neon-yellow);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header, footer {
+  text-align: center;
+  padding: 1.5rem;
+  background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
+  box-shadow: 0 0 15px var(--neon-magenta);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* 🧮 Tableau */
+table {
+  border-collapse: collapse;
+  margin: 2rem auto;
+  width: 80%;
+  max-width: 900px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--neon-magenta);
+  box-shadow: 0 0 20px var(--neon-purple);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid var(--neon-pink);
+}
+
+th {
+  background-color: rgba(255, 44, 111, 0.2);
+  color: var(--neon-yellow);
+  text-transform: uppercase;
+}
+
+tr:hover {
+  background-color: rgba(255, 140, 0, 0.1);
+  transition: 0.3s ease;
+}
+
+/* 🔘 Liens stylés comme des boutons */
+a.button {
+  display: inline-block;
+  margin: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  color: var(--text-light);
+  background: transparent;
+  border: 2px solid var(--neon-pink);
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px var(--neon-pink);
+}
+
+a.button:hover {
+  background: var(--neon-pink);
+  color: var(--bg-dark);
+  box-shadow: 0 0 20px var(--neon-pink), 0 0 40px var(--neon-purple);
+  transform: scale(1.05);
+}
+
+/* 🦶 Footer */
+footer {
+  font-size: 0.9rem;
+  color: var(--neon-yellow);
+  text-shadow: 0 0 10px var(--neon-yellow);
+}
