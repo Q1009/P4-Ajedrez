@@ -5,7 +5,8 @@
 {% block content %}
     <h2>Joueurs inscrits dans le système</h2>
     {% if players %}
-        <table>
+        <div class="table-card">
+        <table class="info-table">
             <thead>
                 <tr>
                     <th>ID Fédération</th>
@@ -27,6 +28,21 @@
                 {% endfor %}
             </tbody>
         </table>
+
+        <div class="table-footer">
+            <div class="pager">
+                {% if pagination %}
+                    {% if pagination.prev %}
+                        <a class="page-btn" href="{{ url_for(endpoint, page=pagination.prev) }}">«</a>
+                    {% endif %}
+                    <span class="muted">Page {{ pagination.page }} / {{ pagination.pages }}</span>
+                    {% if pagination.next %}
+                        <a class="page-btn" href="{{ url_for(endpoint, page=pagination.next) }}">»</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+        </div>
     {% else %}
         <p>Aucun joueur inscrit.</p>
     {% endif %}

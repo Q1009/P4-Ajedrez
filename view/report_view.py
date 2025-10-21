@@ -78,6 +78,19 @@ class ReportView:
         with open(file_path, "w") as fh:
             fh.write(html_rendu)
 
+    def display_index_jinja_view(self, tournaments, players):
+        env = Environment(loader=FileSystemLoader('templates'))
+        template = env.get_template('index.html.j2')
+
+        # Rendre le template avec des données
+        html_rendu = template.render(tournaments=tournaments, players=players)
+        directory = 'reports' 
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        file_path = f'{directory}/index.html'
+        with open(file_path, "w") as fh:
+            fh.write(html_rendu)
+
     def display_link(self):
         print("Visit my [link=https://www.willmcgugan.com]blog[/link]!")
 
@@ -99,6 +112,7 @@ class ReportView:
                 tournament_controller = TournamentController()
                 players = player_controller.display_players_from_json()
                 tournaments = tournament_controller.display_tournaments()
+                self.display_index_jinja_view(tournaments, players)
                 for tournament in tournaments:
                     self.display_tournament_players_jinja_view(tournament, players)
                     self.display_tournament_rounds_jinja_view(tournament, players)

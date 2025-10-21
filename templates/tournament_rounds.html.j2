@@ -5,6 +5,20 @@
 {% block content %}
 <h2>{{tournament.name}} : Tours & Matchs</h2>
 
+{# helper: retourne "Prénom Nom" ou l'ID si non trouvé #}
+{% macro player_fullname(pid) -%}
+  {%- if pid %}
+    {%- set p = (players | selectattr('federation_chess_id','equalto', pid) | list | first) if players else None -%}
+    {%- if p -%}
+      {{ p.name ~ ' ' ~ p.surname | upper }}
+    {%- else -%}
+      {{ pid }}
+    {%- endif -%}
+  {%- else -%}
+    — 
+  {%- endif -%}
+{%- endmacro %}
+
 {% if tournament %}
 <div class="table-card">
     <table class="info-table" aria-describedby="tournois-table">
@@ -40,13 +54,14 @@
                             {% set black_id = match[1][0] %}
                             {% set white_score = match[0][1] %}
                             {% set black_score = match[1][1] %}
+
                             <tr>
                                 <td style="padding:0.35rem 0.6rem; white-space:nowrap;">{{ idx | default('—') }}</td>
-                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">{{ white_id | default('—') }}</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">{{ player_fullname(white_id) | default('—') }}</td>
                                 <td style="padding:0.35rem 0.6rem; white-space:nowrap;">{{ white_score | default('—') }}</td>
                                 <td style="padding:0.35rem 0.6rem; white-space:nowrap;">vs</td>
                                 <td style="padding:0.35rem 0.6rem; white-space:nowrap;">{{ black_score | default('—') }}</td>
-                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">{{ black_id | default('—') }}</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">{{ player_fullname(black_id) | default('—') }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

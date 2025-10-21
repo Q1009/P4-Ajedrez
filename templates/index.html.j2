@@ -5,8 +5,36 @@
 {% block content %}
     <h2>Bienvenue sur Ajedrez</h2>
     <p>Consultez la liste des joueurs, des tournois ou les informations d’un tournoi.</p>
-    <ul>
-        <li><a href="/players.html">Liste des joueurs</a></li>
-        <li><a href="/tournaments.html">Liste des tournois</a></li>
-    </ul>
+
+    {# Calculs de secours si le contrôleur ne passe pas explícitement les compteurs #}
+    {% set players_count_display = (players_count | default(players|length | default(0))) %}
+    {% set tournaments_in_progress_display = (tournaments_in_progress_count
+         | default((tournaments | selectattr('status','equalto','En cours') | list | length) | default(0))) %}
+
+    <div class="stats" style="display:flex;gap:1rem;margin:1.25rem 0;flex-wrap:wrap;">
+        <div class="stat-card" style="flex:1 1 240px;padding:1rem;border-radius:12px;
+             background:linear-gradient(90deg,var(--neon-magenta),var(--neon-pink));
+             color:#021019;box-shadow:0 12px 36px rgba(255,45,111,0.12);">
+            <div class="stat-label" style="font-weight:700;text-transform:uppercase;font-size:0.85rem;">
+                Joueurs inscrits
+            </div>
+            <div class="stat-value" style="font-size:2.4rem;font-weight:900;margin:0.45rem 0;">
+                {{ players_count_display }}
+            </div>
+            <div><a class="btn" href="./players.html">Voir les joueurs</a></div>
+        </div>
+
+        <div class="stat-card" style="flex:1 1 240px;padding:1rem;border-radius:12px;
+             background:linear-gradient(90deg,var(--neon-purple),var(--neon-magenta));
+             color:#021019;box-shadow:0 12px 36px rgba(122,44,255,0.12);">
+            <div class="stat-label" style="font-weight:700;text-transform:uppercase;font-size:0.85rem;">
+                Tournois en cours
+            </div>
+            <div class="stat-value" style="font-size:2.4rem;font-weight:900;margin:0.45rem 0;">
+                {{ tournaments_in_progress_display }}
+            </div>
+            <div><a class="btn" href="./tournaments.html">Voir les tournois</a></div>
+        </div>
+    </div>
+    
 {% endblock %}
