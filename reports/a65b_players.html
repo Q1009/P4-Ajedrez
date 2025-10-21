@@ -194,6 +194,22 @@ tbody tr:nth-child(even){
     text-align: center;
 }
 
+/* inner table: align "Joueur Blanc" (2ème colonne) à droite */
+.inner-table th:nth-child(2),
+.inner-table td:nth-child(2) {
+    text-align: right;
+}
+
+.inner-table th:nth-child(3),
+.inner-table td:nth-child(3) {
+    text-align: right;
+}
+
+.inner-table th:nth-child(4),
+.inner-table td:nth-child(4) {
+    text-align: center;
+}
+
 /* Survol des lignes avec néon */
 tbody tr:hover{
     transform: translateY(-2px);
@@ -263,61 +279,142 @@ footer{
     <table class="info-table" aria-describedby="tournois-table">
         <thead>
             <tr>
+                <th>ID Fédération</th>
                 <th>Nom</th>
+                <th>Prénom</th>
                 <th>Points</th>
             </tr>
         </thead>
         <tbody>
+          
             
-            <tr>
-                <td>CD10655</td>
-                <td>0.0</td>
-            </tr>
+                
+                    <tr>
+                        <td>WY44099</td>
+                        <td>BARBIER</td>
+                        <td>Olivier</td>
+                        <td>0.0</td>
+                    </tr>
+                
             
-            <tr>
-                <td>AB88433</td>
-                <td>0.0</td>
-            </tr>
+                
+                    <tr>
+                        <td>AB88433</td>
+                        <td>BASTIEN</td>
+                        <td>Romain</td>
+                        <td>0.0</td>
+                    </tr>
+                
             
-            <tr>
-                <td>WY44099</td>
-                <td>0.0</td>
-            </tr>
+                
             
-            <tr>
-                <td>TV90765</td>
-                <td>0.0</td>
-            </tr>
+                
             
-            <tr>
-                <td>RT89412</td>
-                <td>0.0</td>
-            </tr>
+                
             
-            <tr>
-                <td>PR56011</td>
-                <td>0.0</td>
-            </tr>
+                
+                    <tr>
+                        <td>CD10655</td>
+                        <td>COLIN</td>
+                        <td>Maxime</td>
+                        <td>0.0</td>
+                    </tr>
+                
             
-            <tr>
-                <td>NP66770</td>
-                <td>0.0</td>
-            </tr>
+                
             
-            <tr>
-                <td>KM90456</td>
-                <td>0.0</td>
-            </tr>
+                
             
-            <tr>
-                <td>HJ24098</td>
-                <td>0.0</td>
-            </tr>
+                
             
-            <tr>
-                <td>EG33456</td>
-                <td>0.0</td>
-            </tr>
+                
+                    <tr>
+                        <td>HJ24098</td>
+                        <td>FONTAINE</td>
+                        <td>Paul</td>
+                        <td>0.0</td>
+                    </tr>
+                
+            
+                
+                    <tr>
+                        <td>NP66770</td>
+                        <td>FRANC</td>
+                        <td>Paul</td>
+                        <td>0.0</td>
+                    </tr>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <tr>
+                        <td>TV90765</td>
+                        <td>LEROY</td>
+                        <td>Aline</td>
+                        <td>0.0</td>
+                    </tr>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <tr>
+                        <td>EG33456</td>
+                        <td>MOREAU</td>
+                        <td>Pierre</td>
+                        <td>0.0</td>
+                    </tr>
+                
+            
+                
+            
+                
+                    <tr>
+                        <td>RT89412</td>
+                        <td>NGUYEN</td>
+                        <td>Minh</td>
+                        <td>0.0</td>
+                    </tr>
+                
+            
+                
+            
+                
+                    <tr>
+                        <td>PR56011</td>
+                        <td>PERRIN</td>
+                        <td>Sébastien</td>
+                        <td>0.0</td>
+                    </tr>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <tr>
+                        <td>KM90456</td>
+                        <td>VINCENT</td>
+                        <td>Arthur</td>
+                        <td>0.0</td>
+                    </tr>
+                
             
         </tbody>
     </table>
@@ -328,7 +425,7 @@ footer{
             
         </div>
         <div class="controls">
-            <a class="btn" href="/tournament/create.html">Créer un tournoi</a>
+            <a class="btn" href="./tournaments.html">Retour</a>
         </div>
     </div>
 </div>

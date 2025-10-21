@@ -35,10 +35,9 @@
 
                         <a href="./{{tournament.tournament_id}}_players.html"
                            class="badge-small" title="Voir les joueurs ({{ tournament.players|length }})">
-                            {{ tournament.players|length }} joueurs
-                        </a>
+                            {{ tournament.players|length }} joueurs</a>
                     {% else %}
-                        <a href="./{{tournament.tournament_id|string }}_players.html"
+                        <a href="./{{tournament.tournament_id}}_players.html"
                            class="badge-small" title="Voir les joueurs">0 joueurs</a>
                     {% endif %}
                 </td>
@@ -46,12 +45,11 @@
                 <td>
                     {# lien cliquable vers les tours/rounds du tournoi #}
                     {% if tournament.rounds is defined and tournament.rounds %}
-                        <a href="/tournament_id/rounds.html"
+                        <a href="./{{tournament.tournament_id}}_rounds.html"
                            class="badge-small" title="Voir les tours ({{ tournament.rounds|length }})">
-                            {{ tournament.rounds|length }} tours
-                        </a>
+                            {{ tournament.rounds|length }} tours</a>
                     {% else %}
-                        <a href="/tournament_id/rounds.html"
+                        <a href="./{{tournament.tournament_id}}_rounds.html"
                            class="badge-small" title="Voir les tours">0 tours</a>
                     {% endif %}
                 </td>

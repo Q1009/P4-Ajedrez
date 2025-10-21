@@ -10,16 +10,23 @@
     <table class="info-table" aria-describedby="tournois-table">
         <thead>
             <tr>
+                <th>ID Fédération</th>
                 <th>Nom</th>
+                <th>Prénom</th>
                 <th>Points</th>
             </tr>
         </thead>
         <tbody>
-            {% for player_id, points in tournament.players.items()|sort(attribute='surname') %}
-            <tr>
-                <td>{{ player_id | default('—') }}</td>
-                <td>{{ points | default('—') }}</td>
-            </tr>
+          {# Parcours tous les joueurs triés par nom et n'affiche que ceux inscrits au tournoi #}
+            {% for player in players | sort(attribute='surname') %}
+                {% if player.federation_chess_id in tournament.players %}
+                    <tr>
+                        <td>{{ player.federation_chess_id | default('—') }}</td>
+                        <td>{{ player.surname | upper | default('—') }}</td>
+                        <td>{{ player.name | default('—') }}</td>
+                        <td>{{ tournament.players[player.federation_chess_id] | default('0') }}</td>
+                    </tr>
+                {% endif %}
             {% endfor %}
         </tbody>
     </table>
@@ -38,7 +45,7 @@
             {% endif %}
         </div>
         <div class="controls">
-            <a class="btn" href="/tournament/create.html">Créer un tournoi</a>
+            <a class="btn" href="./tournaments.html">Retour</a>
         </div>
     </div>
 </div>
@@ -46,7 +53,7 @@
 {% else %}
     <div class="empty-state">
         <p>Aucun tournoi trouvé.</p>
-        <p><a class="btn" href="/tournament/create.html">Créer un tournoi</a></p>
+        <p><a class="btn" href="./tournaments.html">Retour</a></p>
     </div>
 {% endif %}
 {% endblock %}

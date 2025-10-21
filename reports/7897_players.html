@@ -194,6 +194,22 @@ tbody tr:nth-child(even){
     text-align: center;
 }
 
+/* inner table: align "Joueur Blanc" (2ème colonne) à droite */
+.inner-table th:nth-child(2),
+.inner-table td:nth-child(2) {
+    text-align: right;
+}
+
+.inner-table th:nth-child(3),
+.inner-table td:nth-child(3) {
+    text-align: right;
+}
+
+.inner-table th:nth-child(4),
+.inner-table td:nth-child(4) {
+    text-align: center;
+}
+
 /* Survol des lignes avec néon */
 tbody tr:hover{
     transform: translateY(-2px);
@@ -263,76 +279,163 @@ footer{
     <table class="info-table" aria-describedby="tournois-table">
         <thead>
             <tr>
+                <th>ID Fédération</th>
                 <th>Nom</th>
+                <th>Prénom</th>
                 <th>Points</th>
             </tr>
         </thead>
         <tbody>
+          
             
-            <tr>
-                <td>CD10655</td>
-                <td>0.0</td>
-            </tr>
+                
             
-            <tr>
-                <td>ZB77322</td>
-                <td>0.0</td>
-            </tr>
+                
             
-            <tr>
-                <td>XZ55100</td>
-                <td>0.0</td>
-            </tr>
+                
             
-            <tr>
-                <td>UW11823</td>
-                <td>0.0</td>
-            </tr>
+                
             
-            <tr>
-                <td>TV90765</td>
-                <td>0.0</td>
-            </tr>
+                
             
-            <tr>
-                <td>QS78320</td>
-                <td>0.0</td>
-            </tr>
+                
+                    <tr>
+                        <td>CD10655</td>
+                        <td>COLIN</td>
+                        <td>Maxime</td>
+                        <td>0.0</td>
+                    </tr>
+                
             
-            <tr>
-                <td>JL31789</td>
-                <td>0.0</td>
-            </tr>
+                
+                    <tr>
+                        <td>GI65903</td>
+                        <td>DAVID</td>
+                        <td>Anne</td>
+                        <td>0.0</td>
+                    </tr>
+                
             
-            <tr>
-                <td>LN12840</td>
-                <td>0.0</td>
-            </tr>
+                
             
-            <tr>
-                <td>KM90456</td>
-                <td>0.0</td>
-            </tr>
+                
             
-            <tr>
-                <td>HJ24098</td>
-                <td>0.0</td>
-            </tr>
+                
+                    <tr>
+                        <td>HJ24098</td>
+                        <td>FONTAINE</td>
+                        <td>Paul</td>
+                        <td>0.0</td>
+                    </tr>
+                
             
-            <tr>
-                <td>GI65903</td>
-                <td>0.0</td>
-            </tr>
+                
             
-            <tr>
-                <td>FH77011</td>
-                <td>0.0</td>
-            </tr>
+                
             
-            <tr>
-                <td>DF90817</td>
-                <td>0.0</td>
-            </tr>
+                
+            
+                
+                    <tr>
+                        <td>DF90817</td>
+                        <td>LEFEVRE</td>
+                        <td>Claire</td>
+                        <td>0.0</td>
+                    </tr>
+                
+            
+                
+                    <tr>
+                        <td>QS78320</td>
+                        <td>LEMOINE</td>
+                        <td>Isabelle</td>
+                        <td>0.0</td>
+                    </tr>
+                
+            
+                
+                    <tr>
+                        <td>TV90765</td>
+                        <td>LEROY</td>
+                        <td>Aline</td>
+                        <td>0.0</td>
+                    </tr>
+                
+            
+                
+            
+                
+                    <tr>
+                        <td>UW11823</td>
+                        <td>MARCHAND</td>
+                        <td>Hugo</td>
+                        <td>0.0</td>
+                    </tr>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <tr>
+                        <td>XZ55100</td>
+                        <td>NOEL</td>
+                        <td>Claire</td>
+                        <td>0.0</td>
+                    </tr>
+                
+            
+                
+            
+                
+                    <tr>
+                        <td>ZB77322</td>
+                        <td>PERROT</td>
+                        <td>Manon</td>
+                        <td>0.0</td>
+                    </tr>
+                
+            
+                
+                    <tr>
+                        <td>LN12840</td>
+                        <td>RICHARD</td>
+                        <td>Marc</td>
+                        <td>0.0</td>
+                    </tr>
+                
+            
+                
+                    <tr>
+                        <td>FH77011</td>
+                        <td>ROUX</td>
+                        <td>Marcel</td>
+                        <td>0.0</td>
+                    </tr>
+                
+            
+                
+                    <tr>
+                        <td>JL31789</td>
+                        <td>TELLIER</td>
+                        <td>Quentin</td>
+                        <td>0.0</td>
+                    </tr>
+                
+            
+                
+                    <tr>
+                        <td>KM90456</td>
+                        <td>VINCENT</td>
+                        <td>Arthur</td>
+                        <td>0.0</td>
+                    </tr>
+                
             
         </tbody>
     </table>
@@ -343,7 +446,7 @@ footer{
             
         </div>
         <div class="controls">
-            <a class="btn" href="/tournament/create.html">Créer un tournoi</a>
+            <a class="btn" href="./tournaments.html">Retour</a>
         </div>
     </div>
 </div>

@@ -194,6 +194,22 @@ tbody tr:nth-child(even){
     text-align: center;
 }
 
+/* inner table: align "Joueur Blanc" (2ème colonne) à droite */
+.inner-table th:nth-child(2),
+.inner-table td:nth-child(2) {
+    text-align: right;
+}
+
+.inner-table th:nth-child(3),
+.inner-table td:nth-child(3) {
+    text-align: right;
+}
+
+.inner-table th:nth-child(4),
+.inner-table td:nth-child(4) {
+    text-align: center;
+}
+
 /* Survol des lignes avec néon */
 tbody tr:hover{
     transform: translateY(-2px);
@@ -263,51 +279,128 @@ footer{
     <table class="info-table" aria-describedby="tournois-table">
         <thead>
             <tr>
+                <th>ID Fédération</th>
                 <th>Nom</th>
+                <th>Prénom</th>
                 <th>Points</th>
             </tr>
         </thead>
         <tbody>
+          
             
-            <tr>
-                <td>AC48291</td>
-                <td>4.5</td>
-            </tr>
+                
             
-            <tr>
-                <td>BD57302</td>
-                <td>2.0</td>
-            </tr>
+                
             
-            <tr>
-                <td>EG33456</td>
-                <td>7.0</td>
-            </tr>
+                
             
-            <tr>
-                <td>RT89412</td>
-                <td>1.5</td>
-            </tr>
+                
             
-            <tr>
-                <td>YA66211</td>
-                <td>4.5</td>
-            </tr>
+                
+                    <tr>
+                        <td>YA66211</td>
+                        <td>BLANC</td>
+                        <td>Etienne</td>
+                        <td>4.5</td>
+                    </tr>
+                
             
-            <tr>
-                <td>PR56011</td>
-                <td>1.5</td>
-            </tr>
+                
             
-            <tr>
-                <td>LN12840</td>
-                <td>3.0</td>
-            </tr>
+                
             
-            <tr>
-                <td>QS78320</td>
-                <td>2.0</td>
-            </tr>
+                
+                    <tr>
+                        <td>AC48291</td>
+                        <td>DUPONT</td>
+                        <td>Jean</td>
+                        <td>4.5</td>
+                    </tr>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <tr>
+                        <td>QS78320</td>
+                        <td>LEMOINE</td>
+                        <td>Isabelle</td>
+                        <td>2.0</td>
+                    </tr>
+                
+            
+                
+            
+                
+            
+                
+            
+                
+                    <tr>
+                        <td>BD57302</td>
+                        <td>MARTIER</td>
+                        <td>Sophie</td>
+                        <td>2.0</td>
+                    </tr>
+                
+            
+                
+                    <tr>
+                        <td>EG33456</td>
+                        <td>MOREAU</td>
+                        <td>Pierre</td>
+                        <td>7.0</td>
+                    </tr>
+                
+            
+                
+            
+                
+                    <tr>
+                        <td>RT89412</td>
+                        <td>NGUYEN</td>
+                        <td>Minh</td>
+                        <td>1.5</td>
+                    </tr>
+                
+            
+                
+            
+                
+                    <tr>
+                        <td>PR56011</td>
+                        <td>PERRIN</td>
+                        <td>Sébastien</td>
+                        <td>1.5</td>
+                    </tr>
+                
+            
+                
+            
+                
+                    <tr>
+                        <td>LN12840</td>
+                        <td>RICHARD</td>
+                        <td>Marc</td>
+                        <td>3.0</td>
+                    </tr>
+                
+            
+                
+            
+                
+            
+                
             
         </tbody>
     </table>
@@ -318,7 +411,7 @@ footer{
             
         </div>
         <div class="controls">
-            <a class="btn" href="/tournament/create.html">Créer un tournoi</a>
+            <a class="btn" href="./tournaments.html">Retour</a>
         </div>
     </div>
 </div>

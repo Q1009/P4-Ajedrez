@@ -6,6 +6,7 @@ from rich.align import Align
 from rich import print
 from controller.player_controller import ChessPlayerController
 from controller.tournament_controller import TournamentController
+import os
 
 class ReportView:
     def __init__(self, report_controller):
@@ -29,7 +30,11 @@ class ReportView:
 
         # Rendre le template avec des données
         html_rendu = template.render(players=players)
-        with open("reports/players.html", "w") as fh:
+        directory = 'reports' 
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        file_path = f'{directory}/players.html'
+        with open(file_path, "w") as fh:
             fh.write(html_rendu)
 
     def display_tournaments_jinja_view(self, tournaments):
@@ -38,17 +43,38 @@ class ReportView:
 
         # Rendre le template avec des données
         html_rendu = template.render(tournaments=tournaments)
-        with open("reports/tournaments.html", "w") as fh:
+        directory = 'reports' 
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        file_path = f'{directory}/tournaments.html'
+        with open(file_path, "w") as fh:
             fh.write(html_rendu)
     
-    def display_tournament_players_jinja_view(self, tournament):
+    def display_tournament_players_jinja_view(self, tournament, players):
         env = Environment(loader=FileSystemLoader('templates'))
         template = env.get_template('tournament_players.html.j2')
 
         # Rendre le template avec des données
-        html_rendu = template.render(tournament=tournament)
+        html_rendu = template.render(tournament=tournament, players=players)
         tournament_id = tournament.tournament_id
-        file_path = f'reports/{tournament_id}_players.html'
+        directory = 'reports' 
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        file_path = f'{directory}/{tournament_id}_players.html'
+        with open(file_path, "w") as fh:
+            fh.write(html_rendu)
+
+    def display_tournament_rounds_jinja_view(self, tournament, players):
+        env = Environment(loader=FileSystemLoader('templates'))
+        template = env.get_template('tournament_rounds.html.j2')
+
+        # Rendre le template avec des données
+        html_rendu = template.render(tournament=tournament, players=players)
+        tournament_id = tournament.tournament_id
+        directory = 'reports' 
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        file_path = f'{directory}/{tournament_id}_rounds.html'
         with open(file_path, "w") as fh:
             fh.write(html_rendu)
 
@@ -69,10 +95,13 @@ class ReportView:
                 tournaments = tournament_controller.display_tournaments()
                 self.display_tournaments_jinja_view(tournaments)
             elif choice == "3":
+                player_controller = ChessPlayerController()
                 tournament_controller = TournamentController()
+                players = player_controller.display_players_from_json()
                 tournaments = tournament_controller.display_tournaments()
                 for tournament in tournaments:
-                    self.display_tournament_players_jinja_view(tournament)
+                    self.display_tournament_players_jinja_view(tournament, players)
+                    self.display_tournament_rounds_jinja_view(tournament, players)
             elif choice == "4":
                 running = False
             else:

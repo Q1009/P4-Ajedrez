@@ -12,8 +12,7 @@
 /* 🌃 Style global */
 body {
   background-color: var(--bg-dark);
-  color: var(--neon-yellow);
-  text-shadow: 0 0 10px var(--neon-yellow);
+  color: var(--text-light);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   margin: 0;
   padding: 0;

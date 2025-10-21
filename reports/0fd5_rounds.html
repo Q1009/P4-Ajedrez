@@ -194,6 +194,22 @@ tbody tr:nth-child(even){
     text-align: center;
 }
 
+/* inner table: align "Joueur Blanc" (2ème colonne) à droite */
+.inner-table th:nth-child(2),
+.inner-table td:nth-child(2) {
+    text-align: right;
+}
+
+.inner-table th:nth-child(3),
+.inner-table td:nth-child(3) {
+    text-align: right;
+}
+
+.inner-table th:nth-child(4),
+.inner-table td:nth-child(4) {
+    text-align: center;
+}
+
 /* Survol des lignes avec néon */
 tbody tr:hover{
     transform: translateY(-2px);
@@ -256,59 +272,99 @@ footer{
     </header>
     <main>
         
-<h2>Open de Commune : Joueurs</h2>
+<h2>Open de Région : Tours & Matchs</h2>
 
 
 <div class="table-card">
     <table class="info-table" aria-describedby="tournois-table">
         <thead>
             <tr>
-                <th>Nom</th>
-                <th>Points</th>
+                <th>Tour</th>
+                <th>Statut</th>
+                <th>Matchs</th>
             </tr>
         </thead>
         <tbody>
-            
-            <tr>
-                <td>AC48291</td>
-                <td>4.5</td>
-            </tr>
-            
-            <tr>
-                <td>BD57302</td>
-                <td>2.0</td>
-            </tr>
-            
-            <tr>
-                <td>EG33456</td>
-                <td>7.0</td>
-            </tr>
-            
-            <tr>
-                <td>RT89412</td>
-                <td>1.5</td>
-            </tr>
-            
-            <tr>
-                <td>YA66211</td>
-                <td>4.5</td>
-            </tr>
-            
-            <tr>
-                <td>PR56011</td>
-                <td>1.5</td>
-            </tr>
-            
-            <tr>
-                <td>LN12840</td>
-                <td>3.0</td>
-            </tr>
-            
-            <tr>
-                <td>QS78320</td>
-                <td>2.0</td>
-            </tr>
-            
+        
+        <tr>
+            <td>Round 1</td>
+            <td>En cours</td>
+            <td>
+                
+                <table class="inner-table" style="border-collapse:collapse;">
+                    <thead>
+                        <tr>
+                            <th style="padding:0.35rem 0.6rem; white-space:nowrap">N°</th>
+                            <th style="padding:0.35rem 0.6rem; white-space:nowrap">Joueur Blanc</th>
+                            <th style="padding:0.35rem 0.6rem; white-space:nowrap">Score</th>
+                            <th style="padding:0.35rem 0.6rem; white-space:nowrap"></th>
+                            <th style="padding:0.35rem 0.6rem; white-space:nowrap">Score</th>
+                            <th style="padding:0.35rem 0.6rem; white-space:nowrap">Joueur Noir</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                            
+                            
+                            
+                            
+                            
+                            <tr>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">1</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">DF90817</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">1.0</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">vs</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">0.0</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">JL31789</td>
+                            </tr>
+                        
+                            
+                            
+                            
+                            
+                            
+                            <tr>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">2</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">NP66770</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">1.0</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">vs</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">0.0</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">AB88433</td>
+                            </tr>
+                        
+                            
+                            
+                            
+                            
+                            
+                            <tr>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">3</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">RT89412</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;"></td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">vs</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;"></td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">XZ55100</td>
+                            </tr>
+                        
+                            
+                            
+                            
+                            
+                            
+                            <tr>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">4</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">GI65903</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;"></td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">vs</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;"></td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">BC99544</td>
+                            </tr>
+                        
+                    </tbody>
+                </table>
+                
+        </tr>
+        
         </tbody>
     </table>
 
@@ -318,7 +374,7 @@ footer{
             
         </div>
         <div class="controls">
-            <a class="btn" href="/tournament/create.html">Créer un tournoi</a>
+            <a class="btn" href="./tournaments.html">Retour</a>
         </div>
     </div>
 </div>

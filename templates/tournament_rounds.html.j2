@@ -1,0 +1,87 @@
+{% extends "base.html.j2" %}
+
+{% block title %}Liste des tournois{% endblock %}
+
+{% block content %}
+<h2>{{tournament.name}} : Tours & Matchs</h2>
+
+{% if tournament %}
+<div class="table-card">
+    <table class="info-table" aria-describedby="tournois-table">
+        <thead>
+            <tr>
+                <th>Tour</th>
+                <th>Statut</th>
+                <th>Matchs</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for round in tournament.rounds | sort(attribute='name', reverse=True) %}
+        <tr>
+            <td>{{ round.name | default('—') }}</td>
+            <td>{{ round.status | default('—') }}</td>
+            <td>
+                {% if round.matches %}
+                <table class="inner-table" style="border-collapse:collapse;">
+                    <thead>
+                        <tr>
+                            <th style="padding:0.35rem 0.6rem; white-space:nowrap">N°</th>
+                            <th style="padding:0.35rem 0.6rem; white-space:nowrap">Joueur Blanc</th>
+                            <th style="padding:0.35rem 0.6rem; white-space:nowrap">Score</th>
+                            <th style="padding:0.35rem 0.6rem; white-space:nowrap"></th>
+                            <th style="padding:0.35rem 0.6rem; white-space:nowrap">Score</th>
+                            <th style="padding:0.35rem 0.6rem; white-space:nowrap">Joueur Noir</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for match in round.matches %}
+                            {% set idx = loop.index %}
+                            {% set white_id = match[0][0] %}
+                            {% set black_id = match[1][0] %}
+                            {% set white_score = match[0][1] %}
+                            {% set black_score = match[1][1] %}
+                            <tr>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">{{ idx | default('—') }}</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">{{ white_id | default('—') }}</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">{{ white_score | default('—') }}</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">vs</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">{{ black_score | default('—') }}</td>
+                                <td style="padding:0.35rem 0.6rem; white-space:nowrap;">{{ black_id | default('—') }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <em>Aucun match</em>
+                {% endif %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="table-footer">
+        <div class="pager">
+            {# pagination placeholder — adapter côté contrôleur si besoin #}
+            {% if pagination %}
+                {% if pagination.prev %}
+                    <a class="page-btn" href="/tournament/previous.html">«</a>
+                {% endif %}
+                <span class="muted">Page {{ pagination.page }} / {{ pagination.pages }}</span>
+                {% if pagination.next %}
+                    <a class="page-btn" href="/tournament/next.html">»</a>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="controls">
+            <a class="btn" href="./tournaments.html">Retour</a>
+        </div>
+    </div>
+</div>
+
+{% else %}
+    <div class="empty-state">
+        <p>Aucun tournoi trouvé.</p>
+        <p><a class="btn" href="./tournaments.html">Retour</a></p>
+    </div>
+{% endif %}
+{% endblock %}
