@@ -1,16 +1,31 @@
 """
-Utilities to generate and manage tournament match pairings and results.
+Utilities for generating pairings and recording results in tournaments.
 
-This module provides:
-- generate_first_round_matches(players): produce randomized first-round pairings.
-- generate_round_matches(players, previous_matches): produce pairings for subsequent rounds
-  using score groups and avoiding previous pairings when possible.
-- inscribe_match_results(match, result1): write a match result (from white player's POV).
+This module provides simple, serializable helpers used by the tournament
+controller and views:
 
-Note: match representations used across the app are kept simple and serializable:
-    match = ([white_id, white_score], [black_id, black_score])
-Previous matches are tracked as a list of two-item lists: [[p1, p2], ...].
+- generate_first_round_matches(players): create randomized first-round pairings.
+- generate_round_matches(players, previous_matches): create subsequent round
+  pairings trying to avoid repeat pairings and grouping by score.
+- inscribe_match_results(match, result1): record a match result from the white
+  player's perspective.
+- calculate_elo(elo_player, elo_opponent, k_player, w): compute an updated ELO.
+
+Data formats and conventions
+----------------------------
+- Player collections are typically dicts mapping federation_id -> points.
+- A match is represented as: ([white_id, white_score], [black_id, black_score])
+  where scores are numeric (floats) or an empty string when not yet set.
+- previous_matches is a list of two-item lists ([[p1, p2], ...]) used to avoid
+  rematches where possible.
+
+Notes
+-----
+These utilities are intentionally simple and focused on the application's needs.
+They are not meant to implement every tournament pairing rule (e.g. full Swiss
+rules with tie-breaks). Use more advanced libraries for production-grade pairing.
 """
+
 from typing import Dict, List, Tuple, Any
 import random
 
@@ -57,7 +72,7 @@ def generate_round_matches(
     previous_matches: List[List[Any]]
 ) -> Tuple[List[Tuple[List[Any], List[Any]]], List[List[Any]]]:
     """
-    Generate pairings for a subsequent round.
+    Generate pairings for a subsequent round while attempting to avoid rematches.
 
     Strategy:
     - Group players by their current points.
@@ -160,3 +175,36 @@ def inscribe_match_results(match: Tuple[List[Any], List[Any]], result1: Any) -> 
         print("Le résultat saisi est invalide")
 
     return match
+
+
+def calculate_elo(elo_player, elo_opponent, k_player, w):
+    """
+    Compute the updated Elo rating for a player after a single game.
+
+    Parameters
+    ----------
+    elo_player : float | int
+        Current Elo rating of the player to update.
+    elo_opponent : float | int
+        Elo rating of the opponent.
+    k_player : float | int
+        K-factor for the player (rating sensitivity).
+    w : float
+        Game result from the player's perspective (1.0 = win, 0.5 = draw, 0.0 = loss).
+
+    Returns
+    -------
+    int
+        The updated ELO rating rounded to the nearest integer.
+
+    Notes
+    -----
+    Uses the standard Elo expected score formula:
+        expected = 1 / (1 + 10 ** ((elo_opponent - elo_player) / 400))
+    and updates the rating as:
+        R' = R + K * (w - expected)
+    """
+    expected_score = 1 / (1 + 10 ** ((elo_opponent - elo_player) / 400))
+    elo_updated = elo_player + k_player * (w - expected_score)
+
+    return round(elo_updated)

@@ -630,7 +630,7 @@
         "start_date": "2025-10-10",
         "end_date": "2025-10-14",
         "number_of_rounds": 5,
-        "current_round": 2,
+        "current_round": 5,
         "matches_history": [
             [
                 "MO55321",
@@ -654,6 +654,34 @@
             ],
             [
                 "MO55321",
+                "TV90765"
+            ],
+            [
+                "JL31789",
+                "GI65903"
+            ],
+            [
+                "MO55321",
+                "BD57302"
+            ],
+            [
+                "AB88433",
+                "TV90765"
+            ],
+            [
+                "JL31789",
+                "MO55321"
+            ],
+            [
+                "BD57302",
+                "GI65903"
+            ],
+            [
+                "JL31789",
+                "AB88433"
+            ],
+            [
+                "GI65903",
                 "TV90765"
             ]
         ],
@@ -704,8 +732,8 @@
                 "round_id": "c407",
                 "start_date": "2025-10-22",
                 "start_time": "12:18:28",
-                "end_date": null,
-                "end_time": null,
+                "end_date": "2025-10-22",
+                "end_time": "16:20:44",
                 "matches": [
                     [
                         [
@@ -730,27 +758,130 @@
                     [
                         [
                             "MO55321",
-                            ""
+                            1.0
                         ],
                         [
                             "TV90765",
-                            ""
+                            0.0
                         ]
                     ]
                 ],
-                "status": "En cours"
+                "status": "Terminé"
+            },
+            {
+                "name": "Round 3",
+                "round_id": "d7d6",
+                "start_date": "2025-10-22",
+                "start_time": "16:20:44",
+                "end_date": "2025-10-22",
+                "end_time": "16:21:01",
+                "matches": [
+                    [
+                        [
+                            "JL31789",
+                            1.0
+                        ],
+                        [
+                            "GI65903",
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            "MO55321",
+                            0.5
+                        ],
+                        [
+                            "BD57302",
+                            0.5
+                        ]
+                    ],
+                    [
+                        [
+                            "AB88433",
+                            0.0
+                        ],
+                        [
+                            "TV90765",
+                            1.0
+                        ]
+                    ]
+                ],
+                "status": "Terminé"
+            },
+            {
+                "name": "Round 4",
+                "round_id": "22ba",
+                "start_date": "2025-10-22",
+                "start_time": "16:21:01",
+                "end_date": "2025-10-22",
+                "end_time": "16:21:23",
+                "matches": [
+                    [
+                        [
+                            "JL31789",
+                            1.0
+                        ],
+                        [
+                            "MO55321",
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            "BD57302",
+                            0.0
+                        ],
+                        [
+                            "GI65903",
+                            1.0
+                        ]
+                    ]
+                ],
+                "status": "Terminé"
+            },
+            {
+                "name": "Round 5",
+                "round_id": "36b6",
+                "start_date": "2025-10-22",
+                "start_time": "16:21:23",
+                "end_date": "2025-10-22",
+                "end_time": "16:47:15",
+                "matches": [
+                    [
+                        [
+                            "JL31789",
+                            0.0
+                        ],
+                        [
+                            "AB88433",
+                            1.0
+                        ]
+                    ],
+                    [
+                        [
+                            "GI65903",
+                            1.0
+                        ],
+                        [
+                            "TV90765",
+                            0.0
+                        ]
+                    ]
+                ],
+                "status": "Terminé"
             }
         ],
         "players": {
-            "TV90765": 0.0,
-            "MO55321": 0.0,
-            "GI65903": 1.0,
-            "BD57302": 1.0,
-            "JL31789": 1.0,
-            "AB88433": 0.0
+            "TV90765": 1.0,
+            "MO55321": 1.5,
+            "GI65903": 3.5,
+            "BD57302": 1.5,
+            "JL31789": 4.0,
+            "AB88433": 1.5
         },
         "description": "Tournoi test pour debugage complet",
-        "status": "En cours",
+        "status": "Terminé",
         "tournament_id": "7431"
     }
 ]

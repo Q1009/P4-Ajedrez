@@ -1,11 +1,13 @@
 import json
 from model.player_model import ChessPlayer
+from utils.tournament_utils import calculate_elo
 
 
 class ChessPlayerController:
     """Controller for managing ChessPlayer data persisted in JSON.
 
-    Provides simple CRUD operations and helpers used by the console views.
+    Provides simple CRUD operations, lookup helpers and rating updates used by
+    the console views and tournament workflow.
 
     Attributes
     ----------
@@ -14,7 +16,7 @@ class ChessPlayerController:
 
     Methods
     -------
-    display_players_from_json(filepath="data/players.json")
+    display_players_from_json()
         Load players from JSON and return the list of ChessPlayer instances.
     add_player(surname, name, date_of_birth, id, elo)
         Create a new ChessPlayer and persist it to JSON.
@@ -30,6 +32,12 @@ class ChessPlayerController:
         Return a list of federation_chess_id for all players.
     transform_players_id_list(players_id)
         Parse a comma-separated string of IDs and return (valid_ids, invalid_ids).
+    get_player_by_federation_id(federation_id)
+        Lookup and return a ChessPlayer by their federation ID.
+    update_player_by_federation_id(federation_id, player1)
+        Update a player's rating and/or games played by federation ID and persist.
+    update_players_games_and_elo(tournament)
+        Apply tournament results: increment games played, compute and persist new ELOs.
     save_players_to_json(filepath="data/players.json")
         Serialize the in-memory players list to the given JSON file.
     load_players_from_json(filepath="data/players.json")
@@ -48,17 +56,12 @@ class ChessPlayerController:
 
     def display_players_from_json(self):
         """
-        Load players from the JSON file and return the in-memory list.
-
-        Parameters
-        ----------
-        filepath : str
-            Path to the JSON file containing player records.
+        Load players from the default JSON file into memory and return them.
 
         Returns
         -------
         list[ChessPlayer]
-            List of ChessPlayer instances loaded from the file (or empty list).
+            List of ChessPlayer instances loaded from storage (may be empty).
         """
         self.chess_players.clear()
         self.load_players_from_json()
@@ -80,10 +83,6 @@ class ChessPlayerController:
             Federation chess identifier.
         elo : int | float
             Player rating.
-
-        Returns
-        -------
-        None
         """
         self.chess_players.clear()
         self.load_players_from_json()
@@ -210,6 +209,116 @@ class ChessPlayerController:
         valid_ids = [pid for pid in players_id_list if pid in existing_players_id]
         return valid_ids, invalid_ids
 
+    def get_player_by_federation_id(self, federation_id):
+        """
+        Retrieve a player by their federation chess ID.
+
+        Parameters
+        ----------
+        federation_id : str
+            The federation_chess_id of the player to find.
+
+        Returns
+        -------
+        ChessPlayer | None
+            The matching player instance, or None if not found.
+        """
+        self.chess_players.clear()
+        self.load_players_from_json()
+        for player in self.chess_players:
+            if player.federation_chess_id == federation_id:
+                return player
+        return None
+    
+    def update_player_by_federation_id(self, federation_id, player1):
+        """
+        Update a player's ELO and/or games played by their federation chess ID.
+
+        Parameters
+        ----------
+        federation_id : str
+            The federation_chess_id of the player to locate.
+        player1 : object
+            Object supplying new values. Expected attributes (optional):
+                - elo (int | float | None): New ELO rating to assign.
+                - games_played (int | None): New total number of games played.
+
+        Returns
+        -------
+        bool
+            True if a matching player was found and updated (and changes saved),
+            False if no player with the given federation_id was found.
+
+        Notes
+        -----
+        The method reloads the players from persistent storage, applies any
+        provided updates to the matching player, persists the list back to
+        storage, and returns whether an update occurred.
+        """
+        self.chess_players.clear()
+        self.load_players_from_json()
+        for player in self.chess_players:
+            if player.federation_chess_id == federation_id:
+                if player1.games_played is not None:
+                    player.modify_games_played(player1.games_played)
+                if player1.elo is not None:
+                    player.modify_elo(player1.elo)
+                self.save_players_to_json()
+                return True
+        return False
+
+    def update_players_games_and_elo(self, tournament):
+        """
+        Update all players' games played and ELO ratings based on tournament results.
+
+        For each match in each round the method:
+          - looks up the two players by federation ID,
+          - computes new ELOs using calculate_elo() and each player's K-factor,
+          - increments games_played,
+          - updates in-memory player objects and persists changes.
+
+        Parameters
+        ----------
+        tournament : Tournament
+            The tournament instance containing rounds and matches to process.
+
+        Notes
+        -----
+        The method expects `tournament.rounds` to contain rounds with `.matches`
+        where each match is represented as ([player1_id, score1], [player2_id, score2]).
+        """
+        for round in tournament.rounds:
+            for match in round.matches:
+                player1_id = match[0][0]
+                player2_id = match[1][0]
+                result1 = match[0][1]
+                result2 = match[1][1]
+
+                player1 = self.get_player_by_federation_id(player1_id)
+                player2 = self.get_player_by_federation_id(player2_id)
+
+                new_elo_player1 = calculate_elo(
+                    elo_player=player1.elo,
+                    elo_opponent=player2.elo,
+                    k_player=player1.coef_k,
+                    w=result1
+                )
+                new_elo_player2 = calculate_elo(
+                    elo_player=player2.elo,
+                    elo_opponent=player1.elo,
+                    k_player=player2.coef_k,
+                    w=result2
+                )
+
+                player1.modify_games_played(player1.games_played + 1)
+                player2.modify_games_played(player2.games_played + 1)
+
+                player1.modify_elo(new_elo_player1)
+                player2.modify_elo(new_elo_player2)
+
+                self.update_player_by_federation_id(player1_id, player1)
+                self.update_player_by_federation_id(player2_id, player2)
+
     def save_players_to_json(self, filepath="data/players.json"):
         """
         Persist the in-memory players list to a JSON file.
@@ -218,10 +327,6 @@ class ChessPlayerController:
         ----------
         filepath : str
             Destination path for the JSON file.
-
-        Returns
-        -------
-        None
         """
         data = []
         for player in self.chess_players:

@@ -4,209 +4,269 @@
         "name": "Jean",
         "date_of_birth": "1990-05-12",
         "federation_chess_id": "AC48291",
-        "elo": 1450
+        "elo": 1450,
+        "coef_k": 40,
+        "games_played": 18
     },
     {
         "surname": "Martier",
         "name": "Sophie",
         "date_of_birth": "1988-11-23",
         "federation_chess_id": "BD57302",
-        "elo": 1720
+        "elo": 1714,
+        "coef_k": 20,
+        "games_played": 46
     },
     {
         "surname": "Bernard",
         "name": "Luc",
         "date_of_birth": "1995-03-08",
         "federation_chess_id": "CE12045",
-        "elo": 1580
+        "elo": 1580,
+        "coef_k": 40,
+        "games_played": 7
     },
     {
         "surname": "Lefevre",
         "name": "Claire",
         "date_of_birth": "1992-07-15",
         "federation_chess_id": "DF90817",
-        "elo": 1810
+        "elo": 1810,
+        "coef_k": 20,
+        "games_played": 55
     },
     {
         "surname": "Moreau",
         "name": "Pierre",
         "date_of_birth": "1985-12-30",
         "federation_chess_id": "EG33456",
-        "elo": 1743
+        "elo": 1743,
+        "coef_k": 40,
+        "games_played": 29
     },
     {
         "surname": "Roux",
         "name": "Marcel",
         "date_of_birth": "1983-02-17",
         "federation_chess_id": "FH77011",
-        "elo": 1200
+        "elo": 1200,
+        "coef_k": 40,
+        "games_played": 5
     },
     {
         "surname": "David",
         "name": "Anne",
         "date_of_birth": "1991-10-09",
         "federation_chess_id": "GI65903",
-        "elo": 1750
+        "elo": 1767,
+        "coef_k": 20,
+        "games_played": 80
     },
     {
         "surname": "Fontaine",
         "name": "Paul",
         "date_of_birth": "1986-04-25",
         "federation_chess_id": "HJ24098",
-        "elo": 1325
+        "elo": 1325,
+        "coef_k": 40,
+        "games_played": 12
     },
     {
         "surname": "Bernard",
         "name": "Camille",
         "date_of_birth": "1993-08-30",
         "federation_chess_id": "IK88122",
-        "elo": 1800
+        "elo": 1800,
+        "coef_k": 20,
+        "games_played": 33
     },
     {
         "surname": "Tellier",
         "name": "Quentin",
         "date_of_birth": "1992-09-10",
         "federation_chess_id": "JL31789",
-        "elo": 2500
+        "elo": 2490,
+        "coef_k": 10,
+        "games_played": 205
     },
     {
         "surname": "Vincent",
         "name": "Arthur",
         "date_of_birth": "1987-02-17",
         "federation_chess_id": "KM90456",
-        "elo": 1900
+        "elo": 1900,
+        "coef_k": 40,
+        "games_played": 28
     },
     {
         "surname": "Richard",
         "name": "Marc",
         "date_of_birth": "1977-03-12",
         "federation_chess_id": "LN12840",
-        "elo": 1899
+        "elo": 1899,
+        "coef_k": 20,
+        "games_played": 47
     },
     {
         "surname": "Malfoy",
         "name": "Drago",
         "date_of_birth": "2992-12-32",
         "federation_chess_id": "MO55321",
-        "elo": 1234
+        "elo": 1285,
+        "coef_k": 40,
+        "games_played": 7
     },
     {
         "surname": "Franc",
         "name": "Paul",
         "date_of_birth": "1987-05-29",
         "federation_chess_id": "NP66770",
-        "elo": 1774
+        "elo": 1774,
+        "coef_k": 20,
+        "games_played": 61
     },
     {
         "surname": "Garnier",
         "name": "Lucie",
         "date_of_birth": "1994-06-21",
         "federation_chess_id": "OQ41903",
-        "elo": 1605
+        "elo": 1605,
+        "coef_k": 40,
+        "games_played": 22
     },
     {
         "surname": "Perrin",
         "name": "Sébastien",
         "date_of_birth": "1982-09-11",
         "federation_chess_id": "PR56011",
-        "elo": 1420
+        "elo": 1420,
+        "coef_k": 20,
+        "games_played": 36
     },
     {
         "surname": "Lemoine",
         "name": "Isabelle",
         "date_of_birth": "1996-01-03",
         "federation_chess_id": "QS78320",
-        "elo": 1530
+        "elo": 1530,
+        "coef_k": 40,
+        "games_played": 9
     },
     {
         "surname": "Nguyen",
         "name": "Minh",
         "date_of_birth": "1990-12-01",
         "federation_chess_id": "RT89412",
-        "elo": 1650
+        "elo": 1650,
+        "coef_k": 20,
+        "games_played": 44
     },
     {
         "surname": "Morel",
         "name": "Emma",
         "date_of_birth": "2000-04-15",
         "federation_chess_id": "SU23567",
-        "elo": 1350
+        "elo": 1350,
+        "coef_k": 40,
+        "games_played": 15
     },
     {
         "surname": "Leroy",
         "name": "Aline",
         "date_of_birth": "1998-09-02",
         "federation_chess_id": "TV90765",
-        "elo": 1620
+        "elo": 1611,
+        "coef_k": 20,
+        "games_played": 62
     },
     {
         "surname": "Marchand",
         "name": "Hugo",
         "date_of_birth": "1989-01-21",
         "federation_chess_id": "UW11823",
-        "elo": 1485
+        "elo": 1485,
+        "coef_k": 20,
+        "games_played": 31
     },
     {
         "surname": "Gauthier",
         "name": "Nina",
         "date_of_birth": "1994-11-11",
         "federation_chess_id": "VX32901",
-        "elo": 1575
+        "elo": 1575,
+        "coef_k": 40,
+        "games_played": 26
     },
     {
         "surname": "Barbier",
         "name": "Olivier",
         "date_of_birth": "1979-04-03",
         "federation_chess_id": "WY44099",
-        "elo": 1360
+        "elo": 1360,
+        "coef_k": 40,
+        "games_played": 11
     },
     {
         "surname": "Noel",
         "name": "Claire",
         "date_of_birth": "2002-02-14",
         "federation_chess_id": "XZ55100",
-        "elo": 1210
+        "elo": 1210,
+        "coef_k": 40,
+        "games_played": 2
     },
     {
         "surname": "Blanc",
         "name": "Etienne",
         "date_of_birth": "1993-06-30",
         "federation_chess_id": "YA66211",
-        "elo": 1690
+        "elo": 1690,
+        "coef_k": 20,
+        "games_played": 34
     },
     {
         "surname": "Perrot",
         "name": "Manon",
         "date_of_birth": "1997-12-05",
         "federation_chess_id": "ZB77322",
-        "elo": 1410
+        "elo": 1410,
+        "coef_k": 40,
+        "games_played": 19
     },
     {
         "surname": "Bastien",
         "name": "Romain",
         "date_of_birth": "1984-08-19",
         "federation_chess_id": "AB88433",
-        "elo": 1795
+        "elo": 1787,
+        "coef_k": 20,
+        "games_played": 92
     },
     {
         "surname": "Dupuis",
         "name": "Emilie",
         "date_of_birth": "1995-05-27",
         "federation_chess_id": "BC99544",
-        "elo": 1525
+        "elo": 1525,
+        "coef_k": 40,
+        "games_played": 13
     },
     {
         "surname": "Colin",
         "name": "Maxime",
         "date_of_birth": "1986-10-02",
         "federation_chess_id": "CD10655",
-        "elo": 1335
+        "elo": 1335,
+        "coef_k": 40,
+        "games_played": 27
     },
     {
         "surname": "Makoto",
         "name": "Kai-Li",
         "date_of_birth": "1999-04-18",
         "federation_chess_id": "ZE99876",
-        "elo": 2349
+        "elo": 2349,
+        "coef_k": 20,
+        "games_played": 120
     }
 ]
