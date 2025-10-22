@@ -1,9 +1,9 @@
 [
     {
         "name": "Open de Région",
-        "location": "Testlandia",
+        "location": "Chef Lieu",
         "start_date": "2025-10-20",
-        "end_date": "2025-10-23",
+        "end_date": "2025-10-31",
         "number_of_rounds": 7,
         "current_round": 1,
         "matches_history": [
@@ -87,7 +87,7 @@
             "GI65903": 0.0,
             "DF90817": 0.0
         },
-        "description": "Tournoi test pour affichage Jinja",
+        "description": "Tournoi test pour demo soutenance",
         "status": "En cours",
         "tournament_id": "0fd5"
     },
@@ -118,7 +118,7 @@
     },
     {
         "name": "Open de Pays",
-        "location": "Capital",
+        "location": "Capitale",
         "start_date": "2026-01-01",
         "end_date": "2026-01-10",
         "number_of_rounds": 4,
@@ -609,5 +609,148 @@
         "description": "Tournoi test pour debug",
         "status": "Terminé",
         "tournament_id": "b26a"
+    },
+    {
+        "name": "Open d'Europe",
+        "location": "Berlin",
+        "start_date": "2026-02-12",
+        "end_date": "2026-02-21",
+        "number_of_rounds": 4,
+        "current_round": "",
+        "matches_history": [],
+        "rounds": [],
+        "players": {},
+        "description": "Tournoi test pour debuggage",
+        "status": "À venir",
+        "tournament_id": "99c4"
+    },
+    {
+        "name": "Open du Test",
+        "location": "Testlandia",
+        "start_date": "2025-10-10",
+        "end_date": "2025-10-14",
+        "number_of_rounds": 5,
+        "current_round": 2,
+        "matches_history": [
+            [
+                "MO55321",
+                "GI65903"
+            ],
+            [
+                "BD57302",
+                "AB88433"
+            ],
+            [
+                "JL31789",
+                "TV90765"
+            ],
+            [
+                "JL31789",
+                "BD57302"
+            ],
+            [
+                "GI65903",
+                "AB88433"
+            ],
+            [
+                "MO55321",
+                "TV90765"
+            ]
+        ],
+        "rounds": [
+            {
+                "name": "Round 1",
+                "round_id": "cde4",
+                "start_date": "2025-10-22",
+                "start_time": "12:17:43",
+                "end_date": "2025-10-22",
+                "end_time": "12:18:28",
+                "matches": [
+                    [
+                        [
+                            "MO55321",
+                            0.0
+                        ],
+                        [
+                            "GI65903",
+                            1.0
+                        ]
+                    ],
+                    [
+                        [
+                            "BD57302",
+                            1.0
+                        ],
+                        [
+                            "AB88433",
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            "JL31789",
+                            1.0
+                        ],
+                        [
+                            "TV90765",
+                            0.0
+                        ]
+                    ]
+                ],
+                "status": "Terminé"
+            },
+            {
+                "name": "Round 2",
+                "round_id": "c407",
+                "start_date": "2025-10-22",
+                "start_time": "12:18:28",
+                "end_date": null,
+                "end_time": null,
+                "matches": [
+                    [
+                        [
+                            "JL31789",
+                            1.0
+                        ],
+                        [
+                            "BD57302",
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            "GI65903",
+                            0.5
+                        ],
+                        [
+                            "AB88433",
+                            0.5
+                        ]
+                    ],
+                    [
+                        [
+                            "MO55321",
+                            ""
+                        ],
+                        [
+                            "TV90765",
+                            ""
+                        ]
+                    ]
+                ],
+                "status": "En cours"
+            }
+        ],
+        "players": {
+            "TV90765": 0.0,
+            "MO55321": 0.0,
+            "GI65903": 1.0,
+            "BD57302": 1.0,
+            "JL31789": 1.0,
+            "AB88433": 0.0
+        },
+        "description": "Tournoi test pour debugage complet",
+        "status": "En cours",
+        "tournament_id": "7431"
     }
 ]

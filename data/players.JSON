@@ -201,5 +201,12 @@
         "date_of_birth": "1986-10-02",
         "federation_chess_id": "CD10655",
         "elo": 1335
+    },
+    {
+        "surname": "Makoto",
+        "name": "Kai-Li",
+        "date_of_birth": "1999-04-18",
+        "federation_chess_id": "ZE99876",
+        "elo": 2349
     }
 ]

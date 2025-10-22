@@ -1,19 +1,21 @@
-from model.tournament_model import Tournament, TournamentRound
-from model.player_model import ChessPlayer
-import json
-from utils.tournament_utils import generate_first_round_matches
-from utils.tournament_utils import inscribe_match_results
-from utils.tournament_utils import generate_round_matches
-from datetime import datetime
-
 class ReportController:
+    """Controller coordinating report generation data.
 
+    Attributes
+    ----------
+    chess_players : list
+        In-memory list of ChessPlayer objects or dicts used to build reports.
+    tournaments : list
+        In-memory list of Tournament objects or dicts used to build reports.
+    """
+    
     def __init__(self):
-        """Initialise le model ChessPlayer."""
+        """
+        Initialize the ReportController.
+
+        Sets up empty containers for players and tournaments. Callers should
+        populate these via load_data() or by assigning data before asking the
+        ReportView to render reports.
+        """
         self.chess_players = []
         self.tournaments = []
-
-    def display_players_from_json(self, filepath="data/players.json"):
-        self.chess_players.clear()
-        self.load_players_from_json()
-        return self.chess_players
