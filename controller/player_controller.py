@@ -229,7 +229,7 @@ class ChessPlayerController:
             if player.federation_chess_id == federation_id:
                 return player
         return None
-    
+
     def update_player_by_federation_id(self, federation_id, player1):
         """
         Update a player's ELO and/or games played by their federation chess ID.
