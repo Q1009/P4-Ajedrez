@@ -10,6 +10,7 @@ not collision-proof. Use full UUIDs when strong uniqueness is required.
 
 import uuid
 
+
 def generate_unique_id() -> str:
     """
     Generate a short unique identifier derived from a UUID4.

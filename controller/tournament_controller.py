@@ -175,7 +175,6 @@ class TournamentController:
         name, location, start_date, end_date, description : optional
             New values for corresponding tournament attributes.
         """
-        #Rajouter possibilité de modifier les joueurs inscrits
         self.tournaments.clear()
         self.load_tournaments_from_json()
         tournament = self.tournaments[index]
@@ -238,7 +237,7 @@ class TournamentController:
         self.tournaments.clear()
         self.load_tournaments_from_json()
         return self.tournaments[index]
-    
+
     def get_tournaments_count(self):
         """
         Return the number of tournaments currently stored.
@@ -251,7 +250,7 @@ class TournamentController:
         self.tournaments.clear()
         self.load_tournaments_from_json()
         return len(self.tournaments)
-    
+
     def get_tournament_round_matches_count(self, index, round_index):
         """
         Return the number of matches in a specific tournament round.
@@ -272,7 +271,6 @@ class TournamentController:
         self.load_tournaments_from_json()
         return len(self.tournaments[index].rounds[round_index].matches)
 
-    
     def start_tournament(self, index):
         """
         Initialize a tournament: set status, compute number of rounds and create first round.
@@ -293,7 +291,7 @@ class TournamentController:
         first_round = TournamentRound(round_number=1, matches=matches, status="En cours")
         tournament.rounds.append(first_round)
         self.save_tournaments_to_json()
-    
+
     def tournament_round_status_update(self, index, round_index):
         """
         Check whether all matches in a round have recorded results.

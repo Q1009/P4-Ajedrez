@@ -7,7 +7,6 @@ from controller.tournament_controller import TournamentController
 from view.player_view import PlayerView
 from controller.player_controller import ChessPlayerController
 from view.report_view import ReportView
-from controller.report_controller import ReportController
 
 
 class MenuView:
@@ -17,7 +16,7 @@ class MenuView:
     ----------
     console : rich.console.Console
         Console instance used to render panels, tables and read input.
-    
+
     Methods
     -------
     display_menu_view():

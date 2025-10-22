@@ -52,7 +52,10 @@ def generate_first_round_matches(players: Dict[str, Any]) -> Tuple[List[Tuple[Li
     return matches, matches_used
 
 
-def generate_round_matches(players: Dict[str, float], previous_matches: List[List[Any]]) -> Tuple[List[Tuple[List[Any], List[Any]]], List[List[Any]]]:
+def generate_round_matches(
+    players: Dict[str, float],
+    previous_matches: List[List[Any]]
+) -> Tuple[List[Tuple[List[Any], List[Any]]], List[List[Any]]]:
     """
     Generate pairings for a subsequent round.
 

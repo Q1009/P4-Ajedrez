@@ -3,7 +3,6 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.align import Align
-from rich import print
 from controller.player_controller import ChessPlayerController
 from controller.tournament_controller import TournamentController
 import os
@@ -249,10 +248,10 @@ class ReportView:
         The printed link is clickable in terminals that support rich 'link' markup.
         """
         self.console.print(Align.left(
-            f"[bold bright_magenta]------------------------[/bold bright_magenta]"))
+            "[bold bright_magenta]------------------------[/bold bright_magenta]"))
         self.console.print(Align.left(
-            f"[bold bright_magenta][link=./reports/index.html]Consultez les rapports ![/link][/bold bright_magenta]"))
+            "[bold bright_magenta][link=./reports/index.html]Consultez les rapports ![/link][/bold bright_magenta]"))
         self.console.print(Align.left(
-            f"[bold bright_magenta]------------------------[/bold bright_magenta]"))
+            "[bold bright_magenta]------------------------[/bold bright_magenta]"))
         self.console.print(Align.left(
             "Si le lien ne fonctionne pas, dans le dossier Reports ouvrez index.html dans un navigateur. "))

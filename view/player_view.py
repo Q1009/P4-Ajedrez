@@ -71,7 +71,7 @@ class PlayerView:
         players : iterable
             Iterable of player objects (expected attributes: surname, name,
             date_of_birth, federation_chess_id, elo).
-        
+
         Returns
         -------
         None

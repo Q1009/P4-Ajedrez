@@ -8,7 +8,7 @@ class ReportController:
     tournaments : list
         In-memory list of Tournament objects or dicts used to build reports.
     """
-    
+
     def __init__(self):
         """
         Initialize the ReportController.

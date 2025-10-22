@@ -162,7 +162,7 @@ class TournamentView:
         table.add_row("[bold cyan]6.[/bold cyan] Retour")
         panel = Panel(
             table,
-            title=f"[bold yellow]Modification Tournoi[/bold yellow]",
+            title="[bold yellow]Modification Tournoi[/bold yellow]",
             border_style="gold1",
         )
         centered_panel = Align.center(panel)
@@ -194,7 +194,7 @@ class TournamentView:
         table.add_row("[bold cyan]5.[/bold cyan] Retour")
         panel = Panel(
             table,
-            title=f"[bold yellow]Mise à jour Tournoi[/bold yellow]",
+            title="[bold yellow]Mise à jour Tournoi[/bold yellow]",
             border_style="gold1",
         )
         centered_panel = Align.center(panel)
@@ -245,7 +245,7 @@ class TournamentView:
             expand=True
         )
         centered_panel = Align.center(panel)
-        self.console.print(panel)
+        self.console.print(centered_panel)
 
     def display_tournament_round_matches(self, matches):
         """
@@ -316,7 +316,7 @@ class TournamentView:
             The user-entered result string (e.g. "1", "0", "0.5").
         """
         result = self.console.input(
-            f"Entrer le score du joueur blanc (1, 0 ou 0.5): ")
+            "Entrer le score du joueur blanc (1, 0 ou 0.5): ")
         return result
 
     def demand_round_status_update_validation(self):
@@ -329,7 +329,7 @@ class TournamentView:
             The user's raw response (expected 'O'/'N' or similar).
         """
         validation = self.console.input(
-            f"Tous les résultats ont été renseignés. Validez-vous ces scores ? (O/N): ")
+            "Tous les résultats ont été renseignés. Validez-vous ces scores ? (O/N): ")
         return validation
 
     def execute(self):
@@ -489,7 +489,8 @@ class TournamentView:
                             for n in range(matches_count):
                                 valid_matches_number.append(str(n))
                             tournament_list_choice = self.console.input(
-                                f"\nSélectionnez le numéro d'un match du round en cours pour inscrire les scores (0-{matches_count - 1}): ")
+                                "\nSélectionnez le numéro d'un match du round en cours "
+                                f"pour inscrire les scores (0-{matches_count - 1}): ")
                             if tournament_list_choice in valid_matches_number:
                                 self.console.print(
                                     f"Résultats du match N°{tournament_list_choice} :", style="bold")
@@ -561,7 +562,8 @@ class TournamentView:
                             for n in range(matches_count):
                                 valid_matches_number.append(str(n))
                             tournament_list_choice = self.console.input(
-                                f"\nSélectionnez le numéro d'un match du round en cours pour inscrire les scores (0-{matches_count - 1}): ")
+                                "\nSélectionnez le numéro d'un match du round en cours "
+                                f"pour inscrire les scores (0-{matches_count - 1}): ")
                             if tournament_list_choice in valid_matches_number:
                                 self.console.print(
                                     f"Résultats du match N°{tournament_list_choice} :", style="bold")
