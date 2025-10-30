@@ -6,6 +6,8 @@ from rich.align import Align
 from controller.player_controller import ChessPlayerController
 from controller.tournament_controller import TournamentController
 import os
+import pathlib
+import webbrowser
 
 
 class ReportView:
@@ -106,7 +108,7 @@ class ReportView:
             List of player objects passed to the template.
         """
         env = Environment(loader=FileSystemLoader('templates'))
-        template = env.get_template('players.html.j2')
+        template = env.get_template('players2.html.j2')
         html_rendu = template.render(players=players)
         directory = self._ensure_reports_dir()
         file_path = f'{directory}/players.html'
@@ -123,7 +125,7 @@ class ReportView:
             List of tournament objects passed to the template.
         """
         env = Environment(loader=FileSystemLoader('templates'))
-        template = env.get_template('tournaments.html.j2')
+        template = env.get_template('tournaments2.html.j2')
         html_rendu = template.render(tournaments=tournaments)
         directory = self._ensure_reports_dir()
         file_path = f'{directory}/tournaments.html'
@@ -142,7 +144,7 @@ class ReportView:
             List of player objects passed to the template.
         """
         env = Environment(loader=FileSystemLoader('templates'))
-        template = env.get_template('tournament_players.html.j2')
+        template = env.get_template('tournament_players2.html.j2')
         html_rendu = template.render(tournament=tournament, players=players)
         tournament_id = tournament.tournament_id
         directory = self._ensure_reports_dir()
@@ -163,7 +165,7 @@ class ReportView:
             List of player objects passed to the template.
         """
         env = Environment(loader=FileSystemLoader('templates'))
-        template = env.get_template('tournament_rounds.html.j2')
+        template = env.get_template('tournament_rounds2.html.j2')
         html_rendu = template.render(tournament=tournament, players=players)
         tournament_id = tournament.tournament_id
         directory = self._ensure_reports_dir()
@@ -184,7 +186,7 @@ class ReportView:
             List of player objects.
         """
         env = Environment(loader=FileSystemLoader('templates'))
-        template = env.get_template('index.html.j2')
+        template = env.get_template('index2.html.j2')
         html_rendu = template.render(tournaments=tournaments, players=players)
         directory = self._ensure_reports_dir()
         file_path = f'{directory}/index.html'
@@ -217,6 +219,7 @@ class ReportView:
                     self.display_tournament_rounds_jinja_view(
                         tournament, players)
                 self.display_link()
+                self.open_reports_index_in_browser()
             elif choice == "2":
                 running = False
             else:
@@ -240,18 +243,65 @@ class ReportView:
         """
         self.console.print(Align.left(
             f"[yellow]Le rapport {file} à été généré.[/yellow]"))
+        
+    def link(uri, label=None):
+        if label is None: 
+            label = uri
+        parameters = ''
+
+        # OSC 8 ; params ; URI ST <name> OSC 8 ;; ST 
+        escape_mask = '\033]8;{};{}\033\\{}\033]8;;\033\\'
+
+        return escape_mask.format(parameters, uri, label)
+    
+    def open_reports_index_in_browser(self, filename="index.html", directory="reports"):
+        """
+        Open the given report HTML file in the default web browser.
+
+        Parameters
+        ----------
+        filename : str
+            File name inside the reports directory (default "index.html").
+        directory : str
+            Reports directory (default "reports").
+        """
+        try:
+            path = pathlib.Path(directory) / filename
+            path = path.resolve()
+            if path.exists():
+                webbrowser.open(path.as_uri())
+            else:
+                # try fallback: open directory
+                webbrowser.open(pathlib.Path(directory).resolve().as_uri())
+        except Exception:
+            # last resort: call macOS `open` if available
+            try:
+                os.system(f"open {str(path)}")
+            except Exception:
+                pass
 
     def display_link(self):
         """
-        Print a link (or path) pointing to the generated reports index.
+        Print a clickable link (or path) pointing to the generated reports index.
 
-        The printed link is clickable in terminals that support rich 'link' markup.
+        Uses a file:// URI to make the folder clickable in terminals that support
+        link markup. Falls back to a relative path if the URI cannot be built.
         """
-        self.console.print(Align.left(
-            "[bold bright_magenta]------------------------[/bold bright_magenta]"))
-        self.console.print(Align.left(
-            "[bold bright_magenta][link=./reports/index.html]Consultez les rapports ![/link][/bold bright_magenta]"))
-        self.console.print(Align.left(
-            "[bold bright_magenta]------------------------[/bold bright_magenta]"))
-        self.console.print(Align.left(
-            "Si le lien ne fonctionne pas, dans le dossier Reports ouvrez index.html dans un navigateur. "))
+        reports_dir = "reports"
+        try:
+            reports_uri = pathlib.Path(reports_dir).resolve().as_uri()
+        except Exception:
+            reports_uri = f"./{reports_dir}/index.html"
+
+        self.console.print(Align.left("[bold bright_magenta]------------------------[/bold bright_magenta]"))
+        # clickable link to the reports folder (or index.html fallback)
+        self.console.print(Align.left("Vous avez du être redirigé vers la page d'accueil des rapports "
+                                      "sur votre navigateur web."))
+        self.console.print(Align.left("Si ce n'est pas le cas, cliquez sur le lien ci-dessous "
+                                      "pour ouvrir le dossier :file_folder:reports et ouvrez le fichier [reverse]index.html[/reverse] dans votre navigateur."))
+        self.console.print(Align.left(f"[bold bright_magenta][link={reports_uri}]Ouvrir le dossier des rapports[/link][/bold bright_magenta]"))
+        self.console.print(Align.left("Si le lien ne fonctionne pas, recherchez le dossier :file_folder:reports à l'adresse suivante, et ouvrez le fichier "
+                                      "[reverse]index.html[/reverse] dans votre navigateur."))
+        self.console.print(Align.left(f"[bright_magenta]{pathlib.Path(reports_dir).resolve()}[/bright_magenta]"))
+        self.console.print(Align.left("[bold bright_magenta]------------------------[/bold bright_magenta]"))
+    

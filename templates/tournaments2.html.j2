@@ -1,0 +1,83 @@
+{% extends "base2.html.j2" %}
+{% set active = 'tournaments' %}
+
+{% block title %}Liste des tournois{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;">
+    <div>
+      <h2 class="kicker">Liste des tournois</h2>
+      <p class="kicker" style="margin:6px 0 0 0;">Consulter les informations sur les tournois</p>
+    </div>
+  </div>
+
+  {# Macro to convert ISO-like dates (YYYY-MM-DD or YYYY-MM-DDTHH:MM:SS) to French format DD-MM-YYYY #}
+  {% from "macros.html.j2" import format_date %}
+
+  {% if tournaments %}
+  <div class="table-card">
+    <div class="table-wrap">
+      <table class="info-table" aria-describedby="tournois-table">
+        <thead>
+          <tr>
+            <th>Statut</th>
+            <th>Nom</th>
+            <th>Lieu</th>
+            <th>Début</th>
+            <th>Fin</th>
+            <th>Joueurs</th>
+            <th>Tours</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tournament in tournaments | sort(attribute='start_date') %}
+          <tr>
+            <td>{{ tournament.status | default('—') }}</td>
+            <td>{{ tournament.name | default('—') }}</td>
+            <td>{{ tournament.location | default('—') }}</td>
+            <td>{{ format_date(tournament.start_date) }}</td>
+            <td>{{ format_date(tournament.end_date) }}</td>
+            <td>
+              {% set player_count = (tournament.players | default({}) | length) %}
+              <a href="./{{ tournament.tournament_id }}_players.html" class="badge-small" title="Voir les joueurs ({{ player_count }})">
+                {{ player_count }} joueurs
+              </a>
+            </td>
+            <td>
+              {% set rounds_count = (tournament.rounds | default([]) | length) %}
+              <a href="./{{ tournament.tournament_id }}_rounds.html" class="badge-small" title="Voir les tours ({{ rounds_count }})">
+                {{ rounds_count }} tours
+              </a>
+            </td>
+            <td>{{ tournament.description | default('—') }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-footer" style="margin-top:10px;">
+      <div class="kicker">{{ tournaments | length }} tournoi{{ tournaments|length > 1 and 's' or '' }}</div>
+      <div class="pager">
+        {% if pagination %}
+          {% if pagination.prev %}
+            <a class="btn" href="{{ url_for(endpoint, page=pagination.prev) }}">« Prev</a>
+          {% endif %}
+          <span class="kicker" style="margin:0 8px;">Page {{ pagination.page }} / {{ pagination.pages }}</span>
+          {% if pagination.next %}
+            <a class="btn" href="{{ url_for(endpoint, page=pagination.next) }}">Next »</a>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% else %}
+  <div class="panel" style="text-align:center;">
+    <p class="kicker">Aucun tournoi trouvé.</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

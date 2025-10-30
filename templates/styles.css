@@ -32,6 +32,21 @@ html,body{
     padding:2rem;
 }
 
+.logo{
+  width:56px;
+  height:56px;
+  border-radius:10px;
+  background: linear-gradient(180deg, var(--neon-orange), var(--neon-magenta));
+  box-shadow: 0 6px 28px rgba(255,180,0,0.12), inset 0 -6px 18px rgba(255,45,149,0.18);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  color:#0b0310;
+  font-size:18px;
+  letter-spacing:1px;
+}
+
 /* Conteneur central */
 main, .container {
     max-width:1000px;
@@ -129,9 +144,8 @@ tbody td{
 
 /* Liens dans les tableaux — même comportement hover que nav */
 table a,
-.table-card a,
-.badge,
-.badge-small {
+.table-card a
+ {
     color: var(--neon-magenta);
     text-decoration: none;
     padding: 0.25rem 0.45rem;
@@ -142,9 +156,8 @@ table a,
 }
 
 table a:hover,
-.table-card a:hover,
-.badge:hover,
-.badge-small:hover {
+.table-card a:hover
+{
     color: #021019;
     background: linear-gradient(90deg, var(--neon-purple), var(--neon-magenta));
     box-shadow:
@@ -188,20 +201,40 @@ tbody tr:nth-child(even){
     text-align: center;
 }
 
-/* inner table: align "Joueur Blanc" (2ème colonne) à droite */
+/* inner table: format des éléments du sous tableau des matchs */
+.inner-table th:nth-child(1),
+.inner-table td:nth-child(1) {
+    text-align: center;
+    padding:6px 8px;
+}
 .inner-table th:nth-child(2),
 .inner-table td:nth-child(2) {
     text-align: right;
+    padding:6px 8px;
 }
 
 .inner-table th:nth-child(3),
 .inner-table td:nth-child(3) {
     text-align: right;
+    padding:6px 8px;
 }
 
 .inner-table th:nth-child(4),
 .inner-table td:nth-child(4) {
     text-align: center;
+    padding:6px 8px;
+}
+
+.inner-table th:nth-child(5),
+.inner-table td:nth-child(5) {
+    text-align: left;
+    padding:6px 8px;
+}
+
+.inner-table th:nth-child(6),
+.inner-table td:nth-child(6) {
+    text-align: left;
+    padding:6px 8px;
 }
 
 /* Survol des lignes avec néon */
@@ -212,15 +245,75 @@ tbody tr:hover{
 }
 
 /* Accent badges et éléments importants */
-.badge{
-    display:inline-block;
-    padding:0.25rem 0.45rem;
-    border-radius:999px;
-    background: linear-gradient(90deg, var(--neon-yellow), var(--neon-pink));
-    color:#021019;
-    font-weight:700;
-    font-size:0.8rem;
-    box-shadow: 0 8px 24px rgba(255,45,111,0.06);
+/* Badge variants by ELO */
+.badge {
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:800;
+  color:#08030a;
+  transition: background 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+/* low: < 1500 (cool cyan) */
+.badge-low{
+  background: linear-gradient(90deg, var(--neon-purple), #9760f6);
+  border: 1px solid rgba(0,240,255,0.08);
+}
+.badge-low:hover,
+.badge-low:focus {
+  background: linear-gradient(90deg, #9760f6, var(--neon-purple));
+  border-color: rgba(0,240,255,0.12);
+}
+
+/* mid: 1500 - 1999 (warm magenta) */
+.badge-mid{
+  background: linear-gradient(90deg, var(--neon-magenta), #ff79b6);
+  border: 1px solid rgba(255,45,149,0.08);
+}
+.badge-mid:hover,
+.badge-mid:focus {
+  background: linear-gradient(90deg, #ff79b6, var(--neon-magenta));
+  border-color: rgba(255,45,149,0.12);
+}
+
+/* high: >= 2000 (sunset amber) */
+.badge-high{
+  background: linear-gradient(90deg, var(--neon-orange), #ffd36b);
+  border: 1px solid rgba(255,180,0,0.08);
+}
+.badge-high:hover,
+.badge-high:focus {
+  background: linear-gradient(90deg, #ffd36b, var(--neon-orange));
+  border-color: rgba(255,180,0,0.12);
+}
+
+/* buttons */
+.btn{
+  display:inline-block;
+  padding:8px 12px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(180deg, rgba(255,45,149,0.06), rgba(0,240,255,0.03));
+  color:var(--neon-magenta);
+  font-weight:700;
+  cursor:pointer;
+  transition:all .14s ease;
+  box-shadow: var(--glow);
+}
+.btn.secondary{
+  background:transparent;
+  color:var(--electric-cyan);
+  border:1px solid rgba(0,240,255,0.06);
+}
+.btn:active{ transform:translateY(1px) scale(0.997); }
+
+.btn:hover{
+  color:#021019;
+  transform:translateY(-2px);
+  background: linear-gradient(90deg, var(--neon-magenta), var(--neon-pink));
+  box-shadow: 0 10px 30px rgba(255,45,149,0.12), 0 4px 12px rgba(0,240,255,0.06);
 }
 
 /* Lignes de surbrillance pour Elo élevé */

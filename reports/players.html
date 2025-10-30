@@ -1,8 +1,12 @@
+<!-- ...existing code... -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Liste des joueurs</title>
+
+    
     <style>
     /* Palette inspirée de l'image : jaune, orange, rose, magenta, violet */
 
@@ -36,6 +40,21 @@ html,body{
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
     padding:2rem;
+}
+
+.logo{
+  width:56px;
+  height:56px;
+  border-radius:10px;
+  background: linear-gradient(180deg, var(--neon-orange), var(--neon-magenta));
+  box-shadow: 0 6px 28px rgba(255,180,0,0.12), inset 0 -6px 18px rgba(255,45,149,0.18);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  color:#0b0310;
+  font-size:18px;
+  letter-spacing:1px;
 }
 
 /* Conteneur central */
@@ -135,9 +154,8 @@ tbody td{
 
 /* Liens dans les tableaux — même comportement hover que nav */
 table a,
-.table-card a,
-.badge,
-.badge-small {
+.table-card a
+ {
     color: var(--neon-magenta);
     text-decoration: none;
     padding: 0.25rem 0.45rem;
@@ -148,9 +166,8 @@ table a,
 }
 
 table a:hover,
-.table-card a:hover,
-.badge:hover,
-.badge-small:hover {
+.table-card a:hover
+{
     color: #021019;
     background: linear-gradient(90deg, var(--neon-purple), var(--neon-magenta));
     box-shadow:
@@ -194,20 +211,40 @@ tbody tr:nth-child(even){
     text-align: center;
 }
 
-/* inner table: align "Joueur Blanc" (2ème colonne) à droite */
+/* inner table: format des éléments du sous tableau des matchs */
+.inner-table th:nth-child(1),
+.inner-table td:nth-child(1) {
+    text-align: center;
+    padding:6px 8px;
+}
 .inner-table th:nth-child(2),
 .inner-table td:nth-child(2) {
     text-align: right;
+    padding:6px 8px;
 }
 
 .inner-table th:nth-child(3),
 .inner-table td:nth-child(3) {
     text-align: right;
+    padding:6px 8px;
 }
 
 .inner-table th:nth-child(4),
 .inner-table td:nth-child(4) {
     text-align: center;
+    padding:6px 8px;
+}
+
+.inner-table th:nth-child(5),
+.inner-table td:nth-child(5) {
+    text-align: left;
+    padding:6px 8px;
+}
+
+.inner-table th:nth-child(6),
+.inner-table td:nth-child(6) {
+    text-align: left;
+    padding:6px 8px;
 }
 
 /* Survol des lignes avec néon */
@@ -218,15 +255,75 @@ tbody tr:hover{
 }
 
 /* Accent badges et éléments importants */
-.badge{
-    display:inline-block;
-    padding:0.25rem 0.45rem;
-    border-radius:999px;
-    background: linear-gradient(90deg, var(--neon-yellow), var(--neon-pink));
-    color:#021019;
-    font-weight:700;
-    font-size:0.8rem;
-    box-shadow: 0 8px 24px rgba(255,45,111,0.06);
+/* Badge variants by ELO */
+.badge {
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:800;
+  color:#08030a;
+  transition: background 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+/* low: < 1500 (cool cyan) */
+.badge-low{
+  background: linear-gradient(90deg, var(--neon-purple), #9760f6);
+  border: 1px solid rgba(0,240,255,0.08);
+}
+.badge-low:hover,
+.badge-low:focus {
+  background: linear-gradient(90deg, #9760f6, var(--neon-purple));
+  border-color: rgba(0,240,255,0.12);
+}
+
+/* mid: 1500 - 1999 (warm magenta) */
+.badge-mid{
+  background: linear-gradient(90deg, var(--neon-magenta), #ff79b6);
+  border: 1px solid rgba(255,45,149,0.08);
+}
+.badge-mid:hover,
+.badge-mid:focus {
+  background: linear-gradient(90deg, #ff79b6, var(--neon-magenta));
+  border-color: rgba(255,45,149,0.12);
+}
+
+/* high: >= 2000 (sunset amber) */
+.badge-high{
+  background: linear-gradient(90deg, var(--neon-orange), #ffd36b);
+  border: 1px solid rgba(255,180,0,0.08);
+}
+.badge-high:hover,
+.badge-high:focus {
+  background: linear-gradient(90deg, #ffd36b, var(--neon-orange));
+  border-color: rgba(255,180,0,0.12);
+}
+
+/* buttons */
+.btn{
+  display:inline-block;
+  padding:8px 12px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(180deg, rgba(255,45,149,0.06), rgba(0,240,255,0.03));
+  color:var(--neon-magenta);
+  font-weight:700;
+  cursor:pointer;
+  transition:all .14s ease;
+  box-shadow: var(--glow);
+}
+.btn.secondary{
+  background:transparent;
+  color:var(--electric-cyan);
+  border:1px solid rgba(0,240,255,0.06);
+}
+.btn:active{ transform:translateY(1px) scale(0.997); }
+
+.btn:hover{
+  color:#021019;
+  transform:translateY(-2px);
+  background: linear-gradient(90deg, var(--neon-magenta), var(--neon-pink));
+  box-shadow: 0 10px 30px rgba(255,45,149,0.12), 0 4px 12px rgba(0,240,255,0.06);
 }
 
 /* Lignes de surbrillance pour Elo élevé */
@@ -260,287 +357,540 @@ footer{
     nav a{ margin-left:0; margin-right:0.5rem; }
 }
     </style>
+
+    
+    
 </head>
 <body>
     <header>
-        <h1>Ajedrez</h1>
-        <nav>
-            <a href="./index.html">Accueil</a>
-            <a href="./players.html">Joueurs</a>
-            <a href="./tournaments.html">Tournois</a>
-        </nav>
-    </header>
-    <main>
-        
-    <h2>Joueurs inscrits dans le système</h2>
-    
-        <div class="table-card">
-        <table class="info-table">
-            <thead>
-                <tr>
-                    <th>ID Fédération</th>
-                    <th>Elo</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Date de Naissance</th>
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr>
-                    <td>WY44099</td>
-                    <td>1360</td>
-                    <td>BARBIER</td>
-                    <td>Olivier</td>
-                    <td>1979-04-03</td>
-                </tr>
-                
-                <tr>
-                    <td>AB88433</td>
-                    <td>1795</td>
-                    <td>BASTIEN</td>
-                    <td>Romain</td>
-                    <td>1984-08-19</td>
-                </tr>
-                
-                <tr>
-                    <td>CE12045</td>
-                    <td>1580</td>
-                    <td>BERNARD</td>
-                    <td>Luc</td>
-                    <td>1995-03-08</td>
-                </tr>
-                
-                <tr>
-                    <td>IK88122</td>
-                    <td>1800</td>
-                    <td>BERNARD</td>
-                    <td>Camille</td>
-                    <td>1993-08-30</td>
-                </tr>
-                
-                <tr>
-                    <td>YA66211</td>
-                    <td>1690</td>
-                    <td>BLANC</td>
-                    <td>Etienne</td>
-                    <td>1993-06-30</td>
-                </tr>
-                
-                <tr>
-                    <td>CD10655</td>
-                    <td>1335</td>
-                    <td>COLIN</td>
-                    <td>Maxime</td>
-                    <td>1986-10-02</td>
-                </tr>
-                
-                <tr>
-                    <td>GI65903</td>
-                    <td>1750</td>
-                    <td>DAVID</td>
-                    <td>Anne</td>
-                    <td>1991-10-09</td>
-                </tr>
-                
-                <tr>
-                    <td>AC48291</td>
-                    <td>1450</td>
-                    <td>DUPONT</td>
-                    <td>Jean</td>
-                    <td>1990-05-12</td>
-                </tr>
-                
-                <tr>
-                    <td>BC99544</td>
-                    <td>1525</td>
-                    <td>DUPUIS</td>
-                    <td>Emilie</td>
-                    <td>1995-05-27</td>
-                </tr>
-                
-                <tr>
-                    <td>HJ24098</td>
-                    <td>1325</td>
-                    <td>FONTAINE</td>
-                    <td>Paul</td>
-                    <td>1986-04-25</td>
-                </tr>
-                
-                <tr>
-                    <td>NP66770</td>
-                    <td>1774</td>
-                    <td>FRANC</td>
-                    <td>Paul</td>
-                    <td>1987-05-29</td>
-                </tr>
-                
-                <tr>
-                    <td>OQ41903</td>
-                    <td>1605</td>
-                    <td>GARNIER</td>
-                    <td>Lucie</td>
-                    <td>1994-06-21</td>
-                </tr>
-                
-                <tr>
-                    <td>VX32901</td>
-                    <td>1575</td>
-                    <td>GAUTHIER</td>
-                    <td>Nina</td>
-                    <td>1994-11-11</td>
-                </tr>
-                
-                <tr>
-                    <td>DF90817</td>
-                    <td>1810</td>
-                    <td>LEFEVRE</td>
-                    <td>Claire</td>
-                    <td>1992-07-15</td>
-                </tr>
-                
-                <tr>
-                    <td>QS78320</td>
-                    <td>1530</td>
-                    <td>LEMOINE</td>
-                    <td>Isabelle</td>
-                    <td>1996-01-03</td>
-                </tr>
-                
-                <tr>
-                    <td>TV90765</td>
-                    <td>1620</td>
-                    <td>LEROY</td>
-                    <td>Aline</td>
-                    <td>1998-09-02</td>
-                </tr>
-                
-                <tr>
-                    <td>ZE99876</td>
-                    <td>2349</td>
-                    <td>MAKOTO</td>
-                    <td>Kai-Li</td>
-                    <td>1999-04-18</td>
-                </tr>
-                
-                <tr>
-                    <td>MO55321</td>
-                    <td>1234</td>
-                    <td>MALFOY</td>
-                    <td>Drago</td>
-                    <td>2992-12-32</td>
-                </tr>
-                
-                <tr>
-                    <td>UW11823</td>
-                    <td>1485</td>
-                    <td>MARCHAND</td>
-                    <td>Hugo</td>
-                    <td>1989-01-21</td>
-                </tr>
-                
-                <tr>
-                    <td>BD57302</td>
-                    <td>1720</td>
-                    <td>MARTIER</td>
-                    <td>Sophie</td>
-                    <td>1988-11-23</td>
-                </tr>
-                
-                <tr>
-                    <td>EG33456</td>
-                    <td>1743</td>
-                    <td>MOREAU</td>
-                    <td>Pierre</td>
-                    <td>1985-12-30</td>
-                </tr>
-                
-                <tr>
-                    <td>SU23567</td>
-                    <td>1350</td>
-                    <td>MOREL</td>
-                    <td>Emma</td>
-                    <td>2000-04-15</td>
-                </tr>
-                
-                <tr>
-                    <td>RT89412</td>
-                    <td>1650</td>
-                    <td>NGUYEN</td>
-                    <td>Minh</td>
-                    <td>1990-12-01</td>
-                </tr>
-                
-                <tr>
-                    <td>XZ55100</td>
-                    <td>1210</td>
-                    <td>NOEL</td>
-                    <td>Claire</td>
-                    <td>2002-02-14</td>
-                </tr>
-                
-                <tr>
-                    <td>PR56011</td>
-                    <td>1420</td>
-                    <td>PERRIN</td>
-                    <td>Sébastien</td>
-                    <td>1982-09-11</td>
-                </tr>
-                
-                <tr>
-                    <td>ZB77322</td>
-                    <td>1410</td>
-                    <td>PERROT</td>
-                    <td>Manon</td>
-                    <td>1997-12-05</td>
-                </tr>
-                
-                <tr>
-                    <td>LN12840</td>
-                    <td>1899</td>
-                    <td>RICHARD</td>
-                    <td>Marc</td>
-                    <td>1977-03-12</td>
-                </tr>
-                
-                <tr>
-                    <td>FH77011</td>
-                    <td>1200</td>
-                    <td>ROUX</td>
-                    <td>Marcel</td>
-                    <td>1983-02-17</td>
-                </tr>
-                
-                <tr>
-                    <td>JL31789</td>
-                    <td>2500</td>
-                    <td>TELLIER</td>
-                    <td>Quentin</td>
-                    <td>1992-09-10</td>
-                </tr>
-                
-                <tr>
-                    <td>KM90456</td>
-                    <td>1900</td>
-                    <td>VINCENT</td>
-                    <td>Arthur</td>
-                    <td>1987-02-17</td>
-                </tr>
-                
-            </tbody>
-        </table>
-
-        <div class="table-footer">
-            <div class="pager">
-                
+        <div class="brand">
+            <div class="logo">AJ</div>
+            <div>
+                <h1>Ajedrez</h1>
+                <p class="kicker">Chess club manager</p>
             </div>
         </div>
-        </div>
-    
 
+        <nav aria-label="Main navigation">
+            <a href="./index.html" >Accueil</a>
+            <a href="./players.html" class="active">Joueurs</a>
+            <a href="./tournaments.html" >Tournois</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            
+<div class="container">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;">
+    <div>
+      <h2 class="kicker">Joueurs inscrits</h2>
+      <p class="kicker" style="margin:6px 0 0 0;">Consulter la liste des membres</p>
+    </div>
+  </div>
+
+  
+  <div class="table-card">
+    <div class="table-wrap">
+      <table class="info-table" aria-label="Players table">
+        <thead>
+          <tr>
+            <th>ID Fédération</th>
+            <th>ELO</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Date de naissance</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          
+          <tr>
+            <td>WY44099</td>
+            <td>
+              <span class="badge badge-low" title="K=40, games=11">
+                1360
+              </span>
+            </td>
+            <td>BARBIER</td>
+            <td>Olivier</td>
+            <td>
+      03/04/1979</td>
+          </tr>
+          
+          
+          <tr>
+            <td>AB88433</td>
+            <td>
+              <span class="badge badge-mid" title="K=20, games=92">
+                1787
+              </span>
+            </td>
+            <td>BASTIEN</td>
+            <td>Romain</td>
+            <td>
+      19/08/1984</td>
+          </tr>
+          
+          
+          <tr>
+            <td>CE12045</td>
+            <td>
+              <span class="badge badge-mid" title="K=40, games=7">
+                1580
+              </span>
+            </td>
+            <td>BERNARD</td>
+            <td>Luc</td>
+            <td>
+      08/03/1995</td>
+          </tr>
+          
+          
+          <tr>
+            <td>IK88122</td>
+            <td>
+              <span class="badge badge-mid" title="K=20, games=33">
+                1800
+              </span>
+            </td>
+            <td>BERNARD</td>
+            <td>Camille</td>
+            <td>
+      30/08/1993</td>
+          </tr>
+          
+          
+          <tr>
+            <td>YA66211</td>
+            <td>
+              <span class="badge badge-mid" title="K=20, games=34">
+                1690
+              </span>
+            </td>
+            <td>BLANC</td>
+            <td>Etienne</td>
+            <td>
+      30/06/1993</td>
+          </tr>
+          
+          
+          <tr>
+            <td>CD10655</td>
+            <td>
+              <span class="badge badge-low" title="K=40, games=27">
+                1335
+              </span>
+            </td>
+            <td>COLIN</td>
+            <td>Maxime</td>
+            <td>
+      02/10/1986</td>
+          </tr>
+          
+          
+          <tr>
+            <td>GI65903</td>
+            <td>
+              <span class="badge badge-mid" title="K=20, games=80">
+                1767
+              </span>
+            </td>
+            <td>DAVID</td>
+            <td>Anne</td>
+            <td>
+      09/10/1991</td>
+          </tr>
+          
+          
+          <tr>
+            <td>AC48291</td>
+            <td>
+              <span class="badge badge-low" title="K=40, games=18">
+                1450
+              </span>
+            </td>
+            <td>DUPONT</td>
+            <td>Jean</td>
+            <td>
+      12/05/1990</td>
+          </tr>
+          
+          
+          <tr>
+            <td>BC99544</td>
+            <td>
+              <span class="badge badge-mid" title="K=40, games=13">
+                1525
+              </span>
+            </td>
+            <td>DUPUIS</td>
+            <td>Emilie</td>
+            <td>
+      27/05/1995</td>
+          </tr>
+          
+          
+          <tr>
+            <td>HJ24098</td>
+            <td>
+              <span class="badge badge-low" title="K=40, games=12">
+                1325
+              </span>
+            </td>
+            <td>FONTAINE</td>
+            <td>Paul</td>
+            <td>
+      25/04/1986</td>
+          </tr>
+          
+          
+          <tr>
+            <td>NP66770</td>
+            <td>
+              <span class="badge badge-mid" title="K=20, games=61">
+                1774
+              </span>
+            </td>
+            <td>FRANC</td>
+            <td>Paul</td>
+            <td>
+      29/05/1987</td>
+          </tr>
+          
+          
+          <tr>
+            <td>OQ41903</td>
+            <td>
+              <span class="badge badge-mid" title="K=40, games=22">
+                1605
+              </span>
+            </td>
+            <td>GARNIER</td>
+            <td>Lucie</td>
+            <td>
+      21/06/1994</td>
+          </tr>
+          
+          
+          <tr>
+            <td>VX32901</td>
+            <td>
+              <span class="badge badge-mid" title="K=40, games=26">
+                1575
+              </span>
+            </td>
+            <td>GAUTHIER</td>
+            <td>Nina</td>
+            <td>
+      11/11/1994</td>
+          </tr>
+          
+          
+          <tr>
+            <td>DF90817</td>
+            <td>
+              <span class="badge badge-mid" title="K=20, games=55">
+                1810
+              </span>
+            </td>
+            <td>LEFEVRE</td>
+            <td>Claire</td>
+            <td>
+      15/07/1992</td>
+          </tr>
+          
+          
+          <tr>
+            <td>QS78320</td>
+            <td>
+              <span class="badge badge-mid" title="K=40, games=9">
+                1530
+              </span>
+            </td>
+            <td>LEMOINE</td>
+            <td>Isabelle</td>
+            <td>
+      03/01/1996</td>
+          </tr>
+          
+          
+          <tr>
+            <td>TV90765</td>
+            <td>
+              <span class="badge badge-mid" title="K=20, games=62">
+                1611
+              </span>
+            </td>
+            <td>LEROY</td>
+            <td>Aline</td>
+            <td>
+      02/09/1998</td>
+          </tr>
+          
+          
+          <tr>
+            <td>ZE99876</td>
+            <td>
+              <span class="badge badge-high" title="K=20, games=120">
+                2349
+              </span>
+            </td>
+            <td>MAKOTO</td>
+            <td>Kai-Li</td>
+            <td>
+      18/04/1999</td>
+          </tr>
+          
+          
+          <tr>
+            <td>MO55321</td>
+            <td>
+              <span class="badge badge-low" title="K=40, games=7">
+                1285
+              </span>
+            </td>
+            <td>MALFOY</td>
+            <td>Drago</td>
+            <td>
+      32/12/2992</td>
+          </tr>
+          
+          
+          <tr>
+            <td>UW11823</td>
+            <td>
+              <span class="badge badge-low" title="K=20, games=31">
+                1485
+              </span>
+            </td>
+            <td>MARCHAND</td>
+            <td>Hugo</td>
+            <td>
+      21/01/1989</td>
+          </tr>
+          
+          
+          <tr>
+            <td>BD57302</td>
+            <td>
+              <span class="badge badge-mid" title="K=20, games=46">
+                1714
+              </span>
+            </td>
+            <td>MARTIER</td>
+            <td>Sophie</td>
+            <td>
+      23/11/1988</td>
+          </tr>
+          
+          
+          <tr>
+            <td>EG33456</td>
+            <td>
+              <span class="badge badge-mid" title="K=40, games=29">
+                1743
+              </span>
+            </td>
+            <td>MOREAU</td>
+            <td>Pierre</td>
+            <td>
+      30/12/1985</td>
+          </tr>
+          
+          
+          <tr>
+            <td>SU23567</td>
+            <td>
+              <span class="badge badge-low" title="K=40, games=15">
+                1350
+              </span>
+            </td>
+            <td>MOREL</td>
+            <td>Emma</td>
+            <td>
+      15/04/2000</td>
+          </tr>
+          
+          
+          <tr>
+            <td>RT89412</td>
+            <td>
+              <span class="badge badge-mid" title="K=20, games=44">
+                1650
+              </span>
+            </td>
+            <td>NGUYEN</td>
+            <td>Minh</td>
+            <td>
+      01/12/1990</td>
+          </tr>
+          
+          
+          <tr>
+            <td>XZ55100</td>
+            <td>
+              <span class="badge badge-low" title="K=40, games=2">
+                1210
+              </span>
+            </td>
+            <td>NOEL</td>
+            <td>Claire</td>
+            <td>
+      14/02/2002</td>
+          </tr>
+          
+          
+          <tr>
+            <td>PR56011</td>
+            <td>
+              <span class="badge badge-low" title="K=20, games=36">
+                1420
+              </span>
+            </td>
+            <td>PERRIN</td>
+            <td>Sébastien</td>
+            <td>
+      11/09/1982</td>
+          </tr>
+          
+          
+          <tr>
+            <td>ZB77322</td>
+            <td>
+              <span class="badge badge-low" title="K=40, games=19">
+                1410
+              </span>
+            </td>
+            <td>PERROT</td>
+            <td>Manon</td>
+            <td>
+      05/12/1997</td>
+          </tr>
+          
+          
+          <tr>
+            <td>ZE45678</td>
+            <td>
+              <span class="badge badge-high" title="K=40, games=5">
+                2465
+              </span>
+            </td>
+            <td>RABEHI</td>
+            <td>Hugo</td>
+            <td>
+      27/02/1993</td>
+          </tr>
+          
+          
+          <tr>
+            <td>LN12840</td>
+            <td>
+              <span class="badge badge-mid" title="K=20, games=47">
+                1899
+              </span>
+            </td>
+            <td>RICHARD</td>
+            <td>Marc</td>
+            <td>
+      12/03/1977</td>
+          </tr>
+          
+          
+          <tr>
+            <td>FH77011</td>
+            <td>
+              <span class="badge badge-low" title="K=40, games=5">
+                1200
+              </span>
+            </td>
+            <td>ROUX</td>
+            <td>Marcel</td>
+            <td>
+      17/02/1983</td>
+          </tr>
+          
+          
+          <tr>
+            <td>XW21345</td>
+            <td>
+              <span class="badge badge-low" title="K=40, games=5">
+                1320
+              </span>
+            </td>
+            <td>TELBERG</td>
+            <td>Olaf</td>
+            <td>
+      03/09/1932</td>
+          </tr>
+          
+          
+          <tr>
+            <td>JL31789</td>
+            <td>
+              <span class="badge badge-high" title="K=10, games=211">
+                2472
+              </span>
+            </td>
+            <td>TELLIER</td>
+            <td>Quentin</td>
+            <td>
+      10/09/1992</td>
+          </tr>
+          
+          
+          <tr>
+            <td>NA34567</td>
+            <td>
+              <span class="badge badge-high" title="K=40, games=6">
+                2125
+              </span>
+            </td>
+            <td>TELLIER</td>
+            <td>Aude</td>
+            <td>
+      26/07/1960</td>
+          </tr>
+          
+          
+          <tr>
+            <td>KM90456</td>
+            <td>
+              <span class="badge badge-mid" title="K=40, games=28">
+                1900
+              </span>
+            </td>
+            <td>VINCENT</td>
+            <td>Arthur</td>
+            <td>
+      17/02/1987</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-footer" style="margin-top:10px;">
+      <div class="kicker">
+        33 membres au total
+      </div>
+
+      <div class="pager">
+        
+      </div>
+    </div>
+  </div>
+
+  
+</div>
+
+        </div>
     </main>
+
     <footer>
         <p>&copy; 2025 Ajedrez</p>
     </footer>
+
+    
 </body>
 </html>

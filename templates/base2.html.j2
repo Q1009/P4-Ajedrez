@@ -1,0 +1,48 @@
+<!-- ...existing code... -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{% block title %}Ajedrez{% endblock %}</title>
+
+    {# Link the external synth stylesheet instead of inlining it so templates can reuse it #}
+    <style>
+    {% include "styles.css" %}
+    </style>
+
+    {# Optional block for page-specific head additions (scripts, meta, styles) #}
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <div class="brand">
+            <div class="logo">AJ</div>
+            <div>
+                <h1>Ajedrez</h1>
+                <p class="kicker">Chess club manager</p>
+            </div>
+        </div>
+
+        <nav aria-label="Main navigation">
+            <a href="./index.html" {% if active == 'index' %}class="active"{% endif %}>Accueil</a>
+            <a href="./players.html" {% if active == 'players' %}class="active"{% endif %}>Joueurs</a>
+            <a href="./tournaments.html" {% if active == 'tournaments' %}class="active"{% endif %}>Tournois</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            {% block content %}
+            <!-- Page content will be injected here -->
+            {% endblock %}
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Ajedrez</p>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

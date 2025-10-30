@@ -1,0 +1,126 @@
+/* Very basic synthwave palette stylesheet */
+
+:root{
+  --bg-dark:       #12002B;
+  --deep-purple:   #6B1F7A;
+  --neon-magenta:  #FF2D95;
+  --sunset-amber:  #FFB400;
+  --electric-cyan: #00F0FF;
+
+  --text: #EDEDED;
+  --muted: rgba(237,237,237,0.75);
+  --radius: 8px;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* Base */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: var(--font);
+  background: linear-gradient(180deg, var(--bg-dark) 0%, var(--deep-purple) 70%);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Header */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: linear-gradient(90deg, rgba(0,240,255,0.04), rgba(255,45,149,0.04));
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+header h1 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--neon-magenta);
+}
+
+/* Main */
+main {
+  max-width: 1100px;
+  margin: 24px auto;
+  padding: 16px;
+  background: rgba(255,255,255,0.02);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* Simple table */
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--text);
+}
+thead th {
+  text-align: left;
+  padding: 10px;
+  color: var(--sunset-amber);
+  font-weight: 700;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+}
+
+/* Footer */
+footer {
+  max-width: 1100px;
+  margin: 18px auto 40px;
+  padding: 12px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Simple accent button */
+.btn {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--electric-cyan), var(--neon-magenta));
+  color: #050006;
+  text-decoration: none;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+
+/* Badge variants by ELO */
+.badge {
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:800;
+  color:#08030a;
+}
+
+/* low: < 1500 (cool cyan) */
+.badge-low{
+  background: linear-gradient(90deg, var(--electric-cyan), #66f7ff);
+  border: 1px solid rgba(0,240,255,0.08);
+}
+
+/* mid: 1500 - 1999 (warm magenta) */
+.badge-mid{
+  background: linear-gradient(90deg, var(--neon-magenta), #ff79b6);
+  border: 1px solid rgba(255,45,149,0.08);
+}
+
+/* high: >= 2000 (sunset amber) */
+.badge-high{
+  background: linear-gradient(90deg, var(--sunset-amber), #ffd36b);
+  border: 1px solid rgba(255,180,0,0.08);
+}
+
+/* Small responsive tweak */
+@media (max-width: 600px) {
+  header, main, footer { padding-left: 12px; padding-right: 12px; }
+  header h1 { font-size: 16px; }
+}

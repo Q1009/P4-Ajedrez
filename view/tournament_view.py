@@ -512,7 +512,8 @@ class TournamentView:
                                         if started_tournament.current_round == started_tournament.number_of_rounds:
                                             self.display_end_of_tournament_message()
                                             player_controller = ChessPlayerController()
-                                            player_controller.update_players_games_and_elo(started_tournament)
+                                            player_controller.update_players_games_and_elo(
+                                                self.tournament_controller.get_tournament(index))
                                             self.tournament_controller.close_tournament(
                                                 index)
                                         else:

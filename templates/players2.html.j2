@@ -1,0 +1,73 @@
+{% extends "base2.html.j2" %}
+{% set active = 'players' %}
+{% from "macros.html.j2" import format_date, score_badge %}
+
+{% block title %}Liste des joueurs{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;">
+    <div>
+      <h2 class="kicker">Joueurs inscrits</h2>
+      <p class="kicker" style="margin:6px 0 0 0;">Consulter la liste des membres</p>
+    </div>
+  </div>
+
+  {% if players %}
+  <div class="table-card">
+    <div class="table-wrap">
+      <table class="info-table" aria-label="Players table">
+        <thead>
+          <tr>
+            <th>ID Fédération</th>
+            <th>ELO</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Date de naissance</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for player in players|sort(attribute='surname') %}
+          {% set badge_class = 'badge-low' if (player.elo | int) < 1500 else 'badge-mid' if (player.elo | int) < 2000 else 'badge-high' %}
+          <tr>
+            <td>{{ player.federation_chess_id }}</td>
+            <td>
+              <span class="badge {{ badge_class }}" title="K={{ player.coef_k }}, games={{ player.games_played }}">
+                {{ player.elo }}
+              </span>
+            </td>
+            <td>{{ player.surname|upper }}</td>
+            <td>{{ player.name }}</td>
+            <td>{{ format_date(player.date_of_birth) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-footer" style="margin-top:10px;">
+      <div class="kicker">
+        {{ players|length }} membre{{ players|length > 1 and 's' or '' }} au total
+      </div>
+
+      <div class="pager">
+        {% if pagination %}
+          {% if pagination.prev %}
+            <a class="page-btn btn secondary" href="{{ url_for(endpoint, page=pagination.prev) }}">« Prev</a>
+          {% endif %}
+          <span class="kicker" style="margin:0 8px;">Page {{ pagination.page }} / {{ pagination.pages }}</span>
+          {% if pagination.next %}
+            <a class="page-btn btn secondary" href="{{ url_for(endpoint, page=pagination.next) }}">Next »</a>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% else %}
+  <div class="panel" style="text-align:center;">
+    <p class="kicker">Aucun joueur trouvé.</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

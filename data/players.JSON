@@ -85,9 +85,9 @@
         "name": "Quentin",
         "date_of_birth": "1992-09-10",
         "federation_chess_id": "JL31789",
-        "elo": 2490,
+        "elo": 2472,
         "coef_k": 10,
-        "games_played": 205
+        "games_played": 211
     },
     {
         "surname": "Vincent",
@@ -268,5 +268,32 @@
         "elo": 2349,
         "coef_k": 20,
         "games_played": 120
+    },
+    {
+        "surname": "RABEHI",
+        "name": "Hugo",
+        "date_of_birth": "1993-02-27",
+        "federation_chess_id": "ZE45678",
+        "elo": 2465,
+        "coef_k": 40,
+        "games_played": 5
+    },
+    {
+        "surname": "TELLIER",
+        "name": "Aude",
+        "date_of_birth": "1960-07-26",
+        "federation_chess_id": "NA34567",
+        "elo": 2125,
+        "coef_k": 40,
+        "games_played": 6
+    },
+    {
+        "surname": "TELBERG",
+        "name": "Olaf",
+        "date_of_birth": "1932-09-03",
+        "federation_chess_id": "XW21345",
+        "elo": 1320,
+        "coef_k": 40,
+        "games_played": 5
     }
 ]

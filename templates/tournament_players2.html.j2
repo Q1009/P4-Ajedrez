@@ -1,0 +1,62 @@
+{% extends "base2.html.j2" %}
+{% set active = 'tournaments' %}
+
+{% block title %}{{ tournament.name }} — Joueurs{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;">
+    <div>
+      <h2 class="kicker">{{ tournament.name }} : Joueurs</h2>
+      <p class="kicker" style="margin:6px 0 0 0;">Joueurs participants au tournoi</p>
+    </div>
+  </div>
+
+  {% if tournament %}
+  <div class="table-card">
+    <div class="table-wrap">
+      <table class="info-table" aria-describedby="tournois-table">
+        <thead>
+          <tr>
+            <th>ID Fédération</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          {# iterate all players sorted by surname and show only those registered in the tournament #}
+          {% for player in players | sort(attribute='surname') %}
+            {% if player.federation_chess_id in tournament.players %}
+            <tr>
+              <td>{{ player.federation_chess_id | default('—') }}</td>
+              <td>{{ player.surname | upper | default('—') }}</td>
+              <td>{{ player.name | default('—') }}</td>
+              <td>{{ tournament.players[player.federation_chess_id] | default(0) }}
+              </td>
+            </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-footer" style="margin-top:12px;">
+      <div class="kicker">
+        {{ tournament.players | length }} participant{{ (tournament.players|length) > 1 and 's' or '' }}
+      </div>
+
+      <div class="controls">
+        <a class="btn" href="./tournaments.html">Retour aux tournois</a>
+      </div>
+    </div>
+  </div>
+
+  {% else %}
+  <div class="panel" style="text-align:center;">
+    <p class="kicker">Aucun tournoi trouvé.</p>
+    <a class="btn" href="./tournaments.html">Retour</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

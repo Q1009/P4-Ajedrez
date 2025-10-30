@@ -1,8 +1,12 @@
+<!-- ...existing code... -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Liste des tournois</title>
+
+    
     <style>
     /* Palette inspirée de l'image : jaune, orange, rose, magenta, violet */
 
@@ -36,6 +40,21 @@ html,body{
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
     padding:2rem;
+}
+
+.logo{
+  width:56px;
+  height:56px;
+  border-radius:10px;
+  background: linear-gradient(180deg, var(--neon-orange), var(--neon-magenta));
+  box-shadow: 0 6px 28px rgba(255,180,0,0.12), inset 0 -6px 18px rgba(255,45,149,0.18);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  color:#0b0310;
+  font-size:18px;
+  letter-spacing:1px;
 }
 
 /* Conteneur central */
@@ -135,9 +154,8 @@ tbody td{
 
 /* Liens dans les tableaux — même comportement hover que nav */
 table a,
-.table-card a,
-.badge,
-.badge-small {
+.table-card a
+ {
     color: var(--neon-magenta);
     text-decoration: none;
     padding: 0.25rem 0.45rem;
@@ -148,9 +166,8 @@ table a,
 }
 
 table a:hover,
-.table-card a:hover,
-.badge:hover,
-.badge-small:hover {
+.table-card a:hover
+{
     color: #021019;
     background: linear-gradient(90deg, var(--neon-purple), var(--neon-magenta));
     box-shadow:
@@ -194,20 +211,40 @@ tbody tr:nth-child(even){
     text-align: center;
 }
 
-/* inner table: align "Joueur Blanc" (2ème colonne) à droite */
+/* inner table: format des éléments du sous tableau des matchs */
+.inner-table th:nth-child(1),
+.inner-table td:nth-child(1) {
+    text-align: center;
+    padding:6px 8px;
+}
 .inner-table th:nth-child(2),
 .inner-table td:nth-child(2) {
     text-align: right;
+    padding:6px 8px;
 }
 
 .inner-table th:nth-child(3),
 .inner-table td:nth-child(3) {
     text-align: right;
+    padding:6px 8px;
 }
 
 .inner-table th:nth-child(4),
 .inner-table td:nth-child(4) {
     text-align: center;
+    padding:6px 8px;
+}
+
+.inner-table th:nth-child(5),
+.inner-table td:nth-child(5) {
+    text-align: left;
+    padding:6px 8px;
+}
+
+.inner-table th:nth-child(6),
+.inner-table td:nth-child(6) {
+    text-align: left;
+    padding:6px 8px;
 }
 
 /* Survol des lignes avec néon */
@@ -218,15 +255,75 @@ tbody tr:hover{
 }
 
 /* Accent badges et éléments importants */
-.badge{
-    display:inline-block;
-    padding:0.25rem 0.45rem;
-    border-radius:999px;
-    background: linear-gradient(90deg, var(--neon-yellow), var(--neon-pink));
-    color:#021019;
-    font-weight:700;
-    font-size:0.8rem;
-    box-shadow: 0 8px 24px rgba(255,45,111,0.06);
+/* Badge variants by ELO */
+.badge {
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:800;
+  color:#08030a;
+  transition: background 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+/* low: < 1500 (cool cyan) */
+.badge-low{
+  background: linear-gradient(90deg, var(--neon-purple), #9760f6);
+  border: 1px solid rgba(0,240,255,0.08);
+}
+.badge-low:hover,
+.badge-low:focus {
+  background: linear-gradient(90deg, #9760f6, var(--neon-purple));
+  border-color: rgba(0,240,255,0.12);
+}
+
+/* mid: 1500 - 1999 (warm magenta) */
+.badge-mid{
+  background: linear-gradient(90deg, var(--neon-magenta), #ff79b6);
+  border: 1px solid rgba(255,45,149,0.08);
+}
+.badge-mid:hover,
+.badge-mid:focus {
+  background: linear-gradient(90deg, #ff79b6, var(--neon-magenta));
+  border-color: rgba(255,45,149,0.12);
+}
+
+/* high: >= 2000 (sunset amber) */
+.badge-high{
+  background: linear-gradient(90deg, var(--neon-orange), #ffd36b);
+  border: 1px solid rgba(255,180,0,0.08);
+}
+.badge-high:hover,
+.badge-high:focus {
+  background: linear-gradient(90deg, #ffd36b, var(--neon-orange));
+  border-color: rgba(255,180,0,0.12);
+}
+
+/* buttons */
+.btn{
+  display:inline-block;
+  padding:8px 12px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.06);
+  background: linear-gradient(180deg, rgba(255,45,149,0.06), rgba(0,240,255,0.03));
+  color:var(--neon-magenta);
+  font-weight:700;
+  cursor:pointer;
+  transition:all .14s ease;
+  box-shadow: var(--glow);
+}
+.btn.secondary{
+  background:transparent;
+  color:var(--electric-cyan);
+  border:1px solid rgba(0,240,255,0.06);
+}
+.btn:active{ transform:translateY(1px) scale(0.997); }
+
+.btn:hover{
+  color:#021019;
+  transform:translateY(-2px);
+  background: linear-gradient(90deg, var(--neon-magenta), var(--neon-pink));
+  box-shadow: 0 10px 30px rgba(255,45,149,0.12), 0 4px 12px rgba(0,240,255,0.06);
 }
 
 /* Lignes de surbrillance pour Elo élevé */
@@ -260,222 +357,242 @@ footer{
     nav a{ margin-left:0; margin-right:0.5rem; }
 }
     </style>
+
+    
+    
 </head>
 <body>
     <header>
-        <h1>Ajedrez</h1>
-        <nav>
-            <a href="./index.html">Accueil</a>
-            <a href="./players.html">Joueurs</a>
-            <a href="./tournaments.html">Tournois</a>
+        <div class="brand">
+            <div class="logo">AJ</div>
+            <div>
+                <h1>Ajedrez</h1>
+                <p class="kicker">Chess club manager</p>
+            </div>
+        </div>
+
+        <nav aria-label="Main navigation">
+            <a href="./index.html" >Accueil</a>
+            <a href="./players.html" >Joueurs</a>
+            <a href="./tournaments.html" class="active">Tournois</a>
         </nav>
     </header>
+
     <main>
-        
-<h2>Liste des tournois</h2>
+        <div class="container">
+            
+<div class="container">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;">
+    <div>
+      <h2 class="kicker">Liste des tournois</h2>
+      <p class="kicker" style="margin:6px 0 0 0;">Consulter les informations sur les tournois</p>
+    </div>
+  </div>
 
+  
+  
 
-<div class="table-card">
-    <table class="info-table" aria-describedby="tournois-table">
+  
+  <div class="table-card">
+    <div class="table-wrap">
+      <table class="info-table" aria-describedby="tournois-table">
         <thead>
-            <tr>
-                <th>Statut</th>
-                <th>Nom</th>
-                <th>Lieu</th>
-                <th>Date de début</th>
-                <th>Date de fin</th>
-                <th>Joueurs</th>
-                <th>Tours</th>
-                <th>Description</th>
-            </tr>
+          <tr>
+            <th>Statut</th>
+            <th>Nom</th>
+            <th>Lieu</th>
+            <th>Début</th>
+            <th>Fin</th>
+            <th>Joueurs</th>
+            <th>Tours</th>
+            <th>Description</th>
+          </tr>
         </thead>
         <tbody>
-            
-            <tr>
-                <td>En cours</td>
-                <td>Open de Région</td>
-                <td>Chef Lieu</td>
-                <td>2025-10-20</td>
-                <td>2025-10-31</td>
-
-                <td>
-                    
-                    
-
-                        <a href="./0fd5_players.html"
-                           class="badge-small" title="Voir les joueurs (8)">
-                            8 joueurs</a>
-                    
-                </td>
-
-                <td>
-                    
-                    
-                        <a href="./0fd5_rounds.html"
-                           class="badge-small" title="Voir les tours (1)">
-                            1 tours</a>
-                    
-                </td>
-
-                <td>Tournoi test pour demo soutenance</td>
-            </tr>
-            
-            <tr>
-                <td>En cours</td>
-                <td>Open du Test</td>
-                <td>Testlandia</td>
-                <td>2025-10-10</td>
-                <td>2025-10-14</td>
-
-                <td>
-                    
-                    
-
-                        <a href="./7431_players.html"
-                           class="badge-small" title="Voir les joueurs (6)">
-                            6 joueurs</a>
-                    
-                </td>
-
-                <td>
-                    
-                    
-                        <a href="./7431_rounds.html"
-                           class="badge-small" title="Voir les tours (2)">
-                            2 tours</a>
-                    
-                </td>
-
-                <td>Tournoi test pour debugage complet</td>
-            </tr>
-            
-            <tr>
-                <td>Terminé</td>
-                <td>Open de Commune</td>
-                <td>Commune</td>
-                <td>2025-09-20</td>
-                <td>2025-09-25</td>
-
-                <td>
-                    
-                    
-
-                        <a href="./b26a_players.html"
-                           class="badge-small" title="Voir les joueurs (8)">
-                            8 joueurs</a>
-                    
-                </td>
-
-                <td>
-                    
-                    
-                        <a href="./b26a_rounds.html"
-                           class="badge-small" title="Voir les tours (7)">
-                            7 tours</a>
-                    
-                </td>
-
-                <td>Tournoi test pour debug</td>
-            </tr>
-            
-            <tr>
-                <td>À venir</td>
-                <td>Open de Département</td>
-                <td>Paris</td>
-                <td>2025-11-25</td>
-                <td>2025-11-28</td>
-
-                <td>
-                    
-                    
-
-                        <a href="./a65b_players.html"
-                           class="badge-small" title="Voir les joueurs (10)">
-                            10 joueurs</a>
-                    
-                </td>
-
-                <td>
-                    
-                    
-                        <a href="./a65b_rounds.html"
-                           class="badge-small" title="Voir les tours">0 tours</a>
-                    
-                </td>
-
-                <td>Tournoi test pour debugage</td>
-            </tr>
-            
-            <tr>
-                <td>À venir</td>
-                <td>Open de Pays</td>
-                <td>Capitale</td>
-                <td>2026-01-01</td>
-                <td>2026-01-10</td>
-
-                <td>
-                    
-                    
-
-                        <a href="./7897_players.html"
-                           class="badge-small" title="Voir les joueurs (13)">
-                            13 joueurs</a>
-                    
-                </td>
-
-                <td>
-                    
-                    
-                        <a href="./7897_rounds.html"
-                           class="badge-small" title="Voir les tours">0 tours</a>
-                    
-                </td>
-
-                <td>Tournoi test pour test</td>
-            </tr>
-            
-            <tr>
-                <td>À venir</td>
-                <td>Open d'Europe</td>
-                <td>Berlin</td>
-                <td>2026-02-12</td>
-                <td>2026-02-21</td>
-
-                <td>
-                    
-                    
-                        <a href="./99c4_players.html"
-                           class="badge-small" title="Voir les joueurs">0 joueurs</a>
-                    
-                </td>
-
-                <td>
-                    
-                    
-                        <a href="./99c4_rounds.html"
-                           class="badge-small" title="Voir les tours">0 tours</a>
-                    
-                </td>
-
-                <td>Tournoi test pour debuggage</td>
-            </tr>
-            
+          
+          <tr>
+            <td>Terminé</td>
+            <td>Open de Commune</td>
+            <td>Commune</td>
+            <td>
+      20/09/2025</td>
+            <td>
+      25/09/2025</td>
+            <td>
+              
+              <a href="./b26a_players.html" class="badge-small" title="Voir les joueurs (8)">
+                8 joueurs
+              </a>
+            </td>
+            <td>
+              
+              <a href="./b26a_rounds.html" class="badge-small" title="Voir les tours (7)">
+                7 tours
+              </a>
+            </td>
+            <td>Tournoi test pour debug</td>
+          </tr>
+          
+          <tr>
+            <td>Terminé</td>
+            <td>Open du Test</td>
+            <td>Testlandia</td>
+            <td>
+      10/10/2025</td>
+            <td>
+      14/10/2025</td>
+            <td>
+              
+              <a href="./7431_players.html" class="badge-small" title="Voir les joueurs (6)">
+                6 joueurs
+              </a>
+            </td>
+            <td>
+              
+              <a href="./7431_rounds.html" class="badge-small" title="Voir les tours (5)">
+                5 tours
+              </a>
+            </td>
+            <td>Tournoi test pour debugage complet</td>
+          </tr>
+          
+          <tr>
+            <td>En cours</td>
+            <td>Open de Région</td>
+            <td>Chef Lieu</td>
+            <td>
+      20/10/2025</td>
+            <td>
+      31/10/2025</td>
+            <td>
+              
+              <a href="./0fd5_players.html" class="badge-small" title="Voir les joueurs (8)">
+                8 joueurs
+              </a>
+            </td>
+            <td>
+              
+              <a href="./0fd5_rounds.html" class="badge-small" title="Voir les tours (1)">
+                1 tours
+              </a>
+            </td>
+            <td>Tournoi test pour demo soutenance</td>
+          </tr>
+          
+          <tr>
+            <td>Terminé</td>
+            <td>Grand prix de Concoret</td>
+            <td>le Rox</td>
+            <td>
+      29/10/2025</td>
+            <td>
+      30/10/2025</td>
+            <td>
+              
+              <a href="./3d3f_players.html" class="badge-small" title="Voir les joueurs (4)">
+                4 joueurs
+              </a>
+            </td>
+            <td>
+              
+              <a href="./3d3f_rounds.html" class="badge-small" title="Voir les tours (3)">
+                3 tours
+              </a>
+            </td>
+            <td>tournoi plaisir</td>
+          </tr>
+          
+          <tr>
+            <td>À venir</td>
+            <td>Open de Département</td>
+            <td>Paris</td>
+            <td>
+      25/11/2025</td>
+            <td>
+      28/11/2025</td>
+            <td>
+              
+              <a href="./a65b_players.html" class="badge-small" title="Voir les joueurs (10)">
+                10 joueurs
+              </a>
+            </td>
+            <td>
+              
+              <a href="./a65b_rounds.html" class="badge-small" title="Voir les tours (0)">
+                0 tours
+              </a>
+            </td>
+            <td>Tournoi test pour debugage</td>
+          </tr>
+          
+          <tr>
+            <td>À venir</td>
+            <td>Open de Pays</td>
+            <td>Capitale</td>
+            <td>
+      01/01/2026</td>
+            <td>
+      10/01/2026</td>
+            <td>
+              
+              <a href="./7897_players.html" class="badge-small" title="Voir les joueurs (13)">
+                13 joueurs
+              </a>
+            </td>
+            <td>
+              
+              <a href="./7897_rounds.html" class="badge-small" title="Voir les tours (0)">
+                0 tours
+              </a>
+            </td>
+            <td>Tournoi test pour test</td>
+          </tr>
+          
+          <tr>
+            <td>À venir</td>
+            <td>Open d'Europe</td>
+            <td>Berlin</td>
+            <td>
+      12/02/2026</td>
+            <td>
+      21/02/2026</td>
+            <td>
+              
+              <a href="./99c4_players.html" class="badge-small" title="Voir les joueurs (0)">
+                0 joueurs
+              </a>
+            </td>
+            <td>
+              
+              <a href="./99c4_rounds.html" class="badge-small" title="Voir les tours (0)">
+                0 tours
+              </a>
+            </td>
+            <td>Tournoi test pour debuggage</td>
+          </tr>
+          
         </tbody>
-    </table>
-
-    <div class="table-footer">
-        <div class="pager">
-            
-            
-        </div>
+      </table>
     </div>
+
+    <div class="table-footer" style="margin-top:10px;">
+      <div class="kicker">7 tournois</div>
+      <div class="pager">
+        
+      </div>
+    </div>
+  </div>
+
+  
 </div>
 
-
-
+        </div>
     </main>
+
     <footer>
         <p>&copy; 2025 Ajedrez</p>
     </footer>
+
+    
 </body>
 </html>

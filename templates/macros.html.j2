@@ -1,0 +1,27 @@
+{# shared Jinja macros for date formatting and score badges #}
+
+{% macro format_date(date_str) -%}
+  {%- if not date_str %} — 
+  {%- else %}
+    {%- set iso = date_str.split('T')[0] %}
+    {%- set parts = iso.split('-') %}
+    {%- if parts|length >= 3 %}
+      {{ parts[2] ~ '/' ~ parts[1] ~ '/' ~ parts[0] }}
+    {%- else %}
+      {{ date_str }}
+    {%- endif %}
+  {%- endif %}
+{%- endmacro %}
+
+{% macro player_fullname(pid) -%}
+    {%- if pid %}
+      {%- set p = (players | selectattr('federation_chess_id','equalto', pid) | list | first) if players else None -%}
+      {%- if p -%}
+        {{ (p.name ~ ' ' ~ p.surname) | trim }}
+      {%- else -%}
+        {{ pid }}
+      {%- endif -%}
+    {%- else -%}
+      — 
+    {%- endif -%}
+  {%- endmacro %}
